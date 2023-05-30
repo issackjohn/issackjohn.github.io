@@ -1,0 +1,3 @@
+[submodule "Speedometer"]
+	path = Speedometer
+	url = https://github.com/lpardosixtosMs/Speedometer.git
