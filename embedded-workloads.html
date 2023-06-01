@@ -32,6 +32,18 @@
         <ul id="vanilla-test-runner"></ul>
         <h3>Embedded</h3>
         <ul id="embedded-test-runner"></ul>
+
+        <div>
+          <h3>Compare two suites</h3>
+          <label for="suite1">Select suite 1:</label>
+          <select id="suite1">
+          </select>
+
+          <label for="suite2">Select suite 2:</label>
+          <select id="suite2">
+          </select>
+          <button onclick="runTests()">Run tests</button>
+        </div>
       </div>
       <div>
         <h1>Embedded Workoads</h1>
@@ -246,6 +258,40 @@
         li.appendChild(a);
         embeddedTestRunner.appendChild(li);
       });
+
+      function runTests() {
+        const suite1 = document.getElementById("suite1").value;
+        const suite2 = document.getElementById("suite2").value;
+        const url = `https://issackjohn.github.io/Speedometer?suite=${suite1},${suite2}`;
+        window.open(url, "_blank");
+      }
+
+      const suite1Dropdown = document.getElementById("suite1");
+      const suite2Dropdown = document.getElementById("suite2");
+
+      for (const [key, value] of benchmarksMap) {
+        const option1 = document.createElement("option");
+        option1.value = value;
+        option1.innerText = key;
+        suite1Dropdown.appendChild(option1);
+
+        const option2 = document.createElement("option");
+        option2.value = value;
+        option2.innerText = key;
+        suite2Dropdown.appendChild(option2);
+      }
+
+      for (const [key, value] of embeddedBenchmarksMap) {
+        const option1 = document.createElement("option");
+        option1.value = value;
+        option1.innerText = `embedded ${key}`;
+        suite1Dropdown.appendChild(option1);
+
+        const option2 = document.createElement("option");
+        option2.value = value;
+        option2.innerText = `embedded ${key}`;
+        suite2Dropdown.appendChild(option2);
+      }
 
     </script>
   </body>
