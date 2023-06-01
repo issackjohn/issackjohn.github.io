@@ -28,6 +28,10 @@
             >
           </li>
         </ul>
+        <h3>Vanilla</h3>
+        <ul id="vanilla-test-runner"></ul>
+        <h3>Embedded</h3>
+        <ul id="embedded-test-runner"></ul>
       </div>
       <div>
         <h1>Embedded Workoads</h1>
@@ -172,5 +176,77 @@
         </ul>
       </div>
     </div>
+    <script>
+      // TodoMVC-JavaScript-ES5,
+      // TodoMVC-JavaScript-ES5-Complex-DOM,
+      // TodoMVC-JavaScript-ES6,
+      // TodoMVC-JavaScript-ES6-Complex-DOM,
+      // TodoMVC-JavaScript-ES6-Webpack,
+      // TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,
+      // TodoMVC-React,TodoMVC-React-Complex-DOM,
+      // TodoMVC-React-Tentative-Complex-DOM,
+      // TodoMVC-React-Redux,
+      // TodoMVC-React-Redux-Complex-DOM,
+      // TodoMVC-Backbone,
+      // TodoMVC-Backbone-Complex-DOM,
+      // TodoMVC-Angular,TodoMVC-Angular-Complex-DOM,
+      // TodoMVC-Vue,
+      // TodoMVC-Vue-Complex-DOM,
+      // TodoMVC-jQuery,
+      // TodoMVC-jQuery-Complex-DOM,
+      // TodoMVC-Preact,
+      // TodoMVC-Preact-Complex-DOM,
+      // TodoMVC-Svelte,
+      // TodoMVC-Svelte-Complex-DOM
+      const benchmarksMap = new Map();
+      benchmarksMap.set("angular", "TodoMVC-Angular");
+      benchmarksMap.set("backbone", "TodoMVC-Backbone");
+      benchmarksMap.set("jquery", "TodoMVC-Jquery");
+      benchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5");
+      benchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6");
+      benchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-Webpack");
+      benchmarksMap.set("preact", "TodoMVC-Preact");
+      benchmarksMap.set("react", "TodoMVC-React");
+      benchmarksMap.set("react-redux", "TodoMVC-React-Redux");
+      benchmarksMap.set("svelte", "TodoMVC-Svelte");
+      benchmarksMap.set("vue", "TodoMVC-Vue");
+
+      const embeddedBenchmarksMap = new Map();
+      embeddedBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
+      embeddedBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
+      embeddedBenchmarksMap.set("jquery", "TodoMVC-Jquery-Complex-DOM");
+      embeddedBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
+      embeddedBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
+      embeddedBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
+      embeddedBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
+      embeddedBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
+      embeddedBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
+      embeddedBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
+      embeddedBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
+
+      // add the benchmarks to the #list-runner
+      const testRunner = document.getElementById("vanilla-test-runner");
+
+      //iterate through the map
+      benchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `https://issackjohn.github.io/Speedometer?suite=${value}`;
+        a.innerText = key;
+        li.appendChild(a);
+        testRunner.appendChild(li);
+      });
+
+      const embeddedTestRunner = document.getElementById("embedded-test-runner");
+      embeddedBenchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `https://issackjohn.github.io/Speedometer?suite=${value}`;
+        a.innerText = key;
+        li.appendChild(a);
+        embeddedTestRunner.appendChild(li);
+      });
+
+    </script>
   </body>
 </html>
