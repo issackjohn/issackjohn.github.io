@@ -1,3 +1,7 @@
 [submodule "Speedometer"]
 	path = Speedometer
 	url = https://github.com/lpardosixtosMs/Speedometer.git
+[submodule "SpeedometerWithComplex"]
+	path = SpeedometerWithComplex
+	url = https://github.com/lpardosixtosMs/Speedometer.git
+	branch = issackjohn/GeneratedCssViaNPMPackagePOC
