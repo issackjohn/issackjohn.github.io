@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded workloads</title>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: space-evenly">
+      <div>
+        <h1>SpeedometerWithComplex 3.0 Test Runner</h1>
+        <ul>
+          <li>
+            <a href="https://issackjohn.github.io/SpeedometerWithComplex"> All tests</a>
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex?suite=TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React-Complex-DOM,TodoMVC-React-Tentative-Complex-DOM,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte-Complex-DOM"
+            >
+              Only embedded workloads</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex?suite=TodoMVC-JavaScript-ES5,TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React,TodoMVC-React-Complex-DOM,TodoMVC-React-Redux,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte,TodoMVC-Svelte-Complex-DOM"
+            >
+              Embedded vs nonEmbedded workloads</a
+            >
+          </li>
+        </ul>
+        <h3>Vanilla</h3>
+        <ul id="vanilla-test-runner"></ul>
+        <h3>Embedded</h3>
+        <ul id="embedded-test-runner"></ul>
+
+        <div>
+          <h3>Compare two suites</h3>
+          <label for="suite1">Select suite 1:</label>
+          <select id="suite1">
+          </select>
+
+          <label for="suite2">Select suite 2:</label>
+          <select id="suite2">
+          </select>
+          <button onclick="runTests()">Run tests</button>
+        </div>
+      </div>
+      <div>
+        <h1>Embedded Workoads</h1>
+        <ul>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/angular/embedded-dist/"
+              >Angular</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/backbone/embedded-dist/"
+              >Backbone</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/jquery/embedded-dist/"
+              >Jquery</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/vanilla-examples/javascript-es5/embedded-dist/"
+              >JavaScript-es5</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/vanilla-examples/javascript-es6/embedded-dist/"
+              >JavaScript-es6</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/vanilla-examples/javascript-es6-webpack/embedded-dist/"
+              >JavaScript-es6-webpack</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/preact/embedded-dist/"
+              >Preact</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/react/embedded-dist/"
+              >React</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/react-redux/embedded-dist/"
+              >React-Redux</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/svelte/embedded-dist/"
+              >Svelte</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/vue/embedded-dist/"
+              >Vue</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h1>Workloads</h1>
+        <ul>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/angular/dist/"
+              >Angular</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/backbone/dist/"
+              >Backbone</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/jquery/dist/"
+              >Jquery</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/vanilla-examples/javascript-es5/dist/"
+              >JavaScript-es5</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/vanilla-examples/javascript-es6/dist/"
+              >JavaScript-es6</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/vanilla-examples/javascript-es6-webpack/dist/"
+              >JavaScript-es6-webpack</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/preact/dist/"
+              >Preact</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/react/dist/"
+              >React</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/react-redux/dist/"
+              >React-Redux</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/svelte/dist/"
+              >Svelte</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://issackjohn.github.io/SpeedometerWithComplex/resources/todomvc/architecture-examples/vue/dist/"
+              >Vue</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      // TodoMVC-JavaScript-ES5,
+      // TodoMVC-JavaScript-ES5-Complex-DOM,
+      // TodoMVC-JavaScript-ES6,
+      // TodoMVC-JavaScript-ES6-Complex-DOM,
+      // TodoMVC-JavaScript-ES6-Webpack,
+      // TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,
+      // TodoMVC-React,TodoMVC-React-Complex-DOM,
+      // TodoMVC-React-Tentative-Complex-DOM,
+      // TodoMVC-React-Redux,
+      // TodoMVC-React-Redux-Complex-DOM,
+      // TodoMVC-Backbone,
+      // TodoMVC-Backbone-Complex-DOM,
+      // TodoMVC-Angular,TodoMVC-Angular-Complex-DOM,
+      // TodoMVC-Vue,
+      // TodoMVC-Vue-Complex-DOM,
+      // TodoMVC-jQuery,
+      // TodoMVC-jQuery-Complex-DOM,
+      // TodoMVC-Preact,
+      // TodoMVC-Preact-Complex-DOM,
+      // TodoMVC-Svelte,
+      // TodoMVC-Svelte-Complex-DOM
+      const benchmarksMap = new Map();
+      benchmarksMap.set("angular", "TodoMVC-Angular");
+      benchmarksMap.set("backbone", "TodoMVC-Backbone");
+      benchmarksMap.set("jquery", "TodoMVC-jquery");
+      benchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5");
+      benchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6");
+      benchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-Webpack");
+      benchmarksMap.set("preact", "TodoMVC-Preact");
+      benchmarksMap.set("react", "TodoMVC-React");
+      benchmarksMap.set("react-redux", "TodoMVC-React-Redux");
+      benchmarksMap.set("svelte", "TodoMVC-Svelte");
+      benchmarksMap.set("vue", "TodoMVC-Vue");
+
+      const embeddedBenchmarksMap = new Map();
+      embeddedBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
+      embeddedBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
+      embeddedBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
+      embeddedBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
+      embeddedBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
+      embeddedBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
+      embeddedBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
+      embeddedBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
+      embeddedBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
+      embeddedBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
+      embeddedBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
+
+      // add the benchmarks to the #list-runner
+      const testRunner = document.getElementById("vanilla-test-runner");
+
+      //iterate through the map
+      benchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `https://issackjohn.github.io/SpeedometerWithComplex?suite=${value}`;
+        a.innerText = key;
+        li.appendChild(a);
+        testRunner.appendChild(li);
+      });
+
+      const embeddedTestRunner = document.getElementById("embedded-test-runner");
+      embeddedBenchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `https://issackjohn.github.io/SpeedometerWithComplex?suite=${value}`;
+        a.innerText = key;
+        li.appendChild(a);
+        embeddedTestRunner.appendChild(li);
+      });
+
+      function runTests() {
+        const suite1 = document.getElementById("suite1").value;
+        const suite2 = document.getElementById("suite2").value;
+        const url = `https://issackjohn.github.io/SpeedometerWithComplex?suite=${suite1},${suite2}`;
+        window.open(url, "_blank");
+      }
+
+      const suite1Dropdown = document.getElementById("suite1");
+      const suite2Dropdown = document.getElementById("suite2");
+
+      for (const [key, value] of benchmarksMap) {
+        const option1 = document.createElement("option");
+        option1.value = value;
+        option1.innerText = key;
+        suite1Dropdown.appendChild(option1);
+
+        const option2 = document.createElement("option");
+        option2.value = value;
+        option2.innerText = key;
+        suite2Dropdown.appendChild(option2);
+      }
+
+      for (const [key, value] of embeddedBenchmarksMap) {
+        const option1 = document.createElement("option");
+        option1.value = value;
+        option1.innerText = `embedded ${key}`;
+        suite1Dropdown.appendChild(option1);
+
+        const option2 = document.createElement("option");
+        option2.value = value;
+        option2.innerText = `embedded ${key}`;
+        suite2Dropdown.appendChild(option2);
+      }
+
+    </script>
+  </body>
+</html>
