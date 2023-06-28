@@ -11,7 +11,9 @@
         <h1>SpeedometerWithComplex 3.0 Test Runner</h1>
         <ul>
           <li>
-            <a href="https://issackjohn.github.io/SpeedometerWithComplex"> All tests</a>
+            <a href="https://issackjohn.github.io/SpeedometerWithComplex">
+              All tests</a
+            >
           </li>
           <li>
             <a
@@ -36,12 +38,10 @@
         <div>
           <h3>Compare two suites</h3>
           <label for="suite1">Select suite 1:</label>
-          <select id="suite1">
-          </select>
+          <select id="suite1"></select>
 
           <label for="suite2">Select suite 2:</label>
-          <select id="suite2">
-          </select>
+          <select id="suite2"></select>
           <button onclick="runTests()">Run tests</button>
         </div>
       </div>
@@ -216,7 +216,10 @@
       benchmarksMap.set("jquery", "TodoMVC-jquery");
       benchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5");
       benchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6");
-      benchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-Webpack");
+      benchmarksMap.set(
+        "javascript-es6-webpack",
+        "TodoMVC-JavaScript-ES6-Webpack"
+      );
       benchmarksMap.set("preact", "TodoMVC-Preact");
       benchmarksMap.set("react", "TodoMVC-React");
       benchmarksMap.set("react-redux", "TodoMVC-React-Redux");
@@ -227,12 +230,24 @@
       embeddedBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
       embeddedBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
       embeddedBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
-      embeddedBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
-      embeddedBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
-      embeddedBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
+      embeddedBenchmarksMap.set(
+        "javascript-es5",
+        "TodoMVC-JavaScript-ES5-Complex-DOM"
+      );
+      embeddedBenchmarksMap.set(
+        "javascript-es6",
+        "TodoMVC-JavaScript-ES6-Complex-DOM"
+      );
+      embeddedBenchmarksMap.set(
+        "javascript-es6-webpack",
+        "TodoMVC-JavaScript-ES6-webpack-Complex-DOM"
+      );
       embeddedBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
       embeddedBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
-      embeddedBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
+      embeddedBenchmarksMap.set(
+        "react-redux",
+        "TodoMVC-React-Redux-Complex-DOM"
+      );
       embeddedBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
       embeddedBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
 
@@ -249,7 +264,9 @@
         testRunner.appendChild(li);
       });
 
-      const embeddedTestRunner = document.getElementById("embedded-test-runner");
+      const embeddedTestRunner = document.getElementById(
+        "embedded-test-runner"
+      );
       embeddedBenchmarksMap.forEach((value, key) => {
         const li = document.createElement("li");
         const a = document.createElement("a");
@@ -292,7 +309,6 @@
         option2.innerText = `embedded ${key}`;
         suite2Dropdown.appendChild(option2);
       }
-
     </script>
   </body>
 </html>
