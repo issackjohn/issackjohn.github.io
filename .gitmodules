@@ -4,4 +4,4 @@
 [submodule "SpeedometerWithComplex"]
 	path = SpeedometerWithComplex
 	url = https://github.com/lpardosixtosMs/Speedometer.git
-	branch = issackjohn/GeneratedCssViaNPMPackagePOC
+	branch = issackjohn/FollowUpEnableTestSuitesComplexDOM
