@@ -108,6 +108,8 @@
       </div>
     </div>
     <script>
+      const baseUrl = "https://issackjohn.github.io/SpeedometerNewStructure";
+
       const benchmarksMap = new Map();
       benchmarksMap.set("angular", "TodoMVC-Angular");
       benchmarksMap.set("backbone", "TodoMVC-Backbone");
@@ -158,7 +160,7 @@
       benchmarksMap.forEach((value, key) => {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = `https://issackjohn.github.io/SpeedometerNewStructure?suite=${value}`;
+        a.href = `${baseUrl}?suite=${value}`;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.innerText = key;
@@ -171,7 +173,7 @@
       complexBenchmarksMap.forEach((value, key) => {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = `https://issackjohn.github.io/SpeedometerNewStructure?suite=${value}`;
+        a.href = `${baseUrl}?suite=${value}`;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.innerText = key;
@@ -183,7 +185,7 @@
       function runTests() {
         const suite1 = document.getElementById("suite1").value;
         const suite2 = document.getElementById("suite2").value;
-        const url = `https://issackjohn.github.io/SpeedometerNewStructure?suite=${suite1},${suite2}`;
+        const url = `${baseUrl}?suite=${suite1},${suite2}`;
         window.open(url, "_blank");
       }
 
