@@ -9,3 +9,6 @@
 	path = SpeedometerNewStructure
 	url = https://github.com/lpardosixtosMs/Speedometer.git
 	branch = issackjohn/AddressPrCommentsPart2
+[submodule "SpeedometerJSWebComponents"]
+	path = SpeedometerJSWebComponents
+	url = https://github.com/lpardosixtosMs/Speedometer.git
