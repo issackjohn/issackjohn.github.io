@@ -23,3 +23,6 @@
 [submodule "SpeedometerManualCSS"]
 	path = SpeedometerManualCSS
 	url = https://github.com/lpardosixtosMs/Speedometer.git
+[submodule "SpeedometerUseBackgroundImage"]
+	path = SpeedometerUseBackgroundImage
+	url = https://github.com/lpardosixtosMs/Speedometer.git
