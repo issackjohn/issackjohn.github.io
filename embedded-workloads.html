@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Embedded workloads</title>
+    <title>Complex workloads</title>
   </head>
   <body>
     <div style="display: flex; justify-content: space-evenly">
@@ -13,25 +13,11 @@
           <li>
             <a href="https://issackjohn.github.io/Speedometer"> All tests</a>
           </li>
-          <li>
-            <a
-              href="https://issackjohn.github.io/Speedometer?suite=TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React-Complex-DOM,TodoMVC-React-Tentative-Complex-DOM,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte-Complex-DOM"
-            >
-              Only embedded workloads</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://issackjohn.github.io/Speedometer?suite=TodoMVC-JavaScript-ES5,TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React,TodoMVC-React-Complex-DOM,TodoMVC-React-Redux,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte,TodoMVC-Svelte-Complex-DOM"
-            >
-              Embedded vs nonEmbedded workloads</a
-            >
-          </li>
         </ul>
         <h3>Vanilla</h3>
         <ul id="vanilla-test-runner"></ul>
-        <h3>Embedded</h3>
-        <ul id="embedded-test-runner"></ul>
+        <h3>Complex</h3>
+        <ul id="complex-test-runner"></ul>
 
         <div>
           <h3>Compare two suites</h3>
@@ -46,7 +32,7 @@
         </div>
       </div>
       <div>
-        <h1>Embedded Workoads</h1>
+        <h1>Complex Workoads</h1>
         <ul>
           <li>
             <a
@@ -223,18 +209,18 @@
       benchmarksMap.set("svelte", "TodoMVC-Svelte");
       benchmarksMap.set("vue", "TodoMVC-Vue");
 
-      const embeddedBenchmarksMap = new Map();
-      embeddedBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
-      embeddedBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
-      embeddedBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
-      embeddedBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
-      embeddedBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
-      embeddedBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
-      embeddedBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
-      embeddedBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
-      embeddedBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
-      embeddedBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
-      embeddedBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
+      const complexBenchmarksMap = new Map();
+      complexBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
+      complexBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
+      complexBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
+      complexBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
+      complexBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
+      complexBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
+      complexBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
+      complexBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
+      complexBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
+      complexBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
+      complexBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
 
       // add the benchmarks to the #list-runner
       const testRunner = document.getElementById("vanilla-test-runner");
@@ -249,14 +235,14 @@
         testRunner.appendChild(li);
       });
 
-      const embeddedTestRunner = document.getElementById("embedded-test-runner");
-      embeddedBenchmarksMap.forEach((value, key) => {
+      const complexTestRunner = document.getElementById("complex-test-runner");
+      complexBenchmarksMap.forEach((value, key) => {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.href = `https://issackjohn.github.io/Speedometer?suite=${value}`;
         a.innerText = key;
         li.appendChild(a);
-        embeddedTestRunner.appendChild(li);
+        complexTestRunner.appendChild(li);
       });
 
       function runTests() {
@@ -281,15 +267,15 @@
         suite2Dropdown.appendChild(option2);
       }
 
-      for (const [key, value] of embeddedBenchmarksMap) {
+      for (const [key, value] of complexBenchmarksMap) {
         const option1 = document.createElement("option");
         option1.value = value;
-        option1.innerText = `embedded ${key}`;
+        option1.innerText = `complex ${key}`;
         suite1Dropdown.appendChild(option1);
 
         const option2 = document.createElement("option");
         option2.value = value;
-        option2.innerText = `embedded ${key}`;
+        option2.innerText = `complex ${key}`;
         suite2Dropdown.appendChild(option2);
       }
 
