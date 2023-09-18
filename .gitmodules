@@ -9,16 +9,6 @@
 	path = SpeedometerJSWebComponents
 	url = https://github.com/lpardosixtosMs/Speedometer.git
 	branch = lpardosixtos/ComplexDOMWebComponents
-[submodule "SpeedometerJSWebComponentsBase"]
-	path = SpeedometerJSWebComponentsBase
-	url = https://github.com/lpardosixtosMs/Speedometer.git
 [submodule "SpeedometerMoreRules"]
 	path = SpeedometerMoreRules
 	url = https://github.com/lpardosixtosMs/Speedometer.git
-[submodule "SpeedometerManualCSS"]
-	path = SpeedometerManualCSS
-	url = https://github.com/lpardosixtosMs/Speedometer.git
-[submodule "SpeedometerUseBackgroundImage"]
-	path = SpeedometerUseBackgroundImage
-	url = https://github.com/lpardosixtosMs/Speedometer.git
-	branch = issackjohn/ReplaceNowBackgroundImage
