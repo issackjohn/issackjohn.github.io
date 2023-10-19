@@ -14,3 +14,5 @@ function externalHang() {
   while (true) {
   }
 }
+
+externalFoo();
