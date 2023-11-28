@@ -12,3 +12,6 @@
 [submodule "Speedometer1"]
 	path = Speedometer1
 	url = https://github.com/issackjohn/Speedometer
+[submodule "Speedometer2"]
+	path = Speedometer2
+	url = https://github.com/issackjohn/Speedometer
