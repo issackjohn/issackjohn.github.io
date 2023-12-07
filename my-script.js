@@ -3,11 +3,11 @@ function externalFoo() {
 }
 
 function externalBar() {
-    externalBaz();
+  externalBaz();
 }
 
 function externalBaz() {
-    externalHang();
+  externalHang();
 }
 
 function externalHang() {
