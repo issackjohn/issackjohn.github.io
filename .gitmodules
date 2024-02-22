@@ -15,18 +15,12 @@
 [submodule "Speedometer3"]
 	path = Speedometer3
 	url = https://github.com/issackjohn/Speedometer
-[submodule "Speedometer4"]
-	path = Speedometer4
-	url = https://github.com/issackjohn/Speedometer
-[submodule "Speedometer5"]
-	path = Speedometer5
-	url = https://github.com/issackjohn/Speedometer
-[submodule "Speedometer6"]
-	path = Speedometer6
-	url = https://github.com/issackjohn/Speedometer
 [submodule "Speedometer"]
 	path = Speedometer
 	url = https://github.com/issackjohn/Speedometer.git
 [submodule "SpeedometerWithReminderOpen"]
 	path = SpeedometerWithReminderOpen
+	url = https://github.com/issackjohn/Speedometer.git
+[submodule "SpeedometerWithBacklogOpen"]
+	path = SpeedometerWithBacklogOpen
 	url = https://github.com/issackjohn/Speedometer.git
