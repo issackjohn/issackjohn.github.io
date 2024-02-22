@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Hang Page</title>
-    <script>
-        window.onload = function() {
-            while (true) {
-                // Infinite loop to hang the page
-            }
-        };
-    </script>
 </head>
 <body>
     <h1>This page will hang when loaded</h1>
+    <div class="button-container">
+        <button id="hangBtn" class="button">Hang Browser</button>
+        <!-- Add a button that increments a counter -->
+        <button id="counterBtn" class="button">Increment Counter</button>
+        <div class="counter">0</div>
+    </div>
+
+    <script>
+        function hang() {
+            hang2();
+        }
+        function hang2() {
+            hang3();
+        }
+        function hang3() {
+            while (true) { }
+        }
+        const hangBtn = document.querySelector("#hangBtn");
+        hangBtn.onclick = (event) => hang();
+    </script>
 </body>
+
 </html>
