@@ -27,3 +27,6 @@
 [submodule "Speedometer"]
 	path = Speedometer
 	url = https://github.com/issackjohn/Speedometer.git
+[submodule "SpeedometerWithReminderOpen"]
+	path = SpeedometerWithReminderOpen
+	url = https://github.com/issackjohn/Speedometer.git
