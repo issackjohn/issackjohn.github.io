@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Hang Page</title>
 </head>
+
 <body>
     <h1>This page will hang when loaded</h1>
     <div class="button-container">
@@ -24,6 +26,17 @@
         }
         const hangBtn = document.querySelector("#hangBtn");
         hangBtn.onclick = (event) => hang();
+        // Get reference to counter button
+
+        const counterBtn = document.querySelector("#counterBtn");
+        // Function to increment counter on the html page
+        function incrementCounter() {
+            const counterElem = document.querySelector(".counter");
+            counterElem.textContent = parseInt(counterElem.textContent) + 1;
+        }
+        // bind function to onclick method
+        counterBtn.onclick = (event) => incrementCounter();
+
     </script>
 </body>
 
