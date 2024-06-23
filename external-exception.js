@@ -1,18 +1,18 @@
 function externalFoo() {
-  externalBar();
+    externalBar();
 }
 
 function externalBar() {
-  externalBaz();
+    externalBaz();
 }
 
 function externalBaz() {
-  externalException();
+    externalException();
 }
 
 function externalException() {
-  // throw an exception
-  throw new Error("This is an exception");
+    // throw an exception
+    throw new Error("This is an exception");
 }
 
 externalFoo();

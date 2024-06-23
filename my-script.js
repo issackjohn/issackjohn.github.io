@@ -1,18 +1,17 @@
 function externalFoo() {
-  externalBar();
+    externalBar();
 }
 
 function externalBar() {
-  externalBaz();
+    externalBaz();
 }
 
 function externalBaz() {
-  externalHang();
+    externalHang();
 }
 
 function externalHang() {
-  while (true) {
-  }
+    while (true) {}
 }
 
 externalFoo();

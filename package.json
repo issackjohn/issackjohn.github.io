@@ -1,23 +1,25 @@
 {
-  "name": "issackjohn.github.io",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "web-dev-server --node-resolve --open --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/issackjohn/issackjohn.github.io.git"
-  },
-  "author": "issack john",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/issackjohn/issackjohn.github.io/issues"
-  },
-  "homepage": "https://github.com/issackjohn/issackjohn.github.io#readme",
-  "devDependencies": {
-    "@web/dev-server": "^0.4.5"
-  }
+    "name": "issackjohn.github.io",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "web-dev-server --node-resolve --open --watch",
+        "pretty:check": "prettier --check ./",
+        "pretty:fix": "prettier --write ./"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/issackjohn/issackjohn.github.io.git"
+    },
+    "author": "issack john",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/issackjohn/issackjohn.github.io/issues"
+    },
+    "homepage": "https://github.com/issackjohn/issackjohn.github.io#readme",
+    "devDependencies": {
+        "@web/dev-server": "^0.4.5",
+        "prettier": "^3.3.2"
+    }
 }

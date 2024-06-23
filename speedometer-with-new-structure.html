@@ -1,365 +1,304 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Complex workloads</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100">
-    <div style="display: flex; justify-content: space-evenly">
-      <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold mb-4">Speedometer 3.0 Test Runner</h1>
-        <div class="flex flex-col md:flex-row md:justify-between">
-          <div class="w-full md:w-1/2">
-            <h2 class="text-2xl font-bold mb-2">Test Runner</h2>
-            <ul class="list-disc list-inside">
-              <li>
-                <a
-                  href="https://issackjohn.github.io/SpeedometerNewStructure"
-                  class="text-blue-500 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  All tests</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://issackjohn.github.io/SpeedometerWithComplex?developerMode"
-                  class="text-blue-500 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  All tests Developer Mode</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://issackjohn.github.io/SpeedometerNewStructure?suite=TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React-Complex-DOM,TodoMVC-React-Tentative-Complex-DOM,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte-Complex-DOM"
-                  class="text-blue-500 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Only Complex workloads</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://issackjohn.github.io/SpeedometerNewStructure?suite=TodoMVC-JavaScript-ES5,TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React,TodoMVC-React-Complex-DOM,TodoMVC-React-Redux,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte,TodoMVC-Svelte-Complex-DOM"
-                  class="text-blue-500 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Complex vs standalone workloads</a
-                >
-              </li>
-            </ul>
-            <p class="mb-4">
-              Select two test suites to compare their performance using
-              speedometer.
-            </p>
-            <div class="flex flex-col md:flex-row md:items-center mb-4">
-              <label
-                for="suite1"
-                class="text-lg font-medium md:mr-4 mb-2 md:mb-0"
-                >Suite 1:</label
-              >
-              <select
-                name="suite1"
-                id="suite1"
-                class="w-full md:w-2/3 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              ></select>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Complex workloads</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-100">
+        <div style="display: flex; justify-content: space-evenly">
+            <div class="container mx-auto px-4 py-8">
+                <h1 class="text-4xl font-bold mb-4">Speedometer 3.0 Test Runner</h1>
+                <div class="flex flex-col md:flex-row md:justify-between">
+                    <div class="w-full md:w-1/2">
+                        <h2 class="text-2xl font-bold mb-2">Test Runner</h2>
+                        <ul class="list-disc list-inside">
+                            <li>
+                                <a href="https://issackjohn.github.io/SpeedometerNewStructure" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer"> All tests</a>
+                            </li>
+                            <li>
+                                <a href="https://issackjohn.github.io/SpeedometerWithComplex?developerMode" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer"> All tests Developer Mode</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://issackjohn.github.io/SpeedometerNewStructure?suite=TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React-Complex-DOM,TodoMVC-React-Tentative-Complex-DOM,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte-Complex-DOM"
+                                    class="text-blue-500 hover:underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Only Complex workloads</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://issackjohn.github.io/SpeedometerNewStructure?suite=TodoMVC-JavaScript-ES5,TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React,TodoMVC-React-Complex-DOM,TodoMVC-React-Redux,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte,TodoMVC-Svelte-Complex-DOM"
+                                    class="text-blue-500 hover:underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Complex vs standalone workloads</a
+                                >
+                            </li>
+                        </ul>
+                        <p class="mb-4">Select two test suites to compare their performance using speedometer.</p>
+                        <div class="flex flex-col md:flex-row md:items-center mb-4">
+                            <label for="suite1" class="text-lg font-medium md:mr-4 mb-2 md:mb-0">Suite 1:</label>
+                            <select name="suite1" id="suite1" class="w-full md:w-2/3 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></select>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center mb-4">
+                            <label for="suite2" class="text-lg font-medium md:mr-4 mb-2 md:mb-0">Suite 2:</label>
+                            <select name="suite2" id="suite2" class="w-full md:w-2/3 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></select>
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="runTests()">Run Tests</button>
+                    </div>
+                    <div class="w-full md:w-1/2 mt-8 md:mt-0">
+                        <h2 class="text-2xl font-bold mb-2">Benchmarks</h2>
+                        <p class="mb-4">Click on a framework to run its test suite using speedometer.</p>
+                        <ul id="vanilla-test-runner" class="mb-4"></ul>
+                        <h3 class="text-xl font-bold mb-2">Complex Benchmarks</h3>
+                        <p class="mb-4">Click on a framework to run its test suite using speedometer with complex DOM.</p>
+                        <ul id="complex-test-runner"></ul>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold mb-4">Complex Workloads</h1>
+                        <ul class="list-disc list-inside" id="complex-framework-list"></ul>
+                    </div>
+                    <div class="p-4">
+                        <h1 class="text-2xl font-bold mb-4">Workloads</h1>
+                        <ul class="list-disc list-inside" id="standalone-framework-list"></ul>
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-col md:flex-row md:items-center mb-4">
-              <label
-                for="suite2"
-                class="text-lg font-medium md:mr-4 mb-2 md:mb-0"
-                >Suite 2:</label
-              >
-              <select
-                name="suite2"
-                id="suite2"
-                class="w-full md:w-2/3 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              ></select>
-            </div>
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onclick="runTests()"
-            >
-              Run Tests
-            </button>
-          </div>
-          <div class="w-full md:w-1/2 mt-8 md:mt-0">
-            <h2 class="text-2xl font-bold mb-2">Benchmarks</h2>
-            <p class="mb-4">
-              Click on a framework to run its test suite using speedometer.
-            </p>
-            <ul id="vanilla-test-runner" class="mb-4"></ul>
-            <h3 class="text-xl font-bold mb-2">Complex Benchmarks</h3>
-            <p class="mb-4">
-              Click on a framework to run its test suite using speedometer with
-              complex DOM.
-            </p>
-            <ul id="complex-test-runner"></ul>
-          </div>
-          <div>
-            <h1 class="text-2xl font-bold mb-4">Complex Workloads</h1>
-            <ul class="list-disc list-inside" id="complex-framework-list"></ul>
-          </div>
-          <div class="p-4">
-            <h1 class="text-2xl font-bold mb-4">Workloads</h1>
-            <ul
-              class="list-disc list-inside"
-              id="standalone-framework-list"
-            ></ul>
-          </div>
         </div>
-      </div>
-    </div>
-    <script>
-      const baseUrl = "https://issackjohn.github.io/SpeedometerNewStructure";
+        <script>
+            const baseUrl = "https://issackjohn.github.io/SpeedometerNewStructure";
 
-      const benchmarksMap = new Map();
-      benchmarksMap.set("angular", "TodoMVC-Angular");
-      benchmarksMap.set("backbone", "TodoMVC-Backbone");
-      benchmarksMap.set("jquery", "TodoMVC-jquery");
-      benchmarksMap.set("lit", "TodoMVC-Lit");
-      benchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5");
-      benchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6");
-      benchmarksMap.set(
-        "javascript-es6-webpack",
-        "TodoMVC-JavaScript-ES6-Webpack"
-      );
-      benchmarksMap.set("javascript-web-components", "TodoMVC-WebComponents");
-      benchmarksMap.set("preact", "TodoMVC-Preact");
-      benchmarksMap.set("react", "TodoMVC-React");
-      benchmarksMap.set("react-redux", "TodoMVC-React-Redux");
-      benchmarksMap.set("svelte", "TodoMVC-Svelte");
-      benchmarksMap.set("vue", "TodoMVC-Vue");
+            const benchmarksMap = new Map();
+            benchmarksMap.set("angular", "TodoMVC-Angular");
+            benchmarksMap.set("backbone", "TodoMVC-Backbone");
+            benchmarksMap.set("jquery", "TodoMVC-jquery");
+            benchmarksMap.set("lit", "TodoMVC-Lit");
+            benchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5");
+            benchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6");
+            benchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-Webpack");
+            benchmarksMap.set("javascript-web-components", "TodoMVC-WebComponents");
+            benchmarksMap.set("preact", "TodoMVC-Preact");
+            benchmarksMap.set("react", "TodoMVC-React");
+            benchmarksMap.set("react-redux", "TodoMVC-React-Redux");
+            benchmarksMap.set("svelte", "TodoMVC-Svelte");
+            benchmarksMap.set("vue", "TodoMVC-Vue");
 
-      const complexBenchmarksMap = new Map();
-      complexBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
-      complexBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
-      complexBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
-      complexBenchmarksMap.set(
-        "javascript-es5",
-        "TodoMVC-JavaScript-ES5-Complex-DOM"
-      );
-      complexBenchmarksMap.set(
-        "javascript-es6",
-        "TodoMVC-JavaScript-ES6-Complex-DOM"
-      );
-      complexBenchmarksMap.set(
-        "javascript-es6-webpack",
-        "TodoMVC-JavaScript-ES6-webpack-Complex-DOM"
-      );
-      complexBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
-      complexBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
-      complexBenchmarksMap.set(
-        "react-redux",
-        "TodoMVC-React-Redux-Complex-DOM"
-      );
-      complexBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
-      complexBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
+            const complexBenchmarksMap = new Map();
+            complexBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
+            complexBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
+            complexBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
+            complexBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
+            complexBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
+            complexBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
+            complexBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
+            complexBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
+            complexBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
+            complexBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
+            complexBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
 
-      // add the benchmarks to the #list-runner
-      const testRunner = document.getElementById("vanilla-test-runner");
+            // add the benchmarks to the #list-runner
+            const testRunner = document.getElementById("vanilla-test-runner");
 
-      //iterate through the map
-      benchmarksMap.forEach((value, key) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = `${baseUrl}?suite=${value}`;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.innerText = key;
-        a.classList.add("text-blue-500", "hover:text-blue-700", "underline");
-        li.appendChild(a);
-        testRunner.appendChild(li);
-      });
+            //iterate through the map
+            benchmarksMap.forEach((value, key) => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = `${baseUrl}?suite=${value}`;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.innerText = key;
+                a.classList.add("text-blue-500", "hover:text-blue-700", "underline");
+                li.appendChild(a);
+                testRunner.appendChild(li);
+            });
 
-      const complexTestRunner = document.getElementById("complex-test-runner");
-      complexBenchmarksMap.forEach((value, key) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = `${baseUrl}?suite=${value}`;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.innerText = key;
-        a.classList.add("text-blue-500", "hover:text-blue-700", "underline");
-        li.appendChild(a);
-        complexTestRunner.appendChild(li);
-      });
+            const complexTestRunner = document.getElementById("complex-test-runner");
+            complexBenchmarksMap.forEach((value, key) => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = `${baseUrl}?suite=${value}`;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.innerText = key;
+                a.classList.add("text-blue-500", "hover:text-blue-700", "underline");
+                li.appendChild(a);
+                complexTestRunner.appendChild(li);
+            });
 
-      function runTests() {
-        const suite1 = document.getElementById("suite1").value;
-        const suite2 = document.getElementById("suite2").value;
-        const url = `${baseUrl}?suite=${suite1},${suite2}`;
-        window.open(url, "_blank");
-      }
+            function runTests() {
+                const suite1 = document.getElementById("suite1").value;
+                const suite2 = document.getElementById("suite2").value;
+                const url = `${baseUrl}?suite=${suite1},${suite2}`;
+                window.open(url, "_blank");
+            }
 
-      const suite1Dropdown = document.getElementById("suite1");
-      const suite2Dropdown = document.getElementById("suite2");
+            const suite1Dropdown = document.getElementById("suite1");
+            const suite2Dropdown = document.getElementById("suite2");
 
-      for (const [key, value] of benchmarksMap) {
-        const option1 = document.createElement("option");
-        option1.value = value;
-        option1.innerText = key;
-        suite1Dropdown.appendChild(option1);
+            for (const [key, value] of benchmarksMap) {
+                const option1 = document.createElement("option");
+                option1.value = value;
+                option1.innerText = key;
+                suite1Dropdown.appendChild(option1);
 
-        const option2 = document.createElement("option");
-        option2.value = value;
-        option2.innerText = key;
-        suite2Dropdown.appendChild(option2);
-      }
+                const option2 = document.createElement("option");
+                option2.value = value;
+                option2.innerText = key;
+                suite2Dropdown.appendChild(option2);
+            }
 
-      for (const [key, value] of complexBenchmarksMap) {
-        const option1 = document.createElement("option");
-        option1.value = value;
-        option1.innerText = `complex ${key}`;
-        suite1Dropdown.appendChild(option1);
+            for (const [key, value] of complexBenchmarksMap) {
+                const option1 = document.createElement("option");
+                option1.value = value;
+                option1.innerText = `complex ${key}`;
+                suite1Dropdown.appendChild(option1);
 
-        const option2 = document.createElement("option");
-        option2.value = value;
-        option2.innerText = `complex ${key}`;
-        suite2Dropdown.appendChild(option2);
-      }
+                const option2 = document.createElement("option");
+                option2.value = value;
+                option2.innerText = `complex ${key}`;
+                suite2Dropdown.appendChild(option2);
+            }
 
-      function generateComplexFrameworkList() {
-        const list = document.getElementById("complex-framework-list");
-        const frameworks = [
-          {
-            name: "Angular",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/angular-complex/dist",
-          },
-          {
-            name: "Backbone",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/backbone-complex/dist",
-          },
-          {
-            name: "Jquery",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/jquery-complex/dist",
-          },
-          {
-            name: "JavaScript-es5",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es5-complex/dist",
-          },
-          {
-            name: "JavaScript-es6",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6-complex/dist",
-          },
-          {
-            name: "JavaScript-es6-webpack",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6-webpack-complex/dist",
-          },
-          {
-            name: "Preact",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/preact-complex/dist",
-          },
-          {
-            name: "React",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react-complex/dist",
-          },
-          {
-            name: "React-Redux",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react-redux-complex/dist",
-          },
-          {
-            name: "Svelte",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/svelte-complex/dist",
-          },
-          {
-            name: "Vue",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/vue-complex/dist",
-          },
-        ];
+            function generateComplexFrameworkList() {
+                const list = document.getElementById("complex-framework-list");
+                const frameworks = [
+                    {
+                        name: "Angular",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/angular-complex/dist",
+                    },
+                    {
+                        name: "Backbone",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/backbone-complex/dist",
+                    },
+                    {
+                        name: "Jquery",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/jquery-complex/dist",
+                    },
+                    {
+                        name: "JavaScript-es5",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es5-complex/dist",
+                    },
+                    {
+                        name: "JavaScript-es6",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6-complex/dist",
+                    },
+                    {
+                        name: "JavaScript-es6-webpack",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6-webpack-complex/dist",
+                    },
+                    {
+                        name: "Preact",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/preact-complex/dist",
+                    },
+                    {
+                        name: "React",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react-complex/dist",
+                    },
+                    {
+                        name: "React-Redux",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react-redux-complex/dist",
+                    },
+                    {
+                        name: "Svelte",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/svelte-complex/dist",
+                    },
+                    {
+                        name: "Vue",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/vue-complex/dist",
+                    },
+                ];
 
-        frameworks.forEach((framework) => {
-          const listItem = document.createElement("li");
-          const link = document.createElement("a");
-          link.href = framework.url;
-          link.textContent = framework.name;
-          link.classList.add("text-blue-500", "hover:underline");
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          listItem.appendChild(link);
-          list.appendChild(listItem);
-        });
-      }
+                frameworks.forEach((framework) => {
+                    const listItem = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = framework.url;
+                    link.textContent = framework.name;
+                    link.classList.add("text-blue-500", "hover:underline");
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+            }
 
-      function generateStandaloneFrameworkList() {
-        const list = document.getElementById("standalone-framework-list");
-        const frameworks = [
-          {
-            name: "Angular",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/angular/dist/",
-          },
-          {
-            name: "Backbone",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/backbone/dist/",
-          },
-          {
-            name: "Jquery",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/jquery/dist/",
-          },
-          {
-            name: "Lit",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/lit/dist/index.html",
-          },
-          {
-            name: "JavaScript-es5",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es5/dist/",
-          },
-          {
-            name: "JavaScript-es6",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6/dist/",
-          },
-          {
-            name: "JavaScript-es6-webpack",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6-webpack/dist/",
-          },
-          {
-            name: "JavaScript-web-components",
-            url: "http://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-web-components/dist/",
-          },
-          {
-            name: "Preact",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/preact/dist/",
-          },
-          {
-            name: "React",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react/dist/",
-          },
-          {
-            name: "React-Redux",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react-redux/dist/",
-          },
-          {
-            name: "Svelte",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/svelte/dist/",
-          },
-          {
-            name: "Vue",
-            url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/vue/dist/",
-          },
-        ];
+            function generateStandaloneFrameworkList() {
+                const list = document.getElementById("standalone-framework-list");
+                const frameworks = [
+                    {
+                        name: "Angular",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/angular/dist/",
+                    },
+                    {
+                        name: "Backbone",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/backbone/dist/",
+                    },
+                    {
+                        name: "Jquery",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/jquery/dist/",
+                    },
+                    {
+                        name: "Lit",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/lit/dist/index.html",
+                    },
+                    {
+                        name: "JavaScript-es5",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es5/dist/",
+                    },
+                    {
+                        name: "JavaScript-es6",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6/dist/",
+                    },
+                    {
+                        name: "JavaScript-es6-webpack",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-es6-webpack/dist/",
+                    },
+                    {
+                        name: "JavaScript-web-components",
+                        url: "http://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/vanilla-examples/javascript-web-components/dist/",
+                    },
+                    {
+                        name: "Preact",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/preact/dist/",
+                    },
+                    {
+                        name: "React",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react/dist/",
+                    },
+                    {
+                        name: "React-Redux",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/react-redux/dist/",
+                    },
+                    {
+                        name: "Svelte",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/svelte/dist/",
+                    },
+                    {
+                        name: "Vue",
+                        url: "https://issackjohn.github.io/SpeedometerNewStructure/resources/todomvc/architecture-examples/vue/dist/",
+                    },
+                ];
 
-        frameworks.forEach((framework) => {
-          const listItem = document.createElement("li");
-          const link = document.createElement("a");
-          link.href = framework.url;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = framework.name;
-          link.classList.add("text-blue-500", "hover:underline");
-          listItem.appendChild(link);
-          list.appendChild(listItem);
-        });
-      }
+                frameworks.forEach((framework) => {
+                    const listItem = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = framework.url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = framework.name;
+                    link.classList.add("text-blue-500", "hover:underline");
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+            }
 
-      generateComplexFrameworkList();
-      generateStandaloneFrameworkList();
-    </script>
-  </body>
+            generateComplexFrameworkList();
+            generateStandaloneFrameworkList();
+        </script>
+    </body>
 </html>

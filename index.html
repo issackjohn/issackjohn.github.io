@@ -1,95 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Issack John</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <div class="flex justify-center items-center">
-      <h1 class="text-4xl font-bold">Issack John</h1>
-    </div>
-    <div class="bg-gray-100">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-          <h2 class="text-2xl font-bold text-gray-900">Construction zone...</h2>
-
-          <div
-            class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0"
-          >
-          <div class="group relative hover:opacity-75">
-            <h3 class="mt-6 text-sm text-gray-500">
-              <a
-                href="https://issackjohn.github.io/speedometer.html"
-              >
-                <span class="absolute inset-0"></span>
-                Speedometer 3.0
-              </a>
-            </h3>
-            <p class="text-base font-semibold text-gray-900">
-              2024-01-24
-            </p>
-          </div>
-          <div class="group relative hover:opacity-75">
-            <h3 class="mt-6 text-sm text-gray-500">
-                <a href="https://issackjohn.github.io/complex-workloads.html">
-                  <span class="absolute inset-0"></span>
-                  Speedometer 3.0
-                </a>
-              </h3>
-              <p class="text-base font-semibold text-gray-900">
-                Complex Workloads
-              </p>
-            </div>
-            <div class="group relative hover:opacity-75">
-              <h3 class="mt-6 text-sm text-gray-500">
-                <a
-                  href="https://issackjohn.github.io/speedometer-with-complex.html"
-                >
-                  <span class="absolute inset-0"></span>
-                  Speedometer 3.0
-                </a>
-              </h3>
-              <p class="text-base font-semibold text-gray-900">
-                2023-06-27 With Complex DOM
-              </p>
-            </div>
-            <div class="group relative hover:opacity-75">
-              <h3 class="mt-6 text-sm text-gray-500">
-                <a href="https://issackjohn.github.io/speedometer">
-                  <span class="absolute inset-0"></span>
-                  Speedometer 3.0
-                </a>
-              </h3>
-              <p class="text-base font-semibold text-gray-900">
-                2023-09-18 With New structure Complex DOM
-              </p>
-            </div>
-            <div class="group relative hover:opacity-75">
-              <h3 class="mt-6 text-sm text-gray-500">
-                <a href="https://issackjohn.github.io/SpeedometerJSWebComponents">
-                  <span class="absolute inset-0"></span>
-                  Speedometer 3.0
-                </a>
-              </h3>
-              <p class="text-base font-semibold text-gray-900">
-                JavaScript Web Components
-              </p>
-            </div>
-          </div>
-
-          <!-- Videos Section -->
-          <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-900">Recommended Videos</h2>
-            <ul class="mt-4 space-y-4">
-              <li>
-                <a href="https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo" class="text-blue-500 hover:underline">Jim Rohn - Give To Receive</a>
-              </li>
-            </ul>
-          </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Issack John</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="flex justify-center items-center">
+            <h1 class="text-4xl font-bold">Issack John</h1>
         </div>
-      </div>
-    </div>
-  </body>
+        <div class="bg-gray-100">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+                    <!-- Blog Posts Section -->
+                    <div class="mt-12">
+                        <h2 class="text-2xl font-bold text-gray-900">Latest Blog Posts</h2>
+                        <div id="blogPostsList" class="mt-4 space-y-4">
+                            <!-- JavaScript will populate this list -->
+                        </div>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900">Construction zone...</h2>
+
+                    <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+                        <div class="group relative hover:opacity-75">
+                            <h3 class="mt-6 text-sm text-gray-500">
+                                <a href="https://issackjohn.github.io/speedometer.html">
+                                    <span class="absolute inset-0"></span>
+                                    Speedometer 3.0
+                                </a>
+                            </h3>
+                            <p class="text-base font-semibold text-gray-900">2024-01-24</p>
+                        </div>
+                        <div class="group relative hover:opacity-75">
+                            <h3 class="mt-6 text-sm text-gray-500">
+                                <a href="https://issackjohn.github.io/complex-workloads.html">
+                                    <span class="absolute inset-0"></span>
+                                    Speedometer 3.0
+                                </a>
+                            </h3>
+                            <p class="text-base font-semibold text-gray-900">Complex Workloads</p>
+                        </div>
+                        <div class="group relative hover:opacity-75">
+                            <h3 class="mt-6 text-sm text-gray-500">
+                                <a href="https://issackjohn.github.io/speedometer-with-complex.html">
+                                    <span class="absolute inset-0"></span>
+                                    Speedometer 3.0
+                                </a>
+                            </h3>
+                            <p class="text-base font-semibold text-gray-900">2023-06-27 With Complex DOM</p>
+                        </div>
+                        <div class="group relative hover:opacity-75">
+                            <h3 class="mt-6 text-sm text-gray-500">
+                                <a href="https://issackjohn.github.io/speedometer">
+                                    <span class="absolute inset-0"></span>
+                                    Speedometer 3.0
+                                </a>
+                            </h3>
+                            <p class="text-base font-semibold text-gray-900">2023-09-18 With New structure Complex DOM</p>
+                        </div>
+                        <div class="group relative hover:opacity-75">
+                            <h3 class="mt-6 text-sm text-gray-500">
+                                <a href="https://issackjohn.github.io/SpeedometerJSWebComponents">
+                                    <span class="absolute inset-0"></span>
+                                    Speedometer 3.0
+                                </a>
+                            </h3>
+                            <p class="text-base font-semibold text-gray-900">JavaScript Web Components</p>
+                        </div>
+                    </div>
+
+                    <!-- Videos Section -->
+                    <div class="mt-12">
+                        <h2 class="text-2xl font-bold text-gray-900">Recommended Videos</h2>
+                        <ul id="videosList" class="mt-4 space-y-4">
+                            <!-- JavaScript will populate this list -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // title, summary, url
+            const blogPosts = [
+                {
+                    title: "Contributing to Speedometer 3.0",
+                    summary: "Capturing real-world challenges on the web",
+                    url: "https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/",
+                },
+            ];
+
+            const blogPostsList = document.getElementById("blogPostsList");
+
+            blogPosts.forEach((post) => {
+                const article = document.createElement("article");
+                article.className = "mb-4 p-4 shadow-lg";
+
+                const h3 = document.createElement("h3");
+                h3.textContent = post.title;
+                h3.className = "text-xl font-bold text-gray-900";
+
+                const p = document.createElement("p");
+                p.textContent = post.summary;
+                p.className = "text-base font-semibold text-gray-600";
+
+                const a = document.createElement("a");
+                a.href = post.url;
+                a.textContent = "Read more";
+                a.className = "text-blue-500 hover:underline";
+
+                article.appendChild(h3);
+                article.appendChild(p);
+                article.appendChild(a);
+
+                blogPostsList.appendChild(article);
+            });
+            // JavaScript for dynamically adding video links
+            document.addEventListener("DOMContentLoaded", function () {
+                const videos = [{ url: "https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo", title: "Jim Rohn - Give To Receive" }];
+
+                const videosList = document.getElementById("videosList");
+
+                videos.forEach((video) => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = video.url;
+                    a.textContent = video.title;
+                    a.className = "text-blue-500 hover:underline";
+                    li.appendChild(a);
+                    videosList.appendChild(li);
+                });
+            });
+        </script>
+    </body>
 </html>
