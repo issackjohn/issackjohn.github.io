@@ -22,6 +22,3 @@
 [submodule "SpeedometerWithBacklogOpen"]
 	path = SpeedometerWithBacklogOpen
 	url = https://github.com/issackjohn/Speedometer.git
-[submodule "SpeedometerA"]
-	path = SpeedometerA
-	url = https://github.com/lpardosixtosMs/Speedometer.git
