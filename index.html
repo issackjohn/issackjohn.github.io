@@ -6,80 +6,49 @@
         <title>Issack John</title>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
-        <div class="flex justify-center items-center">
-            <h1 class="text-4xl font-bold">Issack John</h1>
-        </div>
-        <div class="bg-gray-100">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-                    <!-- Blog Posts Section -->
-                    <div class="mt-12">
-                        <h2 class="text-2xl font-bold text-gray-900">Latest Blog Posts</h2>
-                        <div id="blogPostsList" class="mt-4 space-y-4">
-                            <!-- JavaScript will populate this list -->
-                        </div>
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-900">Construction zone...</h2>
+    <body class="bg-gray-50 min-h-screen flex flex-col justify-center items-center">
+        <main class="w-full max-w-md mx-auto p-6 flex flex-col gap-8">
+            <header class="flex flex-col items-center gap-2">
+                <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Issack John</h1>
+                <p class="text-gray-500 text-lg">Web Performance & Simplicity</p>
+            </header>
 
-                    <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                        <div class="group relative hover:opacity-75">
-                            <h3 class="mt-6 text-sm text-gray-500">
-                                <a href="https://issackjohn.github.io/speedometer.html">
-                                    <span class="absolute inset-0"></span>
-                                    Speedometer 3.0
-                                </a>
-                            </h3>
-                            <p class="text-base font-semibold text-gray-900">2024-01-24</p>
-                        </div>
-                        <div class="group relative hover:opacity-75">
-                            <h3 class="mt-6 text-sm text-gray-500">
-                                <a href="https://issackjohn.github.io/complex-workloads.html">
-                                    <span class="absolute inset-0"></span>
-                                    Speedometer 3.0
-                                </a>
-                            </h3>
-                            <p class="text-base font-semibold text-gray-900">Complex Workloads</p>
-                        </div>
-                        <div class="group relative hover:opacity-75">
-                            <h3 class="mt-6 text-sm text-gray-500">
-                                <a href="https://issackjohn.github.io/speedometer-with-complex.html">
-                                    <span class="absolute inset-0"></span>
-                                    Speedometer 3.0
-                                </a>
-                            </h3>
-                            <p class="text-base font-semibold text-gray-900">2023-06-27 With Complex DOM</p>
-                        </div>
-                        <div class="group relative hover:opacity-75">
-                            <h3 class="mt-6 text-sm text-gray-500">
-                                <a href="https://issackjohn.github.io/speedometer">
-                                    <span class="absolute inset-0"></span>
-                                    Speedometer 3.0
-                                </a>
-                            </h3>
-                            <p class="text-base font-semibold text-gray-900">2023-09-18 With New structure Complex DOM</p>
-                        </div>
-                        <div class="group relative hover:opacity-75">
-                            <h3 class="mt-6 text-sm text-gray-500">
-                                <a href="https://issackjohn.github.io/SpeedometerJSWebComponents">
-                                    <span class="absolute inset-0"></span>
-                                    Speedometer 3.0
-                                </a>
-                            </h3>
-                            <p class="text-base font-semibold text-gray-900">JavaScript Web Components</p>
-                        </div>
-                    </div>
+            <!-- Blog Posts Section -->
+            <section class="bg-white rounded-xl shadow p-6 flex flex-col gap-4">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Latest Blog Posts</h2>
+                <div id="blogPostsList" class="flex flex-col gap-4"></div>
+            </section>
 
-                    <!-- Videos Section -->
-                    <div class="mt-12">
-                        <h2 class="text-2xl font-bold text-gray-900">Recommended Videos</h2>
-                        <ul id="videosList" class="mt-4 space-y-4">
-                            <!-- JavaScript will populate this list -->
-                        </ul>
-                    </div>
+            <!-- Projects Section -->
+            <section class="bg-white rounded-xl shadow p-6 flex flex-col gap-4">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Featured Projects</h2>
+                <div class="flex flex-col gap-3">
+                    <a href="https://issackjohn.github.io/speedometer.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
+                        <div class="font-medium text-gray-900">Speedometer 3.0 <span class="text-xs text-gray-400">2024-01-24</span></div>
+                    </a>
+                    <a href="https://issackjohn.github.io/complex-workloads.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
+                        <div class="font-medium text-gray-900">Complex Workloads</div>
+                    </a>
+                    <a href="https://issackjohn.github.io/speedometer-with-complex.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
+                        <div class="font-medium text-gray-900">2023-06-27 With Complex DOM</div>
+                    </a>
+                    <a href="https://issackjohn.github.io/speedometer" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
+                        <div class="font-medium text-gray-900">2023-09-18 With New Structure Complex DOM</div>
+                    </a>
+                    <a href="https://issackjohn.github.io/SpeedometerJSWebComponents" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
+                        <div class="font-medium text-gray-900">JavaScript Web Components</div>
+                    </a>
                 </div>
-            </div>
-        </div>
+            </section>
+
+            <!-- Videos Section -->
+            <section class="bg-white rounded-xl shadow p-6 flex flex-col gap-4">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Recommended Videos</h2>
+                <ul id="videosList" class="flex flex-col gap-2"></ul>
+            </section>
+
+            <footer class="text-center text-xs text-gray-400 mt-8">&copy; 2025 Issack John</footer>
+        </main>
         <script>
             // title, summary, url
             const blogPosts = [
@@ -94,20 +63,20 @@
 
             blogPosts.forEach((post) => {
                 const article = document.createElement("article");
-                article.className = "mb-4 p-4 shadow-lg";
+                article.className = "rounded-lg border border-gray-100 p-4 bg-gray-50 flex flex-col gap-2";
 
                 const h3 = document.createElement("h3");
                 h3.textContent = post.title;
-                h3.className = "text-xl font-bold text-gray-900";
+                h3.className = "text-lg font-bold text-gray-900";
 
                 const p = document.createElement("p");
                 p.textContent = post.summary;
-                p.className = "text-base font-semibold text-gray-600";
+                p.className = "text-sm text-gray-600";
 
                 const a = document.createElement("a");
                 a.href = post.url;
                 a.textContent = "Read more";
-                a.className = "text-blue-500 hover:underline";
+                a.className = "text-blue-500 hover:underline text-sm w-fit";
 
                 article.appendChild(h3);
                 article.appendChild(p);
@@ -126,7 +95,7 @@
                     const a = document.createElement("a");
                     a.href = video.url;
                     a.textContent = video.title;
-                    a.className = "text-blue-500 hover:underline";
+                    a.className = "text-blue-500 hover:underline text-sm";
                     li.appendChild(a);
                     videosList.appendChild(li);
                 });
