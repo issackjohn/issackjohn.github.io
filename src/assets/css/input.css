@@ -185,7 +185,8 @@
 
     /* Post content */
     .post-content {
-        @apply prose prose-lg mx-auto;
+        @apply max-w-4xl mx-auto;
+        line-height: 1.75;
     }
 
     .post-content h1,
@@ -194,15 +195,52 @@
     .post-content h4,
     .post-content h5,
     .post-content h6 {
-        @apply font-bold text-gray-900;
+        @apply font-bold text-gray-900 mt-8 mb-4;
+    }
+
+    .post-content h1 {
+        @apply text-3xl;
+    }
+
+    .post-content h2 {
+        @apply text-2xl;
+    }
+
+    .post-content h3 {
+        @apply text-xl;
     }
 
     .post-content p {
-        @apply mb-4;
+        @apply mb-4 text-gray-700;
     }
 
     .post-content a {
-        @apply text-blue-600 hover:text-blue-800;
+        @apply text-blue-600 hover:text-blue-800 underline;
+    }
+
+    .post-content ul,
+    .post-content ol {
+        @apply mb-4 ml-6;
+    }
+
+    .post-content li {
+        @apply mb-2;
+    }
+
+    .post-content blockquote {
+        @apply border-l-4 border-gray-300 pl-4 italic my-6;
+    }
+
+    .post-content code {
+        @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+    }
+
+    .post-content pre {
+        @apply bg-gray-100 p-4 rounded overflow-x-auto my-6;
+    }
+
+    .post-content pre code {
+        @apply bg-transparent p-0;
     }
 
     /* Post navigation */
