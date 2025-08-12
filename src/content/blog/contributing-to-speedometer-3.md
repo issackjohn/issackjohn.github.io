@@ -13,19 +13,19 @@ As web technologies continue to evolve, it's crucial that our performance benchm
 
 The latest version of Speedometer introduces several improvements:
 
-- Enhanced real-world workloads
-- Better representation of modern web applications
-- Improved measurement accuracy
-- More comprehensive testing scenarios
+-   Enhanced real-world workloads
+-   Better representation of modern web applications
+-   Improved measurement accuracy
+-   More comprehensive testing scenarios
 
 ## Real-World Challenges
 
 Modern web applications face unique performance challenges that previous benchmarks couldn't adequately capture. Speedometer 3.0 addresses these by including:
 
-- Complex DOM manipulations
-- Realistic user interactions
-- Modern framework patterns
-- Performance bottlenecks common in production apps
+-   Complex DOM manipulations
+-   Realistic user interactions
+-   Modern framework patterns
+-   Performance bottlenecks common in production apps
 
 ## Getting Involved
 
