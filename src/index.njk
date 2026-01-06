@@ -85,7 +85,7 @@ summary: "Web Performance & Simplicity"
     <ul class="videos-list">
         {% for video in videos.videos %}
             <li>
-                <a href="{{ video.url }}">{{ video.title }}</a>
+                <a href="{{ video.url }}" target="_blank" rel="noopener noreferrer">{{ video.title }}</a>
                 {% if video.description %}
                     <span class="video-description">{{ video.description }}</span>
                 {% endif %}

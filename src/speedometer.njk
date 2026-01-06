@@ -41,10 +41,11 @@ permalink: /speedometer.html
             <div class="border-t lg:border-t-0 lg:border-l border-ink/10 pt-6 lg:pt-0 lg:pl-8">
                 <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-4">Quick Start</h2>
                 <ul class="space-y-3 text-sm">
-                    <li><a href="/Speedometer1/index.html" class="text-ink hover:text-signal transition-colors">→ Run all tests</a></li>
-                    <li><a href="/Speedometer1/index.html?developerMode" class="text-ink hover:text-signal transition-colors">→ Developer mode</a></li>
+                    <li><a href="/Speedometer1/index.html" target="_blank" rel="noopener noreferrer" class="text-ink hover:text-signal transition-colors">→ Run all tests</a></li>
+                    <li><a href="/Speedometer1/index.html?developerMode" target="_blank" rel="noopener noreferrer" class="text-ink hover:text-signal transition-colors">→ Developer mode</a></li>
                     <li>
                         <a href="/Speedometer1/index.html?suite=TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React-Complex-DOM,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte-Complex-DOM" 
+                           target="_blank" rel="noopener noreferrer"
                            class="text-ink hover:text-signal transition-colors">
                            → Complex workloads only
                         </a>
@@ -117,14 +118,14 @@ permalink: /speedometer.html
     const testRunner = document.getElementById("vanilla-test-runner");
     benchmarksMap.forEach((value, key) => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="/Speedometer1/index.html?suite=${value}" target="_blank" class="text-ink/60 hover:text-signal transition-colors">${key}</a>`;
+        li.innerHTML = `<a href="/Speedometer1/index.html?suite=${value}" target="_blank" rel="noopener noreferrer" class="text-ink/60 hover:text-signal transition-colors">${key}</a>`;
         testRunner.appendChild(li);
     });
 
     const complexTestRunner = document.getElementById("complex-test-runner");
     complexBenchmarksMap.forEach((value, key) => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="/Speedometer1/index.html?suite=${value}" target="_blank" class="text-ink/60 hover:text-signal transition-colors">${key}</a>`;
+        li.innerHTML = `<a href="/Speedometer1/index.html?suite=${value}" target="_blank" rel="noopener noreferrer" class="text-ink/60 hover:text-signal transition-colors">${key}</a>`;
         complexTestRunner.appendChild(li);
     });
 
@@ -189,13 +190,13 @@ permalink: /speedometer.html
 
         complexFrameworks.forEach(f => {
             const li = document.createElement("li");
-            li.innerHTML = `<a href="${f.url}" target="_blank" class="hover:text-signal transition-colors">${f.name}</a>`;
+            li.innerHTML = `<a href="${f.url}" target="_blank" rel="noopener noreferrer" class="hover:text-signal transition-colors">${f.name}</a>`;
             complexUl.appendChild(li);
         });
 
         standardFrameworks.forEach(f => {
             const li = document.createElement("li");
-            li.innerHTML = `<a href="${f.url}" target="_blank" class="hover:text-signal transition-colors">${f.name}</a>`;
+            li.innerHTML = `<a href="${f.url}" target="_blank" rel="noopener noreferrer" class="hover:text-signal transition-colors">${f.name}</a>`;
             standardUl.appendChild(li);
         });
     }

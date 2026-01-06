@@ -3,9 +3,8 @@ title: "Contributing to Speedometer 3.0"
 date: "2024-03-11"
 summary: "Capturing real-world challenges on the web"
 tags: ["web performance", "speedometer", "benchmarking"]
+permalink: false
 ---
-
-# Contributing to Speedometer 3.0
 
 As web technologies continue to evolve, it's crucial that our performance benchmarks evolve with them. Speedometer 3.0 represents a significant step forward in capturing real-world web performance challenges.
 
@@ -31,4 +30,4 @@ Modern web applications face unique performance challenges that previous benchma
 
 Contributing to Speedometer 3.0 helps ensure that web performance tools reflect the reality of modern web development. Every contribution helps make the web faster for everyone.
 
-[Read the full article on Microsoft Edge Dev Blog](https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/)
+<a href="https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/" target="_blank" rel="noopener noreferrer">Read the full article on Microsoft Edge Dev Blog</a>
