@@ -1,0 +1,124 @@
+---
+layout: base.njk
+title: Speedometer 3.0 (New Structure) Test Runner
+permalink: /speedometer-with-new-structure.html
+---
+
+<div class="max-w-4xl mx-auto pt-32">
+    <header class="mb-12 border-b border-ink/10 pb-8">
+        <div class="flex items-center gap-4 mb-4">
+            <span class="px-2 py-0.5 text-[10px] uppercase tracking-widest font-mono bg-signal text-white">Tool</span>
+            <span class="text-xs font-mono text-ink/50">Benchmark Runner (Refactored)</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-serif font-medium text-ink leading-tight mb-4">
+            New Structure Runner
+        </h1>
+        <p class="text-lg text-ink/70 max-w-2xl font-serif italic">
+            Evaluating the SpeedometerNewStructure branch architecture.
+        </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <section class="space-y-8">
+            <div>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-6 border-b border-ink/5 pb-2">Suite Selection</h2>
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <label for="suite1" class="block text-sm font-mono text-ink/60">Primary Suite</label>
+                        <select id="suite1" class="w-full bg-transparent border border-ink/20 p-2 font-mono text-sm focus:border-signal outline-none transition-colors"></select>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="suite2" class="block text-sm font-mono text-ink/60">Comparison Suite</label>
+                        <select id="suite2" class="w-full bg-transparent border border-ink/20 p-2 font-mono text-sm focus:border-signal outline-none transition-colors"></select>
+                    </div>
+                    <button onclick="runTests()" class="w-full bg-ink text-paper py-3 px-6 font-mono text-sm hover:bg-signal transition-colors flex items-center justify-center gap-2">
+                        <span>EXECUTE (NEW STR)</span>
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-6 border-b border-ink/5 pb-2">Presets</h2>
+                <ul class="space-y-3 font-serif italic text-ink/80 text-sm">
+                    <li><a href="/SpeedometerNewStructure/index.html" class="hover:text-signal transition-colors underline decoration-ink/20 underline-offset-4">Run all tests</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="space-y-8">
+            <div>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-6 border-b border-ink/5 pb-2">Individual Benchmarks</h2>
+                <ul id="vanilla-test-runner" class="grid grid-cols-2 gap-x-4 gap-y-2 font-mono text-[10px] text-ink/70"></ul>
+            </div>
+            <div>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-6 border-b border-ink/5 pb-2">Complex Suites</h2>
+                <ul id="complex-test-runner" class="grid grid-cols-2 gap-x-4 gap-y-2 font-mono text-[10px] text-ink/70"></ul>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    const baseUrl = "/Speedometer1";
+
+    const benchmarksMap = new Map();
+    benchmarksMap.set("angular", "TodoMVC-Angular");
+    benchmarksMap.set("backbone", "TodoMVC-Backbone");
+    benchmarksMap.set("jquery", "TodoMVC-jquery");
+    benchmarksMap.set("lit", "TodoMVC-Lit");
+    benchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5");
+    benchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6");
+    benchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-Webpack");
+    benchmarksMap.set("javascript-web-components", "TodoMVC-WebComponents");
+    benchmarksMap.set("preact", "TodoMVC-Preact");
+    benchmarksMap.set("react", "TodoMVC-React");
+    benchmarksMap.set("react-redux", "TodoMVC-React-Redux");
+    benchmarksMap.set("svelte", "TodoMVC-Svelte");
+    benchmarksMap.set("vue", "TodoMVC-Vue");
+
+    const complexBenchmarksMap = new Map();
+    complexBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
+    complexBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
+    complexBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
+    complexBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
+    complexBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
+    complexBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
+    complexBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
+    complexBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
+    complexBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
+    complexBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
+    complexBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
+
+    const testRunner = document.getElementById("vanilla-test-runner");
+    benchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${baseUrl}/index.html?suite=${value}" target="_blank" class="hover:text-signal transition-colors">[${key}]</a>`;
+        testRunner.appendChild(li);
+    });
+
+    const complexTestRunner = document.getElementById("complex-test-runner");
+    complexBenchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${baseUrl}/index.html?suite=${value}" target="_blank" class="hover:text-signal transition-colors">[${key}]</a>`;
+        complexTestRunner.appendChild(li);
+    });
+
+    const suite1Dropdown = document.getElementById("suite1");
+    const suite2Dropdown = document.getElementById("suite2");
+
+    benchmarksMap.forEach((value, key) => {
+        suite1Dropdown.add(new Option(key, value));
+        suite2Dropdown.add(new Option(key, value));
+    });
+    complexBenchmarksMap.forEach((value, key) => {
+        suite1Dropdown.add(new Option(`complex: ${key}`, value));
+        suite2Dropdown.add(new Option(`complex: ${key}`, value));
+    });
+
+    function runTests() {
+        const s1 = suite1Dropdown.value;
+        const s2 = suite2Dropdown.value;
+        window.open(`${baseUrl}/index.html?suite=${s1},${s2}`, "_blank");
+    }
+</script>
