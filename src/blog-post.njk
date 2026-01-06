@@ -7,10 +7,11 @@ pagination:
 permalink: "/blog/{{ post.fileSlug }}/"
 ---
 
-<article>
-    <header class="post-header">
+<article class="post-content-wrapper">
+    <header class="page-header">
+        <p class="section-title"><a href="/blog/" style="color: inherit; text-decoration: none;">Blog</a></p>
         <h1>{{ post.data.title }}</h1>
-        <div class="post-meta">
+        <div class="post-meta" style="margin-top: 1rem;">
             <time datetime="{{ post.data.date | isoDate }}">{{ post.data.date | dateFormat }}</time>
             {% if post.data.tags %}
                 <ul class="tags" aria-label="Tags">
@@ -26,16 +27,20 @@ permalink: "/blog/{{ post.fileSlug }}/"
         {{ post.templateContent | safe }}
     </div>
     
-    <footer class="post-footer">
+    <footer>
         <nav class="post-navigation" aria-label="Post navigation">
             {% if pagination.previousPageLink %}
-                <a href="{{ pagination.previousPageLink }}" rel="prev">← Previous Post</a>
+                <a href="{{ pagination.previousPageLink }}" rel="prev">← Previous</a>
+            {% else %}
+                <span></span>
             {% endif %}
             {% if pagination.nextPageLink %}
-                <a href="{{ pagination.nextPageLink }}" rel="next">Next Post →</a>
+                <a href="{{ pagination.nextPageLink }}" rel="next">Next →</a>
+            {% else %}
+                <span></span>
             {% endif %}
         </nav>
         
-        <p><a href="/blog/">← Back to all posts</a></p>
+        <p style="text-align: center; margin-top: 2rem;"><a href="/blog/" class="read-more">← All posts</a></p>
     </footer>
 </article>

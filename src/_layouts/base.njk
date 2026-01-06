@@ -22,33 +22,17 @@
     <meta name="twitter:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}">
     <meta name="twitter:description" content="{% if summary %}{{ summary }}{% else %}{{ site.description }}{% endif %}">
     
-    <!-- Preconnect to external domains -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     
-    <!-- Critical CSS will be inlined here -->
-    <style>
-        /* Critical CSS placeholder - will be replaced with actual critical CSS */
-        body{margin:0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#333}
-        .skip-link{position:absolute;top:-40px;left:6px;background:#000;color:#fff;padding:8px;text-decoration:none;z-index:1000}
-        .skip-link:focus{top:6px}
-        nav ul{list-style:none;padding:0;margin:0;display:flex;gap:1rem}
-        nav a{text-decoration:none;color:#0066cc}
-        nav a:hover,nav a:focus{text-decoration:underline}
-        main{max-width:1024px;margin:0 auto;padding:1rem}
-        .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
-    </style>
-    
-    <!-- Load non-critical CSS asynchronously -->
-    <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/css/main.css"></noscript>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/main.css?v={{ build.stamp }}">
     
     <!-- PWA -->
     <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="theme-color" content="#ffffff">
-    
-    <!-- Security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'self';">
+    <meta name="theme-color" content="#1a1a2e">
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -84,28 +68,30 @@
     {% endif %}
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main" class="skip-link">Skip to main content</a>
-    
-    <!-- Navigation -->
-    {% include "navigation.njk" %}
-    
-    <!-- Main content -->
-    <main id="main" role="main">
-        {{ content | safe }}
-    </main>
-    
-    <!-- Footer -->
-    {% include "footer.njk" %}
+    <div class="site-wrapper">
+        <!-- Skip to main content link -->
+        <a href="#main" class="skip-link">Skip to main content</a>
+        
+        <!-- Navigation -->
+        {% include "navigation.njk" %}
+        
+        <!-- Main content -->
+        <main id="main" role="main">
+            {{ content | safe }}
+        </main>
+        
+        <!-- Footer -->
+        {% include "footer.njk" %}
+    </div>
     
     <!-- Scripts -->
-    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/main.js?v={{ build.stamp }}" defer></script>
     
-    <!-- Service Worker Registration -->
+    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' });
             });
         }
     </script>

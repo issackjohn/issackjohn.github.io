@@ -5,26 +5,28 @@ summary: "Web performance tools and benchmarking projects"
 permalink: "/projects/"
 ---
 
-<header>
+<header class="page-header" data-page="Work">
     <h1>Projects</h1>
-    <p>Web performance tools and benchmarking projects</p>
+    <p>Tools and benchmarks.</p>
 </header>
 
 {% if projects.projects.length > 0 %}
     <div class="projects-grid">
         {% for project in projects.projects %}
-            <article class="project-card">
-                <h2><a href="{{ project.url }}">{{ project.title }}</a></h2>
+            <a class="project-card" href="{{ project.url }}" aria-label="View {{ project.title }}">
+                <span class="project-index">0{{ loop.index }}</span>
+                <h2 class="project-name">{{ project.title }}</h2>
                 {% if project.description %}
-                    <p>{{ project.description }}</p>
+                    <p class="project-desc">{{ project.description }}</p>
                 {% endif %}
                 {% if project.date %}
-                    <time datetime="{{ project.date }}">{{ project.date | dateFormat }}</time>
+                    <span class="project-meta">
+                        <time datetime="{{ project.date }}">{{ project.date | dateFormat }}</time>
+                    </span>
                 {% endif %}
-                <a href="{{ project.url }}" aria-label="View project: {{ project.title }}">View Project</a>
-            </article>
+            </a>
         {% endfor %}
     </div>
 {% else %}
-    <p>No projects yet. Check back soon!</p>
+    <p>No projects listed yet.</p>
 {% endif %}

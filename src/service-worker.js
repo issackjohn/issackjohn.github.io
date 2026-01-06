@@ -1,5 +1,5 @@
-const CACHE_NAME = "issack-john-v1";
-const STATIC_CACHE_URLS = ["/", "/blog/", "/projects/", "/about/", "/assets/css/main.css", "/assets/js/main.js", "/manifest.webmanifest"];
+const CACHE_NAME = "issack-john-v2";
+const STATIC_CACHE_URLS = ["/manifest.webmanifest"];
 
 // Install event - cache static assets
 self.addEventListener("install", (event) => {
@@ -31,41 +31,56 @@ self.addEventListener("activate", (event) => {
 
 // Fetch event - serve from cache when offline
 self.addEventListener("fetch", (event) => {
-    // Only handle GET requests
     if (event.request.method !== "GET") return;
 
-    event.respondWith(
-        caches
-            .match(event.request)
-            .then((response) => {
-                // Return cached version or fetch from network
-                return (
-                    response ||
-                    fetch(event.request).then((fetchResponse) => {
-                        // Don't cache non-successful responses
-                        if (!fetchResponse || fetchResponse.status !== 200 || fetchResponse.type !== "basic") {
-                            return fetchResponse;
+    const request = event.request;
+    const url = new URL(request.url);
+
+    // HTML navigations: network-first so new layouts/styles roll out immediately.
+    if (request.mode === "navigate" || request.headers.get("accept")?.includes("text/html")) {
+        event.respondWith(
+            fetch(request)
+                .then((response) => {
+                    const copy = response.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+                    return response;
+                })
+                .catch(() => caches.match(request).then((cached) => cached || caches.match("/")))
+        );
+        return;
+    }
+
+    // CSS/JS: stale-while-revalidate.
+    if (url.pathname.endsWith(".css") || url.pathname.endsWith(".js")) {
+        event.respondWith(
+            caches.match(request).then((cached) => {
+                const fetchPromise = fetch(request)
+                    .then((response) => {
+                        if (response && response.status === 200) {
+                            const copy = response.clone();
+                            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
                         }
-
-                        // Clone the response
-                        const responseToCache = fetchResponse.clone();
-
-                        // Cache the fetched response
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(event.request, responseToCache);
-                        });
-
-                        return fetchResponse;
+                        return response;
                     })
-                );
+                    .catch(() => cached);
+
+                return cached || fetchPromise;
             })
-            .catch(() => {
-                // Fallback for offline - return blog index for blog pages
-                if (event.request.url.includes("/blog/")) {
-                    return caches.match("/blog/");
+        );
+        return;
+    }
+
+    // Other assets: cache-first.
+    event.respondWith(
+        caches.match(request).then((cached) => {
+            if (cached) return cached;
+            return fetch(request).then((response) => {
+                if (response && response.status === 200) {
+                    const copy = response.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
                 }
-                // Return homepage for other pages
-                return caches.match("/");
-            })
+                return response;
+            });
+        })
     );
 });

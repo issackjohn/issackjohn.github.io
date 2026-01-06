@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: "Blog"
-summary: "Articles about web performance, development, and technology"
+summary: "Short notes on performance work"
 pagination:
   data: collections.blog
   size: 10
@@ -9,9 +9,9 @@ pagination:
 permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
 ---
 
-<header>
-    <h1>Blog</h1>
-    <p>Articles about web performance, development, and technology</p>
+<header class="page-header" data-page="Writing">
+    <h1>Writing</h1>
+    <p>Benchmarks, profiling, and notes.</p>
 </header>
 
 {% if posts.length > 0 %}
@@ -30,7 +30,7 @@ permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumbe
                         </ul>
                     {% endif %}
                 </div>
-                <a href="{{ post.url }}" aria-label="Read full article: {{ post.data.title }}">Read more</a>
+                <a href="{{ post.url }}" class="read-more" aria-label="Read {{ post.data.title }}">Read article</a>
             </article>
         {% endfor %}
     </div>
@@ -40,7 +40,7 @@ permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumbe
         <nav class="pagination" aria-label="Blog pagination">
             <ul>
                 {% if pagination.previousPageLink %}
-                    <li><a href="{{ pagination.previousPageLink }}">← Previous</a></li>
+                    <li><a href="{{ pagination.previousPageLink }}">Prev</a></li>
                 {% endif %}
                 
                 {% for pageEntry in pagination.pages %}
@@ -54,11 +54,11 @@ permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumbe
                 {% endfor %}
                 
                 {% if pagination.nextPageLink %}
-                    <li><a href="{{ pagination.nextPageLink }}">Next →</a></li>
+                    <li><a href="{{ pagination.nextPageLink }}">Next</a></li>
                 {% endif %}
             </ul>
         </nav>
     {% endif %}
 {% else %}
-    <p>No blog posts yet. Check back soon!</p>
+    <p>No posts yet.</p>
 {% endif %}
