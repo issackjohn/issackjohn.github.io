@@ -30,7 +30,7 @@ summary: "Web Performance & Simplicity"
     {% if collections.blog.length > 0 %}
         <div class="posts-list">
             {% for post in collections.blog | limit(3) %}
-                <a href="{{ post.url }}" class="post-item" aria-label="Read {{ post.data.title }}">
+                <a href="/blog/{{ post.fileSlug }}/" class="post-item" aria-label="Read {{ post.data.title }}">
                     <time class="post-date" datetime="{{ post.data.date | isoDate }}">{{ post.data.date | dateFormat }}</time>
                     <div>
                         <h3 class="post-title">{{ post.data.title }}</h3>

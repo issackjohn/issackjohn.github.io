@@ -1,33 +1,16 @@
 ---
 title: "Contributing to Speedometer 3.0"
 date: "2024-03-11"
-summary: "Capturing real-world challenges on the web"
+summary: "How the Edge team helped ship Speedometer 3.0’s Complex DOM tests to better reflect real-world DOM/CSS complexity."
 tags: ["web performance", "speedometer", "benchmarking"]
+eleventyExcludeFromCollections: false
 permalink: false
 ---
 
-As web technologies continue to evolve, it's crucial that our performance benchmarks evolve with them. Speedometer 3.0 represents a significant step forward in capturing real-world web performance challenges.
+Speedometer 3.0 is a cross-industry browser benchmark update that adds many new tests and modern variants.
 
-## What's New in Speedometer 3.0
+The Edge team’s main contribution is **Complex DOM**: TodoMVC interactions run inside a larger “app shell” with a large DOM and complex CSS selectors, so each action forces real style/layout work (including partial selector matches).
 
-The latest version of Speedometer introduces several improvements:
+The article explains the motivation (real apps hit latency cliffs from DOM/CSS complexity), the data-driven approach (sampling DOM sizes/depth and selectors from real apps), and notes variants for Web Components/Lit plus a stacking-context flavor.
 
--   Enhanced real-world workloads
--   Better representation of modern web applications
--   Improved measurement accuracy
--   More comprehensive testing scenarios
-
-## Real-World Challenges
-
-Modern web applications face unique performance challenges that previous benchmarks couldn't adequately capture. Speedometer 3.0 addresses these by including:
-
--   Complex DOM manipulations
--   Realistic user interactions
--   Modern framework patterns
--   Performance bottlenecks common in production apps
-
-## Getting Involved
-
-Contributing to Speedometer 3.0 helps ensure that web performance tools reflect the reality of modern web development. Every contribution helps make the web faster for everyone.
-
-<a href="https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/" target="_blank" rel="noopener noreferrer">Read the full article on Microsoft Edge Dev Blog</a>
+Links: <a href="https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/" target="_blank" rel="noopener noreferrer">article</a> · <a href="https://browserbench.org/Speedometer3.0" target="_blank" rel="noopener noreferrer">Speedometer 3.0</a> · <a href="https://github.com/WebKit/Speedometer/issues" target="_blank" rel="noopener noreferrer">GitHub</a>
