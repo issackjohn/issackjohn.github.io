@@ -4,18 +4,18 @@
 
     // Initialize the site when DOM is ready
     document.addEventListener("DOMContentLoaded", function () {
-        const nav = document.querySelector('.site-nav');
+        const nav = document.querySelector(".site-nav");
         const toggleNavState = () => {
             if (!nav) return;
             if (window.scrollY > 12) {
-                nav.classList.add('scrolled');
+                nav.classList.add("scrolled");
             } else {
-                nav.classList.remove('scrolled');
+                nav.classList.remove("scrolled");
             }
         };
 
         toggleNavState();
-        window.addEventListener('scroll', toggleNavState, { passive: true });
+        window.addEventListener("scroll", toggleNavState, { passive: true });
     });
 
     // Handle external link accessibility

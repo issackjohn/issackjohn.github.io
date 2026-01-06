@@ -1,9 +1,8 @@
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 
 /* Site styles */
 
+/* CSS Variables */
 :root {
     --void: #0c0c0c;
     --ink: #1a1816;
@@ -30,8 +29,8 @@
     --space-unit: 0.5rem;
 }
 
-@layer base {
-    @font-face {
+/* Base Styles */
+@font-face {
         font-family: "Berkeley Mono";
         src: local("Berkeley Mono"), local("SF Mono"), local("Fira Code"), local("Consolas");
         font-display: swap;
@@ -84,26 +83,26 @@
         outline-offset: 4px;
     }
 
-    .skip-link {
-        position: fixed;
-        top: -100%;
-        left: 1rem;
-        padding: 0.75rem 1.5rem;
-        background: var(--ink);
-        color: var(--cream);
-        font-size: var(--text-sm);
-        font-weight: 500;
-        z-index: 100;
-        transition: top 0.2s;
-    }
-
-    .skip-link:focus {
-        top: 1rem;
-    }
+.skip-link {
+    position: fixed;
+    top: -100%;
+    left: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    z-index: 100;
+    transition: top 0.2s;
 }
 
-@layer components {
-    .grid-overlay {
+.skip-link:focus {
+    top: 1rem;
+}
+
+/* Component Styles */
+
+.grid-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -1081,15 +1080,14 @@
         color: var(--signal);
     }
 
-    .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
