@@ -22,33 +22,17 @@
     <meta name="twitter:title" content="Home">
     <meta name="twitter:description" content="Web Performance &amp; Simplicity">
     
-    <!-- Preconnect to external domains -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     
-    <!-- Critical CSS will be inlined here -->
-    <style>
-        /* Critical CSS placeholder - will be replaced with actual critical CSS */
-        body{margin:0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#333}
-        .skip-link{position:absolute;top:-40px;left:6px;background:#000;color:#fff;padding:8px;text-decoration:none;z-index:1000}
-        .skip-link:focus{top:6px}
-        nav ul{list-style:none;padding:0;margin:0;display:flex;gap:1rem}
-        nav a{text-decoration:none;color:#0066cc}
-        nav a:hover,nav a:focus{text-decoration:underline}
-        main{max-width:1024px;margin:0 auto;padding:1rem}
-        .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
-    </style>
-    
-    <!-- Load non-critical CSS asynchronously -->
-    <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/css/main.css"></noscript>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/main.css?v=1767725239580">
     
     <!-- PWA -->
     <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="theme-color" content="#ffffff">
-    
-    <!-- Security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'self';">
+    <meta name="theme-color" content="#1a1a2e">
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -69,115 +53,171 @@
     
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main" class="skip-link">Skip to main content</a>
-    
-    <!-- Navigation -->
-    <nav role="navigation" aria-label="Main navigation">
-    <ul>
-        <li><a href="/" aria-current="page">Home</a></li>
-        <li><a href="/blog/" >Blog</a></li>
-        <li><a href="/projects/" >Projects</a></li>
-        <li><a href="/about/" >About</a></li>
-    </ul>
-</nav>
-    
-    <!-- Main content -->
-    <main id="main" role="main">
+    <div class="site-wrapper">
+        <!-- Skip to main content link -->
+        <a href="#main" class="skip-link">Skip to main content</a>
         
-<header class="hero">
-    <h1>Issack John</h1>
-    <p class="tagline">Web Performance & Simplicity</p>
-</header>
+        <!-- Navigation -->
+        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">Issack John</a>
+        <ul class="nav-links">
+            <li><a href="/" aria-current="page">Index</a></li>
+            <li><a href="/blog/" >Writing</a></li>
+            <li><a href="/projects/" >Work</a></li>
+            <li><a href="/about/" >About</a></li>
+        </ul>
+    </div>
+</nav>
+        
+        <!-- Main content -->
+        <main id="main" role="main">
+            
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-label">Web Performance Engineer</span>
+        <h1 class="hero-name">Issack<span class="highlight">.</span></h1>
+        <p class="hero-title">Performance work: profiling, benchmarks, CWV</p>
+        <p class="hero-bio">I build and maintain performance tooling, chase down regressions, and write up what I learn.</p>
+        <div class="hero-cta">
+            <a href="/projects/" class="btn btn-primary">View Work</a>
+            <a href="/about/" class="btn btn-secondary">About</a>
+        </div>
+    </div>
+</section>
 
 <!-- Blog Posts Section -->
-<section aria-labelledby="blog-heading">
-    <h2 id="blog-heading">Latest Blog Posts</h2>
+<section class="section" data-section="Writing" aria-labelledby="blog-heading">
+    <div class="section-header">
+        <div class="section-title-group">
+            <span class="section-number">02</span>
+            <h2 class="section-label" id="blog-heading">Recent Writing</h2>
+        </div>
+        <a href="/blog/" class="section-link">All posts</a>
+    </div>
     
-        <div class="blog-grid">
+        <div class="posts-list">
             
-                <article class="blog-card">
-                    <h3><a href="/content/blog/contributing-to-speedometer-3/">Contributing to Speedometer 3.0</a></h3>
-                    <p>Capturing real-world challenges on the web</p>
-                    <time datetime="2024-03-11T00:00:00.000Z">March 11, 2024</time>
-                    <a href="/content/blog/contributing-to-speedometer-3/" aria-label="Read more about Contributing to Speedometer 3.0">Read more</a>
-                </article>
+                <a href="/content/blog/contributing-to-speedometer-3/" class="post-item" aria-label="Read Contributing to Speedometer 3.0">
+                    <time class="post-date" datetime="2024-03-11T00:00:00.000Z">March 10, 2024</time>
+                    <div>
+                        <h3 class="post-title">Contributing to Speedometer 3.0</h3>
+                        <p class="post-excerpt">Capturing real-world challenges on the web</p>
+                    </div>
+                </a>
             
         </div>
-        <p><a href="/blog/">View all blog posts</a></p>
     
 </section>
 
 <!-- Projects Section -->
-<section aria-labelledby="projects-heading">
-    <h2 id="projects-heading">Featured Projects</h2>
+<section class="section" data-section="Work" aria-labelledby="projects-heading">
+    <div class="section-header">
+        <div class="section-title-group">
+            <span class="section-number">03</span>
+            <h2 class="section-label" id="projects-heading">Featured Projects</h2>
+        </div>
+        <a href="/projects/" class="section-link">All projects</a>
+    </div>
     
         <div class="projects-grid">
             
-                <article class="project-card">
-                    <h3><a href="https://issackjohn.github.io/speedometer.html">Speedometer 3.0</a></h3>
+                <a class="project-card" href="/speedometer.html" aria-label="View Speedometer 3.0">
+                    <span class="project-index">01</span>
+                    <h3 class="project-name">Speedometer 3.0</h3>
                     
-                        <p>Web performance benchmarking tool</p>
+                        <p class="project-desc">Web performance benchmarking tool</p>
                     
                     
-                        <time datetime="2024-01-24">January 24, 2024</time>
+                        <span class="project-meta">
+                            <time datetime="2024-01-24">January 23, 2024</time>
+                        </span>
                     
-                </article>
+                </a>
             
-                <article class="project-card">
-                    <h3><a href="https://issackjohn.github.io/complex-workloads.html">Complex Workloads</a></h3>
+                <a class="project-card" href="/complex-workloads.html" aria-label="View Complex Workloads">
+                    <span class="project-index">02</span>
+                    <h3 class="project-name">Complex Workloads</h3>
                     
-                        <p>Performance testing with complex DOM operations</p>
+                        <p class="project-desc">Performance testing with complex DOM operations</p>
                     
                     
-                </article>
+                </a>
             
-                <article class="project-card">
-                    <h3><a href="https://issackjohn.github.io/speedometer-with-complex.html">2023-06-27 With Complex DOM</a></h3>
+                <a class="project-card" href="/speedometer-with-complex.html" aria-label="View 2023-06-27 With Complex DOM">
+                    <span class="project-index">03</span>
+                    <h3 class="project-name">2023-06-27 With Complex DOM</h3>
                     
-                        <p>Speedometer testing with complex DOM structures</p>
+                        <p class="project-desc">Speedometer testing with complex DOM structures</p>
                     
                     
-                        <time datetime="2023-06-27">June 27, 2023</time>
+                        <span class="project-meta">
+                            <time datetime="2023-06-27">June 26, 2023</time>
+                        </span>
                     
-                </article>
+                </a>
+            
+                <a class="project-card" href="/Speedometer1/index.html" aria-label="View 2023-09-18 With New Structure Complex DOM">
+                    <span class="project-index">04</span>
+                    <h3 class="project-name">2023-09-18 With New Structure Complex DOM</h3>
+                    
+                        <p class="project-desc">Updated Speedometer with restructured complex DOM</p>
+                    
+                    
+                        <span class="project-meta">
+                            <time datetime="2023-09-18">September 17, 2023</time>
+                        </span>
+                    
+                </a>
             
         </div>
-        <p><a href="/projects/">View all projects</a></p>
     
 </section>
 
 <!-- Videos Section -->
-<section aria-labelledby="videos-heading">
-    <h2 id="videos-heading">Recommended Videos</h2>
-    
-        <ul class="videos-list">
-            
-                <li>
-                    <a href="https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo">Jim Rohn - Give To Receive</a>
-                    
-                        <span class="video-description">Motivational content about giving and receiving</span>
-                    
-                </li>
-            
-        </ul>
-    
+
+<section class="section" data-section="Watch" aria-labelledby="videos-heading">
+    <div class="section-header">
+        <div class="section-title-group">
+            <span class="section-number">04</span>
+            <h2 class="section-label" id="videos-heading">Worth Watching</h2>
+        </div>
+    </div>
+    <ul class="videos-list">
+        
+            <li>
+                <a href="https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo">Jim Rohn - Give To Receive</a>
+                
+                    <span class="video-description">Motivational content about giving and receiving</span>
+                
+            </li>
+        
+    </ul>
 </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer role="contentinfo">
-    <p>&copy; 2025 Issack John. Built with <a href="https://www.11ty.dev/">Eleventy</a>.</p>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+        <p class="footer-copy">© 2026 Issack John</p>
+        <ul class="footer-links">
+            <li><a href="https://github.com/issackjohn" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://twitter.com/niccoates" target="_blank" rel="noopener">Twitter</a></li>
+        </ul>
+    </div>
 </footer>
+    </div>
     
     <!-- Scripts -->
-    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/main.js?v=1767725239580" defer></script>
     
-    <!-- Service Worker Registration -->
+    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' });
             });
         }
     </script>

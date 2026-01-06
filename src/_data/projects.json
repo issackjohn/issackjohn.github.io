@@ -2,30 +2,30 @@
     "projects": [
         {
             "title": "Speedometer 3.0",
-            "url": "https://issackjohn.github.io/speedometer.html",
+            "url": "/speedometer.html",
             "date": "2024-01-24",
             "description": "Web performance benchmarking tool"
         },
         {
             "title": "Complex Workloads",
-            "url": "https://issackjohn.github.io/complex-workloads.html",
+            "url": "/complex-workloads.html",
             "description": "Performance testing with complex DOM operations"
         },
         {
             "title": "2023-06-27 With Complex DOM",
-            "url": "https://issackjohn.github.io/speedometer-with-complex.html",
+            "url": "/speedometer-with-complex.html",
             "date": "2023-06-27",
             "description": "Speedometer testing with complex DOM structures"
         },
         {
             "title": "2023-09-18 With New Structure Complex DOM",
-            "url": "https://issackjohn.github.io/speedometer",
+            "url": "/Speedometer1/index.html",
             "date": "2023-09-18",
             "description": "Updated Speedometer with restructured complex DOM"
         },
         {
             "title": "JavaScript Web Components",
-            "url": "https://issackjohn.github.io/SpeedometerJSWebComponents",
+            "url": "/SpeedometerJSWebComponents/index.html",
             "description": "Performance testing with JavaScript Web Components"
         }
     ]

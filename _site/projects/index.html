@@ -22,33 +22,17 @@
     <meta name="twitter:title" content="Projects">
     <meta name="twitter:description" content="Web performance tools and benchmarking projects">
     
-    <!-- Preconnect to external domains -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     
-    <!-- Critical CSS will be inlined here -->
-    <style>
-        /* Critical CSS placeholder - will be replaced with actual critical CSS */
-        body{margin:0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#333}
-        .skip-link{position:absolute;top:-40px;left:6px;background:#000;color:#fff;padding:8px;text-decoration:none;z-index:1000}
-        .skip-link:focus{top:6px}
-        nav ul{list-style:none;padding:0;margin:0;display:flex;gap:1rem}
-        nav a{text-decoration:none;color:#0066cc}
-        nav a:hover,nav a:focus{text-decoration:underline}
-        main{max-width:1024px;margin:0 auto;padding:1rem}
-        .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
-    </style>
-    
-    <!-- Load non-critical CSS asynchronously -->
-    <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/css/main.css"></noscript>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/main.css?v=1767725239580">
     
     <!-- PWA -->
     <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="theme-color" content="#ffffff">
-    
-    <!-- Security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'self';">
+    <meta name="theme-color" content="#1a1a2e">
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -69,98 +53,115 @@
     
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main" class="skip-link">Skip to main content</a>
-    
-    <!-- Navigation -->
-    <nav role="navigation" aria-label="Main navigation">
-    <ul>
-        <li><a href="/" >Home</a></li>
-        <li><a href="/blog/" >Blog</a></li>
-        <li><a href="/projects/" aria-current="page">Projects</a></li>
-        <li><a href="/about/" >About</a></li>
-    </ul>
-</nav>
-    
-    <!-- Main content -->
-    <main id="main" role="main">
+    <div class="site-wrapper">
+        <!-- Skip to main content link -->
+        <a href="#main" class="skip-link">Skip to main content</a>
         
-<header>
+        <!-- Navigation -->
+        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">Issack John</a>
+        <ul class="nav-links">
+            <li><a href="/" >Index</a></li>
+            <li><a href="/blog/" >Writing</a></li>
+            <li><a href="/projects/" aria-current="page">Work</a></li>
+            <li><a href="/about/" >About</a></li>
+        </ul>
+    </div>
+</nav>
+        
+        <!-- Main content -->
+        <main id="main" role="main">
+            
+<header class="page-header" data-page="Work">
     <h1>Projects</h1>
-    <p>Web performance tools and benchmarking projects</p>
+    <p>Tools and benchmarks.</p>
 </header>
 
 
     <div class="projects-grid">
         
-            <article class="project-card">
-                <h2><a href="https://issackjohn.github.io/speedometer.html">Speedometer 3.0</a></h2>
+            <a class="project-card" href="/speedometer.html" aria-label="View Speedometer 3.0">
+                <span class="project-index">01</span>
+                <h2 class="project-name">Speedometer 3.0</h2>
                 
-                    <p>Web performance benchmarking tool</p>
+                    <p class="project-desc">Web performance benchmarking tool</p>
                 
                 
-                    <time datetime="2024-01-24">January 24, 2024</time>
+                    <span class="project-meta">
+                        <time datetime="2024-01-24">January 23, 2024</time>
+                    </span>
                 
-                <a href="https://issackjohn.github.io/speedometer.html" aria-label="View project: Speedometer 3.0">View Project</a>
-            </article>
+            </a>
         
-            <article class="project-card">
-                <h2><a href="https://issackjohn.github.io/complex-workloads.html">Complex Workloads</a></h2>
+            <a class="project-card" href="/complex-workloads.html" aria-label="View Complex Workloads">
+                <span class="project-index">02</span>
+                <h2 class="project-name">Complex Workloads</h2>
                 
-                    <p>Performance testing with complex DOM operations</p>
+                    <p class="project-desc">Performance testing with complex DOM operations</p>
                 
                 
-                <a href="https://issackjohn.github.io/complex-workloads.html" aria-label="View project: Complex Workloads">View Project</a>
-            </article>
+            </a>
         
-            <article class="project-card">
-                <h2><a href="https://issackjohn.github.io/speedometer-with-complex.html">2023-06-27 With Complex DOM</a></h2>
+            <a class="project-card" href="/speedometer-with-complex.html" aria-label="View 2023-06-27 With Complex DOM">
+                <span class="project-index">03</span>
+                <h2 class="project-name">2023-06-27 With Complex DOM</h2>
                 
-                    <p>Speedometer testing with complex DOM structures</p>
+                    <p class="project-desc">Speedometer testing with complex DOM structures</p>
                 
                 
-                    <time datetime="2023-06-27">June 27, 2023</time>
+                    <span class="project-meta">
+                        <time datetime="2023-06-27">June 26, 2023</time>
+                    </span>
                 
-                <a href="https://issackjohn.github.io/speedometer-with-complex.html" aria-label="View project: 2023-06-27 With Complex DOM">View Project</a>
-            </article>
+            </a>
         
-            <article class="project-card">
-                <h2><a href="https://issackjohn.github.io/speedometer">2023-09-18 With New Structure Complex DOM</a></h2>
+            <a class="project-card" href="/Speedometer1/index.html" aria-label="View 2023-09-18 With New Structure Complex DOM">
+                <span class="project-index">04</span>
+                <h2 class="project-name">2023-09-18 With New Structure Complex DOM</h2>
                 
-                    <p>Updated Speedometer with restructured complex DOM</p>
+                    <p class="project-desc">Updated Speedometer with restructured complex DOM</p>
                 
                 
-                    <time datetime="2023-09-18">September 18, 2023</time>
+                    <span class="project-meta">
+                        <time datetime="2023-09-18">September 17, 2023</time>
+                    </span>
                 
-                <a href="https://issackjohn.github.io/speedometer" aria-label="View project: 2023-09-18 With New Structure Complex DOM">View Project</a>
-            </article>
+            </a>
         
-            <article class="project-card">
-                <h2><a href="https://issackjohn.github.io/SpeedometerJSWebComponents">JavaScript Web Components</a></h2>
+            <a class="project-card" href="/SpeedometerJSWebComponents/index.html" aria-label="View JavaScript Web Components">
+                <span class="project-index">05</span>
+                <h2 class="project-name">JavaScript Web Components</h2>
                 
-                    <p>Performance testing with JavaScript Web Components</p>
+                    <p class="project-desc">Performance testing with JavaScript Web Components</p>
                 
                 
-                <a href="https://issackjohn.github.io/SpeedometerJSWebComponents" aria-label="View project: JavaScript Web Components">View Project</a>
-            </article>
+            </a>
         
     </div>
 
-    </main>
-    
-    <!-- Footer -->
-    <footer role="contentinfo">
-    <p>&copy; 2025 Issack John. Built with <a href="https://www.11ty.dev/">Eleventy</a>.</p>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+        <p class="footer-copy">© 2026 Issack John</p>
+        <ul class="footer-links">
+            <li><a href="https://github.com/issackjohn" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://twitter.com/niccoates" target="_blank" rel="noopener">Twitter</a></li>
+        </ul>
+    </div>
 </footer>
+    </div>
     
     <!-- Scripts -->
-    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/main.js?v=1767725239580" defer></script>
     
-    <!-- Service Worker Registration -->
+    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' });
             });
         }
     </script>

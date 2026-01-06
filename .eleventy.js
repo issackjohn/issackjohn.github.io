@@ -2,6 +2,9 @@ module.exports = function (eleventyConfig) {
     // Copy static files
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/*.js");
+    eleventyConfig.addPassthroughCopy({ "Speedometer1": "Speedometer1" });
+    eleventyConfig.addPassthroughCopy({ "SpeedometerJSWebComponents": "SpeedometerJSWebComponents" });
+    eleventyConfig.addPassthroughCopy({ "SpeedometerWithComplex": "SpeedometerWithComplex" });
     eleventyConfig.addPassthroughCopy("src/robots.txt");
     eleventyConfig.addPassthroughCopy("src/sitemap.xml");
     eleventyConfig.addPassthroughCopy("src/manifest.webmanifest");
@@ -30,22 +33,6 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addFilter("limit", function (array, limit) {
         return array.slice(0, limit);
-    });
-
-    eleventyConfig.addFilter("date", function (date, format) {
-        const d = new Date(date);
-        if (format === "%Y-%m-%d") {
-            return d.toISOString().split("T")[0];
-        }
-        if (format === "rfc") {
-            return d.toUTCString();
-        }
-        return d.toString();
-    });
-
-    eleventyConfig.addFilter("escape", function (str) {
-        if (!str) return "";
-        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     });
 
     return {

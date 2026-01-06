@@ -4,9 +4,18 @@
 
     // Initialize the site when DOM is ready
     document.addEventListener("DOMContentLoaded", function () {
-        // Add any interactive functionality here
-        // eslint-disable-next-line no-console
-        console.log("Site loaded successfully");
+        const nav = document.querySelector('.site-nav');
+        const toggleNavState = () => {
+            if (!nav) return;
+            if (window.scrollY > 12) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+
+        toggleNavState();
+        window.addEventListener('scroll', toggleNavState, { passive: true });
     });
 
     // Handle external link accessibility
