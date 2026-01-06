@@ -1,0 +1,70 @@
+---
+layout: base.njk
+title: Browser Hang Diagnostic
+permalink: /hang.html
+---
+
+<div class="max-w-2xl mx-auto pt-32">
+    <header class="mb-12 border-b border-ink/10 pb-8">
+        <div class="flex items-center gap-4 mb-4">
+            <span class="px-2 py-0.5 text-[10px] uppercase tracking-widest font-mono bg-signal text-white">Diagnostic</span>
+            <span class="text-xs font-mono text-ink/50">Thread Lock Simulation</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-serif font-medium text-ink leading-tight mb-4">
+            Hang diagnostic
+        </h1>
+        <p class="text-lg text-ink/70 max-w-2xl font-serif italic line-through decoration-signal/50">
+            A responsive utility for browser testing.
+        </p>
+        <p class="text-lg text-ink/70 max-w-2xl font-serif italic mt-[-1rem]">
+            Warning: This page is designed to intentionally lock the main thread.
+        </p>
+    </header>
+
+    <div class="space-y-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="border border-ink/10 p-8 space-y-6">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 border-b border-ink/5 pb-2">Destructive Action</h2>
+                <button id="hangBtn" class="w-full bg-signal text-white py-4 font-mono text-sm hover:brightness-110 transition-all uppercase tracking-widest">
+                    Trigger Hang
+                </button>
+                <p class="text-[10px] font-mono text-ink/40 italic text-center">
+                    Note: This will execute an infinite loop on the main thread.
+                </p>
+            </div>
+
+            <div class="border border-ink/10 p-8 space-y-6">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 border-b border-ink/5 pb-2">Responsiveness Test</h2>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-mono text-ink/60 uppercase">Call Stack Count</span>
+                    <div class="counter text-4xl font-mono text-signal">0</div>
+                </div>
+                <button id="counterBtn" class="w-full border border-ink text-ink py-4 font-mono text-sm hover:bg-ink hover:text-paper transition-all uppercase tracking-widest">
+                    Increment Counter
+                </button>
+            </div>
+        </div>
+
+        <div class="font-mono text-[10px] text-ink/30 space-y-2 uppercase tracking-tighter">
+            <p>// Diagnostic implementation details</p>
+            <p>function hang() { while(true) {} }</p>
+            <p>status: pending_lock</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function hang() { hang2(); }
+    function hang2() { hang3(); }
+    function hang3() { while (true) {} }
+    
+    document.getElementById("hangBtn").onclick = () => {
+        console.log("Initiating thread lock...");
+        setTimeout(hang, 100);
+    };
+
+    const counterElem = document.querySelector(".counter");
+    document.getElementById("counterBtn").onclick = () => {
+        counterElem.textContent = parseInt(counterElem.textContent) + 1;
+    };
+</script>

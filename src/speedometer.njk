@@ -1,0 +1,206 @@
+---
+layout: base.njk
+title: Speedometer 3.0 Test Runner
+permalink: /speedometer.html
+---
+
+<div class="max-w-5xl mx-auto pt-32 pb-16">
+    <header class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="px-2 py-0.5 text-[10px] uppercase tracking-widest font-mono bg-signal text-white">Tool</span>
+            <span class="text-xs font-mono text-ink/40">v3.0</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-serif font-medium text-ink leading-[0.95] mb-6">
+            Speedometer
+        </h1>
+        <p class="text-xl text-ink/60 max-w-xl font-serif">
+            Run benchmark suites and compare framework performance.
+        </p>
+    </header>
+
+    <!-- Main Runner Card -->
+    <div class="bg-cream border border-ink/10 p-8 md:p-10 mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-6">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40">Compare Suites</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="suite1" class="block text-xs font-mono text-ink/50 mb-2">Primary</label>
+                        <select id="suite1" class="w-full bg-paper border border-ink/20 p-3 font-mono text-sm focus:border-signal outline-none transition-colors"></select>
+                    </div>
+                    <div>
+                        <label for="suite2" class="block text-xs font-mono text-ink/50 mb-2">Secondary</label>
+                        <select id="suite2" class="w-full bg-paper border border-ink/20 p-3 font-mono text-sm focus:border-signal outline-none transition-colors"></select>
+                    </div>
+                </div>
+                <button onclick="runTests()" class="bg-ink text-paper py-3 px-8 font-mono text-sm hover:bg-signal transition-colors inline-flex items-center gap-2">
+                    <span>RUN COMPARISON</span>
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+            </div>
+            <div class="border-t lg:border-t-0 lg:border-l border-ink/10 pt-6 lg:pt-0 lg:pl-8">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-4">Quick Start</h2>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="/Speedometer1/index.html" target="_blank" rel="noopener noreferrer" class="text-ink hover:text-signal transition-colors">→ Run all tests</a></li>
+                    <li><a href="/Speedometer1/index.html?developerMode" target="_blank" rel="noopener noreferrer" class="text-ink hover:text-signal transition-colors">→ Developer mode</a></li>
+                    <li>
+                        <a href="/Speedometer1/index.html?suite=TodoMVC-JavaScript-ES5-Complex-DOM,TodoMVC-JavaScript-ES6-Complex-DOM,TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,TodoMVC-React-Complex-DOM,TodoMVC-React-Redux-Complex-DOM,TodoMVC-Backbone-Complex-DOM,TodoMVC-Angular-Complex-DOM,TodoMVC-Vue-Complex-DOM,TodoMVC-jQuery-Complex-DOM,TodoMVC-Preact-Complex-DOM,TodoMVC-Svelte-Complex-DOM" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="text-ink hover:text-signal transition-colors">
+                           → Complex workloads only
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benchmark Suites -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div class="bg-cream/50 border border-ink/5 p-6">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-4 pb-2 border-b border-ink/5">Standard Suites</h2>
+            <ul id="vanilla-test-runner" class="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-xs"></ul>
+        </div>
+        <div class="bg-cream/50 border border-ink/5 p-6">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-ink/40 mb-4 pb-2 border-b border-ink/5">Complex DOM Suites</h2>
+            <ul id="complex-test-runner" class="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-xs"></ul>
+        </div>
+    </div>
+
+    <!-- Direct Framework Links -->
+    <details class="group">
+        <summary class="cursor-pointer text-xs font-mono uppercase tracking-widest text-ink/40 hover:text-ink/60 transition-colors flex items-center gap-2 mb-6">
+            <svg class="w-3 h-3 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Direct Framework Links
+        </summary>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-ink/10">
+            <div>
+                <h3 class="text-xs font-mono text-ink/30 mb-3">Complex</h3>
+                <ul id="complex-framework-list" class="space-y-1 text-sm text-ink/70"></ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-mono text-ink/30 mb-3">Standard</h3>
+                <ul id="standalone-framework-list" class="space-y-1 text-sm text-ink/70"></ul>
+            </div>
+        </div>
+    </details>
+</div>
+
+<script>
+    const benchmarksMap = new Map();
+    benchmarksMap.set("angular", "TodoMVC-Angular");
+    benchmarksMap.set("backbone", "TodoMVC-Backbone");
+    benchmarksMap.set("jquery", "TodoMVC-jquery");
+    benchmarksMap.set("lit", "TodoMVC-Lit");
+    benchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5");
+    benchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6");
+    benchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-Webpack");
+    benchmarksMap.set("javascript-web-components", "TodoMVC-WebComponents");
+    benchmarksMap.set("preact", "TodoMVC-Preact");
+    benchmarksMap.set("react", "TodoMVC-React");
+    benchmarksMap.set("react-redux", "TodoMVC-React-Redux");
+    benchmarksMap.set("svelte", "TodoMVC-Svelte");
+    benchmarksMap.set("vue", "TodoMVC-Vue");
+
+    const complexBenchmarksMap = new Map();
+    complexBenchmarksMap.set("angular", "TodoMVC-Angular-Complex-DOM");
+    complexBenchmarksMap.set("backbone", "TodoMVC-Backbone-Complex-DOM");
+    complexBenchmarksMap.set("jquery", "TodoMVC-jquery-Complex-DOM");
+    complexBenchmarksMap.set("javascript-es5", "TodoMVC-JavaScript-ES5-Complex-DOM");
+    complexBenchmarksMap.set("javascript-es6", "TodoMVC-JavaScript-ES6-Complex-DOM");
+    complexBenchmarksMap.set("javascript-es6-webpack", "TodoMVC-JavaScript-ES6-webpack-Complex-DOM");
+    complexBenchmarksMap.set("preact", "TodoMVC-Preact-Complex-DOM");
+    complexBenchmarksMap.set("react", "TodoMVC-React-Complex-DOM");
+    complexBenchmarksMap.set("react-redux", "TodoMVC-React-Redux-Complex-DOM");
+    complexBenchmarksMap.set("svelte", "TodoMVC-Svelte-Complex-DOM");
+    complexBenchmarksMap.set("vue", "TodoMVC-Vue-Complex-DOM");
+
+    const testRunner = document.getElementById("vanilla-test-runner");
+    benchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="/Speedometer1/index.html?suite=${value}" target="_blank" rel="noopener noreferrer" class="text-ink/60 hover:text-signal transition-colors">${key}</a>`;
+        testRunner.appendChild(li);
+    });
+
+    const complexTestRunner = document.getElementById("complex-test-runner");
+    complexBenchmarksMap.forEach((value, key) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="/Speedometer1/index.html?suite=${value}" target="_blank" rel="noopener noreferrer" class="text-ink/60 hover:text-signal transition-colors">${key}</a>`;
+        complexTestRunner.appendChild(li);
+    });
+
+    const suite1Dropdown = document.getElementById("suite1");
+    const suite2Dropdown = document.getElementById("suite2");
+
+    function populateDropdowns() {
+        benchmarksMap.forEach((value, key) => {
+            suite1Dropdown.add(new Option(key, value));
+            suite2Dropdown.add(new Option(key, value));
+        });
+        complexBenchmarksMap.forEach((value, key) => {
+            suite1Dropdown.add(new Option(`complex: ${key}`, value));
+            suite2Dropdown.add(new Option(`complex: ${key}`, value));
+        });
+    }
+
+    function runTests() {
+        const s1 = suite1Dropdown.value;
+        const s2 = suite2Dropdown.value;
+        window.open(`/Speedometer1/index.html?suite=${s1},${s2}`, "_blank");
+    }
+
+    function generateFrameworkLists() {
+        const complexUl = document.getElementById("complex-framework-list");
+        const standardUl = document.getElementById("standalone-framework-list");
+
+        const complexFrameworks = [
+            { name: "Angular", url: "/Speedometer1/resources/todomvc/architecture-examples/angular-complex/dist/index.html#/all" },
+            { name: "Backbone", url: "/Speedometer1/resources/todomvc/architecture-examples/backbone-complex/dist/index.html#/all" },
+            { name: "Jquery", url: "/Speedometer1/resources/todomvc/architecture-examples/jquery-complex/dist/index.html#/all" },
+            { name: "JavaScript-es5", url: "/Speedometer1/resources/todomvc/vanilla-examples/javascript-es5-complex/dist/index.html#/all" },
+            { name: "JavaScript-es6", url: "/Speedometer1/resources/todomvc/vanilla-examples/javascript-es6-complex/dist/index.html#/all" },
+            { name: "JavaScript-es6-webpack", url: "/Speedometer1/resources/todomvc/vanilla-examples/javascript-es6-webpack-complex/dist/index.html#/all" },
+            { name: "Preact", url: "/Speedometer1/resources/todomvc/architecture-examples/preact-complex/dist/index.html#/all" },
+            { name: "React", url: "/Speedometer1/resources/todomvc/architecture-examples/react-complex/dist/index.html#/all" },
+            { name: "React-Redux", url: "/Speedometer1/resources/todomvc/architecture-examples/react-redux-complex/dist/index.html#/all" },
+            { name: "Svelte", url: "/Speedometer1/resources/todomvc/architecture-examples/svelte-complex/dist/index.html#/all" },
+            { name: "Vue", url: "/Speedometer1/resources/todomvc/architecture-examples/vue-complex/dist/index.html#/all" },
+        ];
+
+        const standardFrameworks = [
+            { name: "Angular", url: "/Speedometer1/resources/todomvc/architecture-examples/angular/dist/index.html" },
+            { name: "Backbone", url: "/Speedometer1/resources/todomvc/architecture-examples/backbone/dist/index.html" },
+            { name: "Jquery", url: "/Speedometer1/resources/todomvc/architecture-examples/jquery/dist/index.html" },
+            { name: "Lit", url: "/Speedometer1/resources/todomvc/architecture-examples/lit/dist/index.html" },
+            { name: "JavaScript-es5", url: "/Speedometer1/resources/todomvc/vanilla-examples/javascript-es5/dist/index.html" },
+            { name: "JavaScript-es6", url: "/Speedometer1/resources/todomvc/vanilla-examples/javascript-es6/dist/index.html" },
+            { name: "JavaScript-es6-webpack", url: "/Speedometer1/resources/todomvc/vanilla-examples/javascript-es6-webpack/dist/index.html" },
+            { name: "JavaScript-web-components", url: "/SpeedometerWithComplex/resources/todomvc/vanilla-examples/javascript-web-components/dist/index.html" },
+            { name: "Preact", url: "/Speedometer1/resources/todomvc/architecture-examples/preact/dist/index.html" },
+            { name: "React", url: "/Speedometer1/resources/todomvc/architecture-examples/react/dist/index.html" },
+            { name: "React-Redux", url: "/Speedometer1/resources/todomvc/architecture-examples/react-redux/dist/index.html" },
+            { name: "Svelte", url: "/Speedometer1/resources/todomvc/architecture-examples/svelte/dist/index.html" },
+            { name: "Vue", url: "/Speedometer1/resources/todomvc/architecture-examples/vue/dist/index.html" },
+            { name: "Charts", url: "/Speedometer1/resources/charts/dist/index.html" },
+            { name: "Editors", url: "/Speedometer1/resources/editors/dist/index.html" },
+            { name: "News Site next", url: "/Speedometer1/resources/newssite/news-next/dist/index.html" },
+            { name: "News Site nuxt", url: "/Speedometer1/resources/newssite/news-nuxt/dist/index.html" },
+            { name: "React stockcharts", url: "/Speedometer1/resources/react-stockcharts/build/index.html" },
+        ];
+
+        complexFrameworks.forEach(f => {
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${f.url}" target="_blank" rel="noopener noreferrer" class="hover:text-signal transition-colors">${f.name}</a>`;
+            complexUl.appendChild(li);
+        });
+
+        standardFrameworks.forEach(f => {
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${f.url}" target="_blank" rel="noopener noreferrer" class="hover:text-signal transition-colors">${f.name}</a>`;
+            standardUl.appendChild(li);
+        });
+    }
+
+    populateDropdowns();
+    generateFrameworkLists();
+</script>

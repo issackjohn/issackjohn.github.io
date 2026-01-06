@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issack John - Personal website focused on web performance and simplicity</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Personal website focused on web performance and simplicity">
+    <meta name="author" content="Issack John">
+    <link rel="canonical" href="https://issackjohn.github.io/blog/contributing-to-speedometer-3/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Issack John">
+    <meta property="og:description" content="Personal website focused on web performance and simplicity">
+    <meta property="og:url" content="https://issackjohn.github.io/blog/contributing-to-speedometer-3/">
+    <meta property="og:site_name" content="Issack John">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Issack John">
+    <meta name="twitter:description" content="Personal website focused on web performance and simplicity">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/main.css?v=1767727363359">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#1a1a2e">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Issack John",
+        "url": "https://issackjohn.github.io",
+        "sameAs": [],
+        "jobTitle": "Web Performance Engineer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Issack John"
+        }
+    }
+    </script>
+    
+    
+</head>
+<body>
+    <div class="site-wrapper">
+        <!-- Skip to main content link -->
+        <a href="#main" class="skip-link">Skip to main content</a>
+        
+        <!-- Navigation -->
+        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">Issack John</a>
+        <ul class="nav-links">
+            <li><a href="/" >Index</a></li>
+            <li><a href="/blog/" aria-current="page">Writing</a></li>
+            <li><a href="/projects/" >Work</a></li>
+            <li><a href="/about/" >About</a></li>
+        </ul>
+    </div>
+</nav>
+        
+        <!-- Main content -->
+        <main id="main" role="main">
+            
+<article class="post-content-wrapper pt-32 pb-16">
+    <header class="mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/blog/" class="text-xs font-mono uppercase tracking-widest text-ink/40 hover:text-signal transition-colors">← Blog</a>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-serif font-medium text-ink leading-tight mb-4">Contributing to Speedometer 3.0</h1>
+        <div class="flex items-center gap-4 text-xs font-mono text-ink/50">
+            <time datetime="2024-03-11T00:00:00.000Z">March 10, 2024</time>
+            
+                <div class="flex gap-2">
+                    
+                        <span class="px-2 py-0.5 bg-cream border border-ink/10">web performance</span>
+                    
+                        <span class="px-2 py-0.5 bg-cream border border-ink/10">speedometer</span>
+                    
+                        <span class="px-2 py-0.5 bg-cream border border-ink/10">benchmarking</span>
+                    
+                </div>
+            
+        </div>
+    </header>
+    
+    <div class="post-content">
+        <p>Speedometer 3.0 is a cross-industry browser benchmark update that adds many new tests and modern variants.</p>
+<p>The Edge team’s main contribution is <strong>Complex DOM</strong>: TodoMVC interactions run inside a larger “app shell” with a large DOM and complex CSS selectors, so each action forces real style/layout work (including partial selector matches).</p>
+<p>The article explains the motivation (real apps hit latency cliffs from DOM/CSS complexity), the data-driven approach (sampling DOM sizes/depth and selectors from real apps), and notes variants for Web Components/Lit plus a stacking-context flavor.</p>
+<p>Links: <a href="https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/" target="_blank" rel="noopener noreferrer">article</a> · <a href="https://browserbench.org/Speedometer3.0" target="_blank" rel="noopener noreferrer">Speedometer 3.0</a> · <a href="https://github.com/WebKit/Speedometer/issues" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+
+    </div>
+    
+    <nav class="flex justify-between items-center pt-12 mt-12 border-t border-ink/10" aria-label="Post navigation">
+        
+            <span></span>
+        
+        
+            <span></span>
+        
+    </nav>
+</article>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+        <p class="footer-copy">© 2026 Issack John</p>
+        <ul class="footer-links">
+            <li><a href="https://github.com/issackjohn" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://twitter.com/niccoates" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+        </ul>
+    </div>
+</footer>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/assets/js/main.js?v=1767727363359" defer></script>
+    
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' });
+            });
+        }
+    </script>
+</body>
+</html>

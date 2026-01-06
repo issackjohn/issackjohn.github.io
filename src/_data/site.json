@@ -1,0 +1,9 @@
+{
+    "title": "Issack John",
+    "description": "Personal website focused on web performance and simplicity",
+    "url": "https://issackjohn.github.io",
+    "author": {
+        "name": "Issack John",
+        "email": "issackjohn@example.com"
+    }
+}

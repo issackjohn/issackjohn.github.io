@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {{ site.title }}{% else %}{{ site.title }} - {{ site.description }}{% endif %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% if summary %}{{ summary }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="{{ site.author.name }}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="{% if collections.blog and page.url != '/' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{% if summary %}{{ summary }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}">
+    <meta name="twitter:description" content="{% if summary %}{{ summary }}{% else %}{{ site.description }}{% endif %}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/main.css?v={{ build.stamp }}">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#1a1a2e">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "{{ site.author.name }}",
+        "url": "{{ site.url }}",
+        "sameAs": [],
+        "jobTitle": "Web Performance Engineer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "{{ site.title }}"
+        }
+    }
+    </script>
+    
+    {% if collections.blog and page.url != '/' and date %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ title }}",
+        "description": "{{ summary }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ site.author.name }}"
+        },
+        "datePublished": "{{ date | isoDate }}",
+        "url": "{{ site.url }}{{ page.url }}"
+    }
+    </script>
+    {% endif %}
+</head>
+<body>
+    <div class="site-wrapper">
+        <!-- Skip to main content link -->
+        <a href="#main" class="skip-link">Skip to main content</a>
+        
+        <!-- Navigation -->
+        {% include "navigation.njk" %}
+        
+        <!-- Main content -->
+        <main id="main" role="main">
+            {{ content | safe }}
+        </main>
+        
+        <!-- Footer -->
+        {% include "footer.njk" %}
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/assets/js/main.js?v={{ build.stamp }}" defer></script>
+    
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+    "projects": [
+        {
+            "title": "Speedometer 3.0",
+            "url": "/speedometer.html",
+            "date": "2024-01-24",
+            "description": "Web performance benchmarking tool"
+        },
+        {
+            "title": "Complex Workloads",
+            "url": "/complex-workloads.html",
+            "description": "Performance testing with complex DOM operations"
+        },
+        {
+            "title": "2023-06-27 With Complex DOM",
+            "url": "/speedometer-with-complex.html",
+            "date": "2023-06-27",
+            "description": "Speedometer testing with complex DOM structures"
+        },
+        {
+            "title": "2023-09-18 With New Structure Complex DOM",
+            "url": "/Speedometer1/index.html",
+            "date": "2023-09-18",
+            "description": "Updated Speedometer with restructured complex DOM"
+        },
+        {
+            "title": "JavaScript Web Components",
+            "url": "/SpeedometerJSWebComponents/index.html",
+            "description": "Performance testing with JavaScript Web Components"
+        }
+    ]
+}

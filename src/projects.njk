@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: "Projects"
+summary: "Web performance tools and benchmarking projects"
+permalink: "/projects/"
+---
+
+<header class="page-header" data-page="Work">
+    <h1>Projects</h1>
+    <p>Tools and benchmarks.</p>
+</header>
+
+{% if projects.projects.length > 0 %}
+    <div class="projects-grid">
+        {% for project in projects.projects %}
+            <a class="project-card" href="{{ project.url }}" aria-label="View {{ project.title }}">
+                <span class="project-index">0{{ loop.index }}</span>
+                <h2 class="project-name">{{ project.title }}</h2>
+                {% if project.description %}
+                    <p class="project-desc">{{ project.description }}</p>
+                {% endif %}
+                {% if project.date %}
+                    <span class="project-meta">
+                        <time datetime="{{ project.date }}">{{ project.date | dateFormat }}</time>
+                    </span>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No projects listed yet.</p>
+{% endif %}

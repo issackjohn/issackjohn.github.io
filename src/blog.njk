@@ -1,0 +1,64 @@
+---
+layout: base.njk
+title: "Blog"
+summary: "Short notes on performance work"
+pagination:
+  data: collections.blog
+  size: 10
+  alias: posts
+permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+---
+
+<header class="page-header" data-page="Writing">
+    <h1>Writing</h1>
+    <p>Benchmarks, profiling, and notes.</p>
+</header>
+
+{% if posts.length > 0 %}
+    <div class="blog-list">
+        {% for post in posts %}
+            <article class="blog-list-item">
+                <h2><a href="/blog/{{ post.fileSlug }}/">{{ post.data.title }}</a></h2>
+                <p>{{ post.data.summary }}</p>
+                <div class="post-meta">
+                    <time datetime="{{ post.data.date | isoDate }}">{{ post.data.date | dateFormat }}</time>
+                    {% if post.data.tags %}
+                        <ul class="tags" aria-label="Tags">
+                            {% for tag in post.data.tags %}
+                                <li>{{ tag }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <a href="/blog/{{ post.fileSlug }}/" class="read-more" aria-label="Read {{ post.data.title }}">Read article</a>
+            </article>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if pagination.pages.length > 1 %}
+        <nav class="pagination" aria-label="Blog pagination">
+            <ul>
+                {% if pagination.previousPageLink %}
+                    <li><a href="{{ pagination.previousPageLink }}">Prev</a></li>
+                {% endif %}
+                
+                {% for pageEntry in pagination.pages %}
+                    <li>
+                        {% if pageEntry == pagination.pageNumber %}
+                            <span aria-current="page">{{ pageEntry + 1 }}</span>
+                        {% else %}
+                            <a href="{{ pagination.hrefs[loop.index0] }}">{{ pageEntry + 1 }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                
+                {% if pagination.nextPageLink %}
+                    <li><a href="{{ pagination.nextPageLink }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% else %}
+    <p>No posts yet.</p>
+{% endif %}

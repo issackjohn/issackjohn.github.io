@@ -1,0 +1,96 @@
+---
+layout: base.njk
+title: "Home"
+summary: "Web Performance & Simplicity"
+---
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-label">Web Performance Engineer</span>
+        <h1 class="hero-name">Issack<span class="highlight">.</span></h1>
+        <p class="hero-title">Performance work: profiling, benchmarks, CWV</p>
+        <p class="hero-bio">I build and maintain performance tooling, chase down regressions, and write up what I learn.</p>
+        <div class="hero-cta">
+            <a href="/projects/" class="btn btn-primary">View Work</a>
+            <a href="/about/" class="btn btn-secondary">About</a>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Posts Section -->
+<section class="section" data-section="Writing" aria-labelledby="blog-heading">
+    <div class="section-header">
+        <div class="section-title-group">
+            <span class="section-number">02</span>
+            <h2 class="section-label" id="blog-heading">Recent Writing</h2>
+        </div>
+        <a href="/blog/" class="section-link">All posts</a>
+    </div>
+    {% if collections.blog.length > 0 %}
+        <div class="posts-list">
+            {% for post in collections.blog | limit(3) %}
+                <a href="/blog/{{ post.fileSlug }}/" class="post-item" aria-label="Read {{ post.data.title }}">
+                    <time class="post-date" datetime="{{ post.data.date | isoDate }}">{{ post.data.date | dateFormat }}</time>
+                    <div>
+                        <h3 class="post-title">{{ post.data.title }}</h3>
+                        <p class="post-excerpt">{{ post.data.summary }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No posts yet.</p>
+    {% endif %}
+</section>
+
+<!-- Projects Section -->
+<section class="section" data-section="Work" aria-labelledby="projects-heading">
+    <div class="section-header">
+        <div class="section-title-group">
+            <span class="section-number">03</span>
+            <h2 class="section-label" id="projects-heading">Featured Projects</h2>
+        </div>
+        <a href="/projects/" class="section-link">All projects</a>
+    </div>
+    {% if projects.projects.length > 0 %}
+        <div class="projects-grid">
+            {% for project in projects.projects | limit(4) %}
+                <a class="project-card" href="{{ project.url }}" aria-label="View {{ project.title }}">
+                    <span class="project-index">0{{ loop.index }}</span>
+                    <h3 class="project-name">{{ project.title }}</h3>
+                    {% if project.description %}
+                        <p class="project-desc">{{ project.description }}</p>
+                    {% endif %}
+                    {% if project.date %}
+                        <span class="project-meta">
+                            <time datetime="{{ project.date }}">{{ project.date | dateFormat }}</time>
+                        </span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+<!-- Videos Section -->
+{% if videos.videos.length > 0 %}
+<section class="section" data-section="Watch" aria-labelledby="videos-heading">
+    <div class="section-header">
+        <div class="section-title-group">
+            <span class="section-number">04</span>
+            <h2 class="section-label" id="videos-heading">Worth Watching</h2>
+        </div>
+    </div>
+    <ul class="videos-list">
+        {% for video in videos.videos %}
+            <li>
+                <a href="{{ video.url }}" target="_blank" rel="noopener noreferrer">{{ video.title }}</a>
+                {% if video.description %}
+                    <span class="video-description">{{ video.description }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}
