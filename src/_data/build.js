@@ -1,3 +1,3 @@
 module.exports = {
-  stamp: Date.now(),
+    stamp: Date.now(),
 };

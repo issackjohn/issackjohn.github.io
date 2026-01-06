@@ -32,8 +32,8 @@
 
 @layer base {
     @font-face {
-        font-family: 'Berkeley Mono';
-        src: local('Berkeley Mono'), local('SF Mono'), local('Fira Code'), local('Consolas');
+        font-family: "Berkeley Mono";
+        src: local("Berkeley Mono"), local("SF Mono"), local("Fira Code"), local("Consolas");
         font-display: swap;
     }
 
@@ -48,7 +48,12 @@
     }
 
     body {
-        font-family: 'Söhne', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        font-family:
+            "Söhne",
+            -apple-system,
+            BlinkMacSystemFont,
+            system-ui,
+            sans-serif;
         color: var(--ink);
         background: var(--paper);
         line-height: 1.6;
@@ -57,7 +62,7 @@
     }
 
     body::before {
-        content: '';
+        content: "";
         position: fixed;
         top: 0;
         left: 0;
@@ -107,9 +112,9 @@
         pointer-events: none;
         z-index: 0;
     }
-    
+
     .grid-overlay::before {
-        content: '';
+        content: "";
         position: absolute;
         left: calc(50% - 600px);
         top: 0;
@@ -118,7 +123,7 @@
         background: var(--bone);
         opacity: 0.5;
     }
-    
+
     @media (max-width: 1280px) {
         .grid-overlay::before {
             left: 2rem;
@@ -179,7 +184,7 @@
     }
 
     .nav-logo {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-sm);
         font-weight: 400;
         letter-spacing: 0.05em;
@@ -188,7 +193,7 @@
         text-transform: uppercase;
         transition: opacity 0.2s;
     }
-    
+
     .site-nav.scrolled .nav-logo {
         color: var(--ink);
     }
@@ -206,7 +211,7 @@
     }
 
     .nav-links a {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.08em;
@@ -216,13 +221,13 @@
         transition: opacity 0.2s;
         position: relative;
     }
-    
+
     .site-nav.scrolled .nav-links a {
         color: var(--stone);
     }
 
     .nav-links a::after {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         bottom: -4px;
@@ -241,7 +246,7 @@
     .nav-links a[aria-current="page"] {
         color: var(--cream);
     }
-    
+
     .site-nav.scrolled .nav-links a:hover,
     .site-nav.scrolled .nav-links a[aria-current="page"] {
         color: var(--ink);
@@ -255,7 +260,7 @@
         padding: 8rem 0 6rem;
         position: relative;
     }
-    
+
     @media (min-width: 1024px) {
         .hero {
             grid-template-columns: 1fr 1fr;
@@ -264,12 +269,12 @@
     }
 
     .hero::before {
-        content: '01';
+        content: "01";
         position: absolute;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: clamp(12rem, 25vw, 20rem);
         font-weight: 300;
         color: var(--bone);
@@ -284,7 +289,7 @@
     }
 
     .hero-label {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.12em;
@@ -297,7 +302,7 @@
     }
 
     .hero-label::before {
-        content: '';
+        content: "";
         width: 2rem;
         height: 1px;
         background: var(--stone);
@@ -317,7 +322,7 @@
     }
 
     .hero-title {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-sm);
         font-weight: 400;
         letter-spacing: 0.02em;
@@ -328,7 +333,7 @@
     }
 
     .hero-title::before {
-        content: '→';
+        content: "→";
         position: absolute;
         left: 0;
         color: var(--signal);
@@ -354,7 +359,7 @@
         align-items: center;
         gap: 0.75rem;
         padding: 1rem 1.75rem;
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.08em;
@@ -395,7 +400,7 @@
         position: absolute;
         left: -1rem;
         top: 8rem;
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.12em;
@@ -427,7 +432,7 @@
     }
 
     .section-number {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-3xl);
         font-weight: 300;
         color: var(--bone);
@@ -442,7 +447,7 @@
     }
 
     .section-link {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.08em;
@@ -456,7 +461,7 @@
     }
 
     .section-link::after {
-        content: '→';
+        content: "→";
         transition: transform 0.2s;
     }
 
@@ -501,7 +506,7 @@
     }
 
     .post-item::before {
-        content: '';
+        content: "";
         position: absolute;
         left: -2rem;
         top: 50%;
@@ -520,7 +525,7 @@
     }
 
     .post-date {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-variant-numeric: tabular-nums;
         letter-spacing: 0.05em;
@@ -570,7 +575,7 @@
     }
 
     .project-card::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         top: 0;
@@ -592,7 +597,7 @@
     }
 
     .project-index {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         letter-spacing: 0.12em;
         color: var(--dust);
@@ -620,7 +625,7 @@
     }
 
     .project-meta {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-variant-numeric: tabular-nums;
         letter-spacing: 0.05em;
@@ -675,7 +680,7 @@
         position: absolute;
         right: 0;
         top: 8rem;
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: clamp(8rem, 18vw, 14rem);
         font-weight: 300;
         color: var(--bone);
@@ -743,7 +748,7 @@
         flex-wrap: wrap;
         align-items: center;
         gap: 1rem;
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         letter-spacing: 0.05em;
         color: var(--dust);
@@ -758,7 +763,7 @@
     }
 
     .tags li {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.05em;
@@ -772,7 +777,7 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.08em;
@@ -784,7 +789,7 @@
     }
 
     .read-more::after {
-        content: '→';
+        content: "→";
         transition: transform 0.2s;
     }
 
@@ -805,7 +810,7 @@
     }
 
     .about-content h2 {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         text-transform: uppercase;
@@ -851,7 +856,7 @@
     }
 
     .about-content li::before {
-        content: '—';
+        content: "—";
         position: absolute;
         left: 0;
         color: var(--dust);
@@ -886,9 +891,15 @@
         margin: 3rem 0 1.5rem;
     }
 
-    .post-content h1 { font-size: var(--text-2xl); }
-    .post-content h2 { font-size: var(--text-xl); }
-    .post-content h3 { font-size: var(--text-lg); }
+    .post-content h1 {
+        font-size: var(--text-2xl);
+    }
+    .post-content h2 {
+        font-size: var(--text-xl);
+    }
+    .post-content h3 {
+        font-size: var(--text-lg);
+    }
 
     .post-content p {
         margin: 0 0 1.75rem;
@@ -925,7 +936,7 @@
     }
 
     .post-content code {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: 0.875em;
         padding: 0.2em 0.5em;
         background: var(--cream);
@@ -956,7 +967,7 @@
     }
 
     .post-navigation a {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         letter-spacing: 0.08em;
@@ -989,7 +1000,7 @@
         justify-content: center;
         min-width: 2.5rem;
         height: 2.5rem;
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         color: var(--stone);
@@ -1010,7 +1021,7 @@
         justify-content: center;
         min-width: 2.5rem;
         height: 2.5rem;
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         font-weight: 400;
         background: var(--ink);
@@ -1042,7 +1053,7 @@
     }
 
     .footer-copy {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         letter-spacing: 0.05em;
         color: var(--dust);
@@ -1058,7 +1069,7 @@
     }
 
     .footer-links a {
-        font-family: 'Berkeley Mono', 'SF Mono', monospace;
+        font-family: "Berkeley Mono", "SF Mono", monospace;
         font-size: var(--text-xs);
         letter-spacing: 0.05em;
         color: var(--stone);

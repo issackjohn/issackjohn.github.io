@@ -2,9 +2,9 @@ module.exports = function (eleventyConfig) {
     // Copy static files
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/*.js");
-    eleventyConfig.addPassthroughCopy({ "Speedometer1": "Speedometer1" });
-    eleventyConfig.addPassthroughCopy({ "SpeedometerJSWebComponents": "SpeedometerJSWebComponents" });
-    eleventyConfig.addPassthroughCopy({ "SpeedometerWithComplex": "SpeedometerWithComplex" });
+    eleventyConfig.addPassthroughCopy({ Speedometer1: "Speedometer1" });
+    eleventyConfig.addPassthroughCopy({ SpeedometerJSWebComponents: "SpeedometerJSWebComponents" });
+    eleventyConfig.addPassthroughCopy({ SpeedometerWithComplex: "SpeedometerWithComplex" });
     eleventyConfig.addPassthroughCopy("src/robots.txt");
     eleventyConfig.addPassthroughCopy("src/sitemap.xml");
     eleventyConfig.addPassthroughCopy("src/manifest.webmanifest");
