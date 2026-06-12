@@ -1,4 +1,4 @@
-// Theme toggle: persists preference, falls back to OS setting.
+// Theme toggle: persists preference, defaults to light mode.
 (function () {
     const root = document.documentElement;
     const stored = localStorage.getItem("theme");
@@ -9,12 +9,13 @@
     function currentTheme() {
         const explicit = root.getAttribute("data-theme");
         if (explicit) return explicit;
-        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        return "light";
     }
 
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.getElementById("themeToggle");
         if (toggle) {
+            toggle.setAttribute("aria-pressed", String(currentTheme() === "dark"));
             toggle.addEventListener("click", function () {
                 const next = currentTheme() === "dark" ? "light" : "dark";
                 root.setAttribute("data-theme", next);
