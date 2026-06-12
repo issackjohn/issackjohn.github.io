@@ -3,15 +3,45 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Issack John</title>
+        <title>Issack John — Web Performance Engineer</title>
+        <meta name="description" content="Issack John — Web Performance Engineer at Microsoft Edge. Core contributor to Speedometer 3.0 and web benchmarking research." />
+        <meta property="og:title" content="Issack John — Web Performance Engineer" />
+        <meta property="og:description" content="Web Performance Engineer at Microsoft Edge. Core contributor to Speedometer 3.0 and web benchmarking research." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://issackjohn.github.io" />
+        <link rel="canonical" href="https://issackjohn.github.io" />
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="bg-gray-50 min-h-screen flex flex-col justify-center items-center">
-        <main class="w-full max-w-md mx-auto p-6 flex flex-col gap-8">
-            <header class="flex flex-col items-center gap-2">
+    <body class="bg-gray-50 min-h-screen flex flex-col items-center py-10">
+        <main class="w-full max-w-xl mx-auto px-6 flex flex-col gap-8">
+            <header class="flex flex-col items-center gap-3">
                 <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Issack John</h1>
-                <p class="text-gray-500 text-lg">Web Performance & Simplicity</p>
+                <p class="text-gray-500 text-lg text-center">Web Performance &amp; Simplicity · Microsoft Edge</p>
+                <nav class="flex gap-5 mt-1" aria-label="Social links">
+                    <a href="https://github.com/issackjohn" target="_blank" rel="noopener noreferrer"
+                       class="text-gray-500 hover:text-gray-900 transition text-sm font-medium">
+                        GitHub
+                    </a>
+                    <a href="https://blogs.windows.com/msedgedev/author/issackjohn/" target="_blank" rel="noopener noreferrer"
+                       class="text-gray-500 hover:text-gray-900 transition text-sm font-medium">
+                        Blog
+                    </a>
+                    <a href="https://browserbench.org/Speedometer3.0/" target="_blank" rel="noopener noreferrer"
+                       class="text-gray-500 hover:text-gray-900 transition text-sm font-medium">
+                        Speedometer 3.0
+                    </a>
+                </nav>
             </header>
+
+            <!-- About Section -->
+            <section class="bg-white rounded-xl shadow p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">About</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Software engineer at Microsoft Edge focused on web performance and browser benchmarking.
+                    Core contributor to <a href="https://browserbench.org/Speedometer3.0/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Speedometer 3.0</a>,
+                    the industry-standard browser benchmark designed to capture real-world web application performance challenges.
+                </p>
+            </section>
 
             <!-- Blog Posts Section -->
             <section class="bg-white rounded-xl shadow p-6 flex flex-col gap-4">
@@ -21,22 +51,28 @@
 
             <!-- Projects Section -->
             <section class="bg-white rounded-xl shadow p-6 flex flex-col gap-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-2">Featured Projects</h2>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Projects &amp; Tools</h2>
                 <div class="flex flex-col gap-3">
-                    <a href="https://issackjohn.github.io/speedometer.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
-                        <div class="font-medium text-gray-900">Speedometer 3.0 <span class="text-xs text-gray-400">2024-01-24</span></div>
+                    <a href="/speedometer.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition">
+                        <div class="font-medium text-gray-900">Speedometer 3.0 Test Runner</div>
+                        <div class="text-xs text-gray-500 mt-1">Compare benchmark suites side-by-side · January 2024</div>
                     </a>
-                    <a href="https://issackjohn.github.io/complex-workloads.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
-                        <div class="font-medium text-gray-900">Complex Workloads</div>
+                    <a href="/speedometer-with-complex.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition">
+                        <div class="font-medium text-gray-900">Speedometer with Complex DOM</div>
+                        <div class="text-xs text-gray-500 mt-1">Benchmark experiments using complex DOM structures · June 2023</div>
                     </a>
-                    <a href="https://issackjohn.github.io/speedometer-with-complex.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
-                        <div class="font-medium text-gray-900">2023-06-27 With Complex DOM</div>
+                    <a href="/speedometer-with-new-structure.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition">
+                        <div class="font-medium text-gray-900">Speedometer — New Structure Complex DOM</div>
+                        <div class="text-xs text-gray-500 mt-1">Updated architecture experiments · September 2023</div>
                     </a>
-                    <a href="https://issackjohn.github.io/speedometer" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
-                        <div class="font-medium text-gray-900">2023-09-18 With New Structure Complex DOM</div>
+                    <a href="https://issackjohn.github.io/SpeedometerJSWebComponents" target="_blank" rel="noopener noreferrer"
+                       class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition">
+                        <div class="font-medium text-gray-900">JavaScript Web Components Speedometer</div>
+                        <div class="text-xs text-gray-500 mt-1">TodoMVC benchmark using native Web Components</div>
                     </a>
-                    <a href="https://issackjohn.github.io/SpeedometerJSWebComponents" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 transition">
-                        <div class="font-medium text-gray-900">JavaScript Web Components</div>
+                    <a href="/complex-workloads.html" class="block p-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition">
+                        <div class="font-medium text-gray-900">Complex Workloads Explorer</div>
+                        <div class="text-xs text-gray-500 mt-1">Browse and launch individual complex benchmark workloads</div>
                     </a>
                 </div>
             </section>
@@ -47,53 +83,65 @@
                 <ul id="videosList" class="flex flex-col gap-2"></ul>
             </section>
 
-            <footer class="text-center text-xs text-gray-400 mt-8">&copy; 2025 Issack John</footer>
+            <footer class="text-center text-xs text-gray-400 pb-6">&copy; 2025 Issack John</footer>
         </main>
         <script>
-            // title, summary, url
             const blogPosts = [
                 {
                     title: "Contributing to Speedometer 3.0",
-                    summary: "Capturing real-world challenges on the web",
+                    summary: "How the team captured real-world web challenges in the industry-standard browser benchmark.",
                     url: "https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/",
+                    date: "March 11, 2024",
                 },
             ];
 
             const blogPostsList = document.getElementById("blogPostsList");
-
             blogPosts.forEach((post) => {
                 const article = document.createElement("article");
                 article.className = "rounded-lg border border-gray-100 p-4 bg-gray-50 flex flex-col gap-2";
 
                 const h3 = document.createElement("h3");
                 h3.textContent = post.title;
-                h3.className = "text-lg font-bold text-gray-900";
+                h3.className = "text-base font-bold text-gray-900";
 
                 const p = document.createElement("p");
                 p.textContent = post.summary;
                 p.className = "text-sm text-gray-600";
 
+                const footer = document.createElement("div");
+                footer.className = "flex items-center justify-between";
+
                 const a = document.createElement("a");
                 a.href = post.url;
-                a.textContent = "Read more";
-                a.className = "text-blue-500 hover:underline text-sm w-fit";
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.textContent = "Read more →";
+                a.className = "text-blue-500 hover:underline text-sm";
 
+                const time = document.createElement("time");
+                time.textContent = post.date;
+                time.className = "text-xs text-gray-400";
+
+                footer.appendChild(a);
+                footer.appendChild(time);
                 article.appendChild(h3);
                 article.appendChild(p);
-                article.appendChild(a);
-
+                article.appendChild(footer);
                 blogPostsList.appendChild(article);
             });
-            // JavaScript for dynamically adding video links
+
             document.addEventListener("DOMContentLoaded", function () {
-                const videos = [{ url: "https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo", title: "Jim Rohn - Give To Receive" }];
+                const videos = [
+                    { url: "https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo", title: "Jim Rohn — Give To Receive" },
+                ];
 
                 const videosList = document.getElementById("videosList");
-
                 videos.forEach((video) => {
                     const li = document.createElement("li");
                     const a = document.createElement("a");
                     a.href = video.url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
                     a.textContent = video.title;
                     a.className = "text-blue-500 hover:underline text-sm";
                     li.appendChild(a);
