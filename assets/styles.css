@@ -252,13 +252,6 @@ main {
     color: var(--text-faint);
 }
 
-.signals {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
 .signal {
     padding-top: 0.9rem;
     border-top: 1px solid var(--line);
