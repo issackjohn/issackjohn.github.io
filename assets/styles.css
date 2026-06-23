@@ -252,6 +252,33 @@ main {
     color: var(--text-faint);
 }
 
+.signals {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.signal {
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+}
+
+.signal-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+.signal-value {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
 .links {
     display: flex;
     flex-wrap: wrap;
