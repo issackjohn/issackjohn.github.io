@@ -24,6 +24,7 @@
         }
 
         renderContent();
+        setupEmail();
         setupReveal();
     });
 
@@ -38,23 +39,6 @@
             date: "",
             url: "/projects/oncology-icu-rounds-prep.html",
             external: false,
-        },
-    ];
-
-    const benchmarks = [
-        {
-            title: "Complex workloads explorer",
-            desc: "A small tool for browsing the heavier, more realistic DOM-based cases.",
-            date: "",
-            url: "/complex-workloads.html",
-            external: false,
-        },
-        {
-            title: "JavaScript web components speedometer",
-            desc: "A todoMVC-style benchmark implemented with native web components.",
-            date: "",
-            url: "https://issackjohn.github.io/SpeedometerJSWebComponents",
-            external: true,
         },
     ];
 
@@ -109,12 +93,16 @@
         const head = el("div", "item-head");
         head.appendChild(el("span", "item-title", item.title));
         if (item.date) head.appendChild(el("span", "item-date", item.date));
-        a.appendChild(head);
-
-        const desc = el("p", "item-desc");
-        if (item.desc) desc.appendChild(document.createTextNode(item.desc + " "));
-        desc.appendChild(el("span", "arrow", "\u2192"));
-        a.appendChild(desc);
+        if (item.desc) {
+            const desc = el("p", "item-desc");
+            desc.appendChild(document.createTextNode(item.desc + " "));
+            desc.appendChild(el("span", "arrow", "→"));
+            a.appendChild(head);
+            a.appendChild(desc);
+        } else {
+            head.appendChild(el("span", "arrow", "→"));
+            a.appendChild(head);
+        }
         return a;
     }
 
@@ -130,7 +118,6 @@
         const evidence = document.getElementById("evidence");
         if (evidence) {
             const stats = [
-                { value: String(benchmarks.length), label: "Benchmarks & experiments" },
                 { value: String(references.length), label: "Engine commit streams" },
                 { value: "3.0", label: "Speedometer release" },
             ];
@@ -162,7 +149,6 @@
         }
 
         renderList("projectsList", projects);
-        renderList("benchmarksList", benchmarks);
         renderList("referencesList", references);
 
         const videosList = document.getElementById("videosList");
@@ -178,6 +164,20 @@
                 videosList.appendChild(a);
             });
         }
+    }
+
+    // Assemble the email at runtime so it never appears as plain text in the
+    // page source for naive scrapers to harvest.
+    function setupEmail() {
+        const node = document.getElementById("emailLink");
+        if (!node) return;
+        const encoded = node.getAttribute("data-e");
+        if (!encoded) return;
+        try {
+            const addr = atob(encoded);
+            node.href = "mailto:" + addr;
+            node.setAttribute("aria-label", "Email " + addr);
+        } catch (e) {}
     }
 
     function setupReveal() {

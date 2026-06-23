@@ -352,46 +352,6 @@ main {
     letter-spacing: 0.01em;
 }
 
-/* Approach: numbered editorial list --------------------------------------- */
-
-.approach {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    counter-reset: approach;
-}
-
-.approach li {
-    counter-increment: approach;
-    padding: 1.1rem 0;
-    border-top: 1px solid var(--line);
-}
-
-.approach li:first-child {
-    border-top: none;
-    padding-top: 0;
-}
-
-.approach h3 {
-    margin: 0 0 0.3rem;
-    font-size: 1.05rem;
-    font-weight: 600;
-}
-
-.approach h3::before {
-    content: counter(approach, decimal-leading-zero);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    color: var(--accent);
-    margin-right: 0.75rem;
-}
-
-.approach p {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.96rem;
-}
-
 /* Ledger rows (benchmarks / history / writing / watching) ----------------- */
 
 .ledger {
@@ -416,7 +376,7 @@ main {
 
 .item-head {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem;
 }
@@ -443,6 +403,11 @@ main {
     margin: 0.3rem 0 0;
     font-size: 0.92rem;
     color: var(--text-muted);
+}
+
+.item-head .arrow {
+    margin-left: auto;
+    flex-shrink: 0;
 }
 
 .item .arrow {
