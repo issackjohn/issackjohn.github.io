@@ -169,9 +169,9 @@ Ledger Editorial is a hand-tuned, dependency-free, and performance-oriented desi
 
 The chosen style is **Typographic Minimalist Ledger**. The design evokes the authoritative, deliberate gravity of high-quality journalism combined with the clean, structured utility of an engineering record or ledger. It utilizes stark contrasts, precise horizontal dividers, generous white space, and zero frames or roundness. Key characteristics:
 
--   **Quiet Dignity:** Let typography and content drive the layout, avoiding heavy containers or decorative borders.
--   **High Readability:** Emphasize generous line heights, legible font sizing, and strict contrast standards.
--   **Structured Rhythm:** Use a strict vertical rhythm built around horizontal rows separated by fine rules.
+- **Quiet Dignity:** Let typography and content drive the layout, avoiding heavy containers or decorative borders.
+- **High Readability:** Emphasize generous line heights, legible font sizing, and strict contrast standards.
+- **Structured Rhythm:** Use a strict vertical rhythm built around horizontal rows separated by fine rules.
 
 ## Colors
 
@@ -179,59 +179,59 @@ The color palette centers on organic, low-contrast neutral tones in light mode a
 
 ### Light Theme
 
--   **Background (`#fbfaf8`):** A warm, soft limestone background that reduces glare.
--   **Text (`#15140f`):** A deep, warm charcoal black ensuring exceptional readability.
--   **Text Muted (`#57534c`):** A sophisticated stone grey for auxiliary copy and descriptions.
--   **Text Faint (`#8a847b`):** A lighter dust grey for non-actionable labels and metadata.
--   **Accent (`#1f3aa6`):** A strong cobalt blue that serves as the primary interactive visual cue.
--   **Accent Hover (`#15287a`):** A deeper navy blue used on interactive hover states.
+- **Background (`#fbfaf8`):** A warm, soft limestone background that reduces glare.
+- **Text (`#15140f`):** A deep, warm charcoal black ensuring exceptional readability.
+- **Text Muted (`#57534c`):** A sophisticated stone grey for auxiliary copy and descriptions.
+- **Text Faint (`#8a847b`):** A lighter dust grey for non-actionable labels and metadata.
+- **Accent (`#1f3aa6`):** A strong cobalt blue that serves as the primary interactive visual cue.
+- **Accent Hover (`#15287a`):** A deeper navy blue used on interactive hover states.
 
 ### Dark Theme
 
--   **Background (`#0c0d10`):** A dark velvet obsidian blue/black.
--   **Text (`#ededec`):** A soft off-white to prevent stark, tiring contrast.
--   **Text Muted (`#a3a6ad`):** A gentle, cool grey for subtext and metadata.
--   **Text Faint (`#6f7079`):** A muted slate grey for non-actionable labels.
--   **Accent (`#93a8f0`):** A bright, soft lavender-blue that stands out clearly on dark backgrounds.
--   **Accent Hover (`#b6c4f6`):** A lighter, glowing lavender-blue for dark mode hovers.
+- **Background (`#0c0d10`):** A dark velvet obsidian blue/black.
+- **Text (`#ededec`):** A soft off-white to prevent stark, tiring contrast.
+- **Text Muted (`#a3a6ad`):** A gentle, cool grey for subtext and metadata.
+- **Text Faint (`#6f7079`):** A muted slate grey for non-actionable labels.
+- **Accent (`#93a8f0`):** A bright, soft lavender-blue that stands out clearly on dark backgrounds.
+- **Accent Hover (`#b6c4f6`):** A lighter, glowing lavender-blue for dark mode hovers.
 
 ### Lines & Fields
 
--   **Line:** A fine, semi-transparent hairline used for horizontal dividers and border rules.
--   **Frame:** A slightly more prominent boundary line used for interactive borders (e.g., hover states on inputs or panels).
--   **Field:** A soft, shaded tint backing used to highlight specific blocks of text or input fields.
+- **Line:** A fine, semi-transparent hairline used for horizontal dividers and border rules.
+- **Frame:** A slightly more prominent boundary line used for interactive borders (e.g., hover states on inputs or panels).
+- **Field:** A soft, shaded tint backing used to highlight specific blocks of text or input fields.
 
 ## Typography
 
 The design system establishes a strong hierarchy by pairing an elegant serif for high-level statements, an ultra-legible sans-serif for body copy, and a technical monospaced font for labels and metadata.
 
--   **Headlines & Statements:** Set in _Iowan Old Style_ (or _Georgia_ / _Palatino_ fallback) in an italic, medium weight. This conveys narrative authority and editorial gravitas.
--   **Body & Paragraphs:** Set in standard system sans-serif (_system-ui_ / _-apple-system_) at 17px with a spacious 1.65 line height. This guarantees modern professional legibility across platforms.
--   **Labels, Branding, & Metadata:** Set in system monospace (_ui-monospace_ / _SF Mono_) with generous letter spacing (up to 0.08em) and uppercase formatting. This evokes precise, technical record-keeping.
+- **Headlines & Statements:** Set in _Iowan Old Style_ (or _Georgia_ / _Palatino_ fallback) in an italic, medium weight. This conveys narrative authority and editorial gravitas.
+- **Body & Paragraphs:** Set in standard system sans-serif (_system-ui_ / _-apple-system_) at 17px with a spacious 1.65 line height. This guarantees modern professional legibility across platforms.
+- **Labels, Branding, & Metadata:** Set in system monospace (_ui-monospace_ / _SF Mono_) with generous letter spacing (up to 0.08em) and uppercase formatting. This evokes precise, technical record-keeping.
 
 ## Layout & Spacing
 
 The layout is built around a single, highly-focused column designed to guide the reader sequentially down the page.
 
--   **Single Column Focus:** A strict maximum width of `50rem` keeps the layout centered, compact, and extremely readable on large screens.
--   **Horizontal Lanes:** Sections are built as grids or horizontal rows, separated by elegant `1px` horizontal rules.
--   **Vertical Rhythm:** Spacing relies on a clean, scalable rem system (from micro-gaps to generous hero margins), ensuring that each element has ample room to breathe.
--   **Fluid Padding:** Content uses generous responsive padding (`1.5rem` horizontally) to adapt beautifully to screens of all sizes.
+- **Single Column Focus:** A strict maximum width of `50rem` keeps the layout centered, compact, and extremely readable on large screens.
+- **Horizontal Lanes:** Sections are built as grids or horizontal rows, separated by elegant `1px` horizontal rules.
+- **Vertical Rhythm:** Spacing relies on a clean, scalable rem system (from micro-gaps to generous hero margins), ensuring that each element has ample room to breathe.
+- **Fluid Padding:** Content uses generous responsive padding (`1.5rem` horizontally) to adapt beautifully to screens of all sizes.
 
 ## Elevation & Depth
 
 In line with its editorial ledger concept, this design system uses **Tonal Planes** and **Zero Elevation**.
 
--   **Flat Aesthetic:** There are no box shadows, drop shadows, or gradient effects. The interface is completely flat.
--   **Tonal Contrast:** Visual depth and hierarchy are achieved entirely through content organization, high-contrast typography, and subtle, semi-transparent divider lines.
--   **Interactive Feedback:** Rather than physical lifting, interactive hovers rely on micro-translations (e.g., moving arrows slightly on the X-axis) and clear, instantaneous color transitions.
+- **Flat Aesthetic:** There are no box shadows, drop shadows, or gradient effects. The interface is completely flat.
+- **Tonal Contrast:** Visual depth and hierarchy are achieved entirely through content organization, high-contrast typography, and subtle, semi-transparent divider lines.
+- **Interactive Feedback:** Rather than physical lifting, interactive hovers rely on micro-translations (e.g., moving arrows slightly on the X-axis) and clear, instantaneous color transitions.
 
 ## Shapes
 
 Shapes in this design system are governed by **Architectural Sharpness**.
 
--   **No Rounded Corners:** Every element—including interactive buttons, cards, images, input fields, and borders—uses a hard `0px` radius.
--   **Geometric Structure:** The lack of rounded corners reinforces the technical, engineered ledger aesthetic, emphasizing structure and permanence.
+- **No Rounded Corners:** Every element—including interactive buttons, cards, images, input fields, and borders—uses a hard `0px` radius.
+- **Geometric Structure:** The lack of rounded corners reinforces the technical, engineered ledger aesthetic, emphasizing structure and permanence.
 
 ## Components
 
@@ -253,10 +253,10 @@ CTAs are represented as monospaced inline text decorated with a prominent bottom
 
 ## Do's and Don'ts
 
--   **Do** maintain a single, highly readable font size hierarchy across headers and body text.
--   **Do** use horizontal divider lines (`1px` hairline) to structure content and separate independent entries.
--   **Do** ensure contrast standards (WCAG AA) are fully met for both light and dark modes.
--   **Do** use uppercase monospace text with generous tracking for technical data, metadata, and labels.
--   **Don't** use any rounded corners (`border-radius`) or shadow effects.
--   **Don't** introduce more than one accent color to the design.
--   **Don't** crowd elements; let the layout maintain high whitespace ratios.
+- **Do** maintain a single, highly readable font size hierarchy across headers and body text.
+- **Do** use horizontal divider lines (`1px` hairline) to structure content and separate independent entries.
+- **Do** ensure contrast standards (WCAG AA) are fully met for both light and dark modes.
+- **Do** use uppercase monospace text with generous tracking for technical data, metadata, and labels.
+- **Don't** use any rounded corners (`border-radius`) or shadow effects.
+- **Don't** introduce more than one accent color to the design.
+- **Don't** crowd elements; let the layout maintain high whitespace ratios.

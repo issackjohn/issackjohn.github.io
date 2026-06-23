@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-theme-default>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fixing a Mysterious x86 String Corruption in V8 — Issack John</title>
+
+        <meta name="description" content="How a standard C++ string move/copy chain caused Intl.DateTimeFormat to fail on Windows x86 official builds, and how replacing it with const char* made it faster and safer." />
+        <meta name="author" content="Issack John" />
+        <link rel="canonical" href="https://issackjohn.github.io/blog/fixing-intl-datetimeformat-corruption-in-v8.html" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://issackjohn.github.io/blog/fixing-intl-datetimeformat-corruption-in-v8.html" />
+        <meta property="og:title" content="Fixing a Mysterious x86 String Corruption in V8" />
+        <meta property="og:description" content="How replacing std::string with const char* in PatternMap resolved platform-specific string corruption in Intl.DateTimeFormat." />
+        <meta name="twitter:card" content="summary" />
+
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+
+        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t === "light" || t === "dark") {
+                        document.documentElement.setAttribute("data-theme", t);
+                    }
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <div class="topbar">
+            <div class="wrap">
+                <a class="brand" href="/">Issack John</a>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <main id="main" class="wrap">
+            <a class="back-link" href="/blog/">← Writing</a>
+
+            <article class="article reveal">
+                <p class="article-meta">February 12, 2026 · V8 Internals · C++</p>
+                <h1 class="article-title">Fixing a Mysterious x86 String Corruption in V8</h1>
+
+                <div class="prose">
+                    <p>
+                        Recently, a bizarre bug was reported on the Chromium issue tracker (Issue <a href="https://issues.chromium.org/issues/483769488" target="_blank" rel="noopener noreferrer">483769488</a>): on official, highly-optimized 32-bit
+                        x86 Windows builds of Google Chrome, calling <code>Intl.DateTimeFormat</code> with certain 2-digit time formatting options (such as <code>{ hour: '2-digit', minute: '2-digit', second: '2-digit' }</code>) returned completely
+                        empty strings.
+                    </p>
+
+                    <pre><code>const formatter = new Intl.DateTimeFormat('en-US', {
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+});
+
+// Returns "" (empty string) on 32-bit Windows official builds!
+console.log(formatter.format(new Date()));</code></pre>
+
+                    <p>
+                        Surprisingly, choosing <code>numeric</code> instead of <code>2-digit</code>, or using <code>dateStyle</code>/<code>timeStyle</code> options worked perfectly. The issue only manifested in optimized x86 environments, making it
+                        look suspiciously like an aggressive compiler-induced bug or low-level memory corruption.
+                    </p>
+
+                    <h2>The Investigation</h2>
+                    <p>
+                        Diving into V8’s implementation of ECMA-402 (specifically in <code>src/objects/js-date-time-format.cc</code>), V8 handles localized date/time patterns using a mapping data structure called <code>PatternMap</code>. The
+                        <code>PatternMap</code> is responsible for mapping date/time skeleton patterns (like <code>yMd</code> or <code>Hm</code>) to the actual, locale-specific formatting patterns loaded from the ICU library (such as
+                        <code>dd/MM/yyyy</code>).
+                    </p>
+
+                    <p>
+                        Under the hood, <code>PatternMap</code> was structured with elements that held keys and values as C++ <code>std::string</code>. During the initialization of a <code>PatternMap</code>, a sequence of copy/move construction
+                        operations occurred on these string members. On almost all modern platforms (64-bit Windows, macOS, or Linux), this worked flawlessly.
+                    </p>
+
+                    <p>
+                        However, on official 32-bit Windows builds compiled with MSVC's aggressive link-time optimization (LTCG) and specific alignment flags, something went wrong with the compiler's optimization of the C++ standard library’s Small
+                        String Optimization (SSO) during the copy/move construction chain. Specifically, the string’s internal buffer pointers or state became misaligned or corrupted, silently emptying the strings in the process. As a result,
+                        <code>PatternMap</code> lookups failed to retrieve valid pattern templates, causing <code>Intl.DateTimeFormat</code> to silently fall back and return empty strings.
+                    </p>
+
+                    <h2>The Fix</h2>
+                    <p>
+                        While digging through <code>js-date-time-format.cc</code>, I noticed a crucial property of how <code>PatternMap</code> was being used: every single key and value inserted into the map was actually a static, hardcoded string
+                        literal inside V8 and ICU. Because these strings are string literals with <code>static</code> storage lifetime, their memory is guaranteed to remain valid and reside in the read-only data segment of the binary for the entire
+                        duration of the application.
+                    </p>
+
+                    <p>
+                        Instantiating heap-allocated, dynamic <code>std::string</code> instances for these literals was not only completely unnecessary, but also introduced a measurable overhead in terms of memory allocations, destructor
+                        registrations, and runtime copies.
+                    </p>
+
+                    <p>The solution was simple and elegant: refactor the <code>PatternMap</code> structure to store lightweight <code>const char*</code> pointers instead of <code>std::string</code>.</p>
+
+                    <pre><code>// Before
+struct PatternMap {
+  std::string key;
+  std::string pattern;
+};
+
+// After
+struct PatternMap {
+  const char* key;
+  const char* pattern;
+};</code></pre>
+
+                    <p>
+                        This change completely bypassed the C++ standard library's <code>std::string</code> move/copy constructor chain and SSO code paths, instantly resolving the compiler-induced string corruption on 32-bit Windows official builds.
+                        Even better, it turned a dynamic, memory-allocating data structure into a purely pointer-based, zero-overhead structure. This eliminated heap allocations, shrank V8's memory footprint, and made
+                        <code>Intl.DateTimeFormat</code> lookups faster and safer.
+                    </p>
+
+                    <h2>Conclusion</h2>
+                    <p>
+                        Sometimes, the most robust fix is not to make a complex system more resilient to bugs, but to realize you didn't need the complexity in the first place. By replacing heap-allocated standard strings with raw pointers to static
+                        literals, we eliminated a mysterious, platform-specific compiler optimization bug and made the engine faster in the process.
+                    </p>
+
+                    <p>
+                        The fix was merged into V8 as <a href="https://chromium-review.googlesource.com/c/v8/v8/+/7566247" target="_blank" rel="noopener noreferrer">CL 7566247</a> (Commit
+                        <a href="https://chromium.googlesource.com/v8/v8.git/+/f59b29229b3445853e280af08ed5bc4aaaca51ab" target="_blank" rel="noopener noreferrer">f59b29229b3445853e280af08ed5bc4aaaca51ab</a>).
+                    </p>
+                </div>
+
+                <div class="article-foot">
+                    <a class="back-link" href="/blog/">← Back to writing</a>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+        </footer>
+
+        <script src="/assets/main.js" defer></script>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>

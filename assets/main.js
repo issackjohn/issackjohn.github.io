@@ -38,7 +38,14 @@
     // --- Dynamic content ---------------------------------------------------
 
     const content = {
-        blogPosts: [],
+        blogPosts: [
+            {
+                title: "Fixing a Mysterious x86 String Corruption in V8",
+                summary: "How a standard C++ string move/copy chain caused Intl.DateTimeFormat to fail on Windows x86 official builds, and how replacing it with const char* made it faster and safer.",
+                date: "Feb 12, 2026",
+                url: "/blog/fixing-intl-datetimeformat-corruption-in-v8.html",
+            },
+        ],
         projects: [
             {
                 title: "Oncology ICU Rounds Prep",

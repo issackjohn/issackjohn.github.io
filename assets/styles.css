@@ -595,6 +595,23 @@ main {
     border: 1px solid var(--line);
 }
 
+.prose pre {
+    display: block;
+    padding: 1.2rem;
+    background: var(--field);
+    border: 1px solid var(--line);
+    overflow-x: auto;
+    margin: 1.8rem 0;
+}
+
+.prose pre code {
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: 0.84em;
+    line-height: 1.5;
+}
+
 .prose strong {
     font-weight: 600;
 }

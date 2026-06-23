@@ -6,10 +6,10 @@ Personal site for **Issack John** — a browser performance engineer working at 
 
 ## What it is
 
--   Zero runtime frameworks. The site ships hand-tuned HTML, CSS, and a small vanilla-JS enhancement layer.
--   A simple theme system with light/dark mode, OS preference support, and no flash on load.
--   An accessible, static layout with semantic landmarks, a skip link, visible focus states, and reduced-motion support.
--   SEO-friendly metadata and structured data for the homepage.
+- Zero runtime frameworks. The site ships hand-tuned HTML, CSS, and a small vanilla-JS enhancement layer.
+- A simple theme system with light/dark mode, OS preference support, and no flash on load.
+- An accessible, static layout with semantic landmarks, a skip link, visible focus states, and reduced-motion support.
+- SEO-friendly metadata and structured data for the homepage.
 
 ## Structure
 
@@ -32,10 +32,10 @@ Personal site for **Issack John** — a browser performance engineer working at 
 
 ## Pages
 
--   [index.html](index.html) — homepage with the main profile, project links, history, writing, and watching sections.
--   [projects/oncology-icu-rounds-prep.html](projects/oncology-icu-rounds-prep.html) — case study for the oncology prep app.
--   [blog/index.html](blog/index.html) — blog landing page for future posts.
--   [complex-workloads.html](complex-workloads.html) — standalone benchmark/demo page.
+- [index.html](index.html) — homepage with the main profile, project links, history, writing, and watching sections.
+- [projects/oncology-icu-rounds-prep.html](projects/oncology-icu-rounds-prep.html) — case study for the oncology prep app.
+- [blog/index.html](blog/index.html) — blog landing page for future posts.
+- [complex-workloads.html](complex-workloads.html) — standalone benchmark/demo page.
 
 ## Development
 
@@ -55,6 +55,6 @@ python3 -m http.server 8000
 
 ## Notes
 
--   The site is static and deploys directly to GitHub Pages.
--   The email address is assembled at runtime in `assets/main.js` to avoid exposing it as plain text in the source for naive scrapers.
--   The repo currently includes one git submodule: `SpeedometerJSWebComponents/`.
+- The site is static and deploys directly to GitHub Pages.
+- The email address is assembled at runtime in `assets/main.js` to avoid exposing it as plain text in the source for naive scrapers.
+- The repo currently includes one git submodule: `SpeedometerJSWebComponents/`.
