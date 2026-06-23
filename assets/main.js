@@ -29,14 +29,7 @@
 
     // --- Dynamic content ---------------------------------------------------
 
-    const blogPosts = [
-        {
-            title: "Contributing to Speedometer 3.0",
-            summary: "A look at how the benchmark was shaped around real web-app behavior rather than synthetic shortcuts.",
-            url: "https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/",
-            date: "March 11, 2024",
-        },
-    ];
+    const blogPosts = [];
 
     const benchmarks = [
         {
@@ -149,7 +142,7 @@
                 const foot = el("div", "post-foot");
                 const a = el("a", null, "Read more \u2192");
                 a.href = post.url;
-                externalAttrs(a);
+                if (/^https?:/.test(post.url)) externalAttrs(a);
                 const time = el("time", null, post.date);
                 foot.appendChild(a);
                 foot.appendChild(time);

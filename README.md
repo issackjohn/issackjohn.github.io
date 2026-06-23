@@ -20,6 +20,7 @@ contributor to [Speedometer 3.0](https://browserbench.org/Speedometer3.0/).
 ├── index.html               # Portfolio home
 ├── 404.html                 # Friendly not-found page
 ├── complex-workloads.html   # Index of individual complex benchmark workloads
+├── blog/                    # Hand-written blog (index + posts)
 ├── assets/
 │   ├── styles.css           # Theme tokens, layout, components, dark mode
 │   ├── main.js              # Theme toggle + content rendering + scroll reveal
@@ -32,6 +33,7 @@ contributor to [Speedometer 3.0](https://browserbench.org/Speedometer3.0/).
 | Page                                             | Description                                              |
 | ------------------------------------------------ | -------------------------------------------------------- |
 | [index.html](index.html)                         | Portfolio home — about, benchmarks, history, and writing |
+| [blog/](blog/)                                   | Writing on browser performance and benchmark design      |
 | [complex-workloads.html](complex-workloads.html) | Browse and launch individual complex benchmark workloads |
 
 ## Benchmark variants (git submodules)
