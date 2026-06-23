@@ -47,6 +47,20 @@
             external: true,
         },
         {
+            title: "DevTools Frontend Commits by issackjohn",
+            desc: "Recent commits authored on Chrome DevTools frontend main branch.",
+            date: "",
+            url: "https://github.com/ChromeDevTools/devtools-frontend/commits/main/?author=issackjohn",
+            external: true,
+        },
+        {
+            title: "Chromium Commits by issackjohn",
+            desc: "Recent commits authored on Chromium main branch.",
+            date: "",
+            url: "https://github.com/chromium/chromium/commits/main/?author=issackjohn",
+            external: true,
+        },
+        {
             title: "Speedometer 3.0 Test Runner",
             desc: "Compare benchmark suites side-by-side and launch individual workloads.",
             date: "Jan 2024",
