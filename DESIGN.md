@@ -2,12 +2,14 @@
 version: alpha
 name: Ledger Editorial
 colors:
+    primary: "#1f3aa6"
+    primary-hover: "#15287a"
+    primary-dark: "#93a8f0"
+    primary-hover-dark: "#b6c4f6"
     bg: "#fbfaf8"
     text: "#15140f"
     text-muted: "#57534c"
     text-faint: "#8a847b"
-    accent: "#1f3aa6"
-    accent-hover: "#15287a"
     line: "rgba(20, 18, 12, 0.12)"
     frame: "rgba(20, 18, 12, 0.22)"
     field: "rgba(20, 18, 12, 0.03)"
@@ -15,8 +17,6 @@ colors:
     text-dark: "#ededec"
     text-muted-dark: "#a3a6ad"
     text-faint-dark: "#6f7079"
-    accent-dark: "#93a8f0"
-    accent-hover-dark: "#b6c4f6"
     line-dark: "rgba(255, 255, 255, 0.12)"
     frame-dark: "rgba(255, 255, 255, 0.22)"
     field-dark: "rgba(255, 255, 255, 0.035)"
@@ -72,16 +72,93 @@ spacing:
     xxl: 4.5rem
     max-width: 50rem
 components:
+    body:
+        backgroundColor: "{colors.bg}"
+        textColor: "{colors.text}"
+        typography: "{typography.body}"
+    body-dark:
+        backgroundColor: "{colors.bg-dark}"
+        textColor: "{colors.text-dark}"
+    brand:
+        textColor: "{colors.text}"
+        typography: "{typography.brand}"
+    brand-dark:
+        textColor: "{colors.text-dark}"
+    kicker:
+        textColor: "{colors.text-faint}"
+        typography: "{typography.kicker}"
+    kicker-dark:
+        textColor: "{colors.text-faint-dark}"
+    statement:
+        textColor: "{colors.text}"
+        typography: "{typography.statement}"
+    statement-dark:
+        textColor: "{colors.text-dark}"
+    page-title:
+        textColor: "{colors.text}"
+        typography: "{typography.page-title}"
+    page-title-dark:
+        textColor: "{colors.text-dark}"
+    block-lead:
+        textColor: "{colors.text}"
+        typography: "{typography.block-lead}"
+    block-lead-dark:
+        textColor: "{colors.text-dark}"
+    evidence-value:
+        textColor: "{colors.text}"
+        typography: "{typography.evidence-value}"
+    evidence-value-dark:
+        textColor: "{colors.text-dark}"
+    evidence-label:
+        textColor: "{colors.text-faint}"
+        typography: "{typography.evidence-label}"
+    evidence-label-dark:
+        textColor: "{colors.text-faint-dark}"
     topbar:
-        backgroundColor: "color-mix(in srgb, {colors.bg} 88%, transparent)"
+        backgroundColor: "{colors.bg}"
         height: 58px
+    topbar-dark:
+        backgroundColor: "{colors.bg-dark}"
     theme-toggle:
         size: 36px
         backgroundColor: transparent
+        textColor: "{colors.text-muted}"
+    theme-toggle-dark:
+        textColor: "{colors.text-muted-dark}"
     ledger-item:
         padding: "{spacing.sm}"
+    ledger-item-title-hover:
+        textColor: "{colors.primary}"
+    ledger-item-title-hover-dark:
+        textColor: "{colors.primary-dark}"
     cta-link:
+        textColor: "{colors.text}"
         typography: "{typography.cta}"
+    cta-link-hover:
+        textColor: "{colors.primary}"
+    cta-link-dark:
+        textColor: "{colors.text-dark}"
+    cta-link-hover-dark:
+        textColor: "{colors.primary-dark}"
+    divider:
+        backgroundColor: "{colors.line}"
+        height: 1px
+    divider-dark:
+        backgroundColor: "{colors.line-dark}"
+    input-field:
+        backgroundColor: "{colors.field}"
+        textColor: "{colors.text-muted}"
+    input-field-dark:
+        backgroundColor: "{colors.field-dark}"
+        textColor: "{colors.text-muted-dark}"
+    button-primary-hover:
+        backgroundColor: "{colors.primary-hover}"
+    button-primary-hover-dark:
+        backgroundColor: "{colors.primary-hover-dark}"
+    card-interactive-hover:
+        backgroundColor: "{colors.frame}"
+    card-interactive-hover-dark:
+        backgroundColor: "{colors.frame-dark}"
 ---
 
 # Ledger Editorial — DESIGN.md
