@@ -3,27 +3,11 @@
     const root = document.documentElement;
     const storageKey = "theme";
 
-    function getStoredTheme() {
-        try {
-            const stored = localStorage.getItem(storageKey);
-            if (stored === "light" || stored === "dark") {
-                return stored;
-            }
-        } catch (e) {}
-        return null;
+    function getActiveTheme() {
+        return root.getAttribute("data-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     }
 
-    function getPreferredTheme() {
-        const stored = getStoredTheme();
-        if (stored) return stored;
-        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-
-    function currentTheme() {
-        return root.getAttribute("data-theme") || getPreferredTheme();
-    }
-
-    function updateThemeToggle(theme) {
+    function syncToggleState(theme) {
         const toggle = document.getElementById("themeToggle");
         if (!toggle) return;
         const isDark = theme === "dark";
@@ -31,23 +15,21 @@
         toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
     }
 
-    function applyTheme(nextTheme) {
-        root.setAttribute("data-theme", nextTheme);
-        try {
-            localStorage.setItem(storageKey, nextTheme);
-        } catch (e) {}
-        updateThemeToggle(nextTheme);
-    }
-
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.getElementById("themeToggle");
         if (toggle) {
             toggle.addEventListener("click", function () {
-                applyTheme(currentTheme() === "dark" ? "light" : "dark");
+                const current = getActiveTheme();
+                const target = current === "dark" ? "light" : "dark";
+                root.setAttribute("data-theme", target);
+                try {
+                    localStorage.setItem(storageKey, target);
+                } catch (e) {}
+                syncToggleState(target);
             });
         }
 
-        applyTheme(getPreferredTheme());
+        syncToggleState(getActiveTheme());
         renderContent();
         setupEmail();
         setupReveal();
@@ -92,7 +74,10 @@
         videos: [
             {
                 title: "Jim Rohn — Give to Receive",
+                desc: "",
+                date: "",
                 url: "https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo",
+                external: true,
             },
         ],
     };
@@ -163,41 +148,16 @@
         });
     }
 
-    function renderVideos(container) {
-        if (!container) return;
-        clearChildren(container);
-        content.videos.forEach(function (video) {
-            const a = el("a", "item");
-            a.href = video.url;
-            externalAttrs(a);
-            const head = el("div", "item-head");
-            head.appendChild(el("span", "item-title", video.title));
-            head.appendChild(el("span", "arrow", "→"));
-            a.appendChild(head);
-            container.appendChild(a);
-        });
-    }
-
     function renderContent() {
-        const evidence = document.getElementById("evidence");
-        if (evidence) {
-            clearChildren(evidence);
-            const stats = [
-                { value: String(content.references.length), label: "Engine commit streams" },
-                { value: "3.0", label: "Speedometer release" },
-            ];
-            stats.forEach(function (s) {
-                const item = el("div", "evidence-item");
-                item.appendChild(el("span", "evidence-value", s.value));
-                item.appendChild(el("span", "evidence-label", s.label));
-                evidence.appendChild(item);
-            });
+        const referencesCount = document.getElementById("referencesCount");
+        if (referencesCount) {
+            referencesCount.textContent = String(content.references.length);
         }
 
         renderBlogPosts(document.getElementById("blogPostsList"));
         renderList(document.getElementById("projectsList"), content.projects);
         renderList(document.getElementById("referencesList"), content.references);
-        renderVideos(document.getElementById("videosList"));
+        renderList(document.getElementById("videosList"), content.videos);
     }
 
     // Assemble the email at runtime so it never appears as plain text in the
@@ -214,6 +174,7 @@
         } catch (e) {}
     }
 
+    // Reveal-on-scroll animation
     function setupReveal() {
         const items = document.querySelectorAll(".reveal");
         if (!("IntersectionObserver" in window) || items.length === 0) {
