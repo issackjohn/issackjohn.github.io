@@ -66,28 +66,57 @@
                         sampler was wrong; it was that DevTools had no reliable way to tell which stream a sample belonged to.
                     </p>
 
-                    <h2>The bug</h2>
+                    <h2>The Bug: Quietly Corrupting Trace Timelines</h2>
                     <p>
-                        When multiple profiling sources are active concurrently, DevTools can end up merging their streams on the same thread. That sounds harmless until you look at the consequences. A profile can become a blur of mixed samples, and
-                        JavaScript attribution gets corrupted. What should have been a precise view of a self-profiling run instead became a case of “which source did this sample really come from?”
+                        The issue was tracked under <a href="https://issues.chromium.org/issues/375614293" target="_blank" rel="noopener noreferrer">Chromium Issue 375614293</a>. When multiple profiling sources ran concurrently, DevTools historically
+                        had a critical limitation: it merged all concurrent CPU profile streams on the same thread into a single jumbled timeline.
                     </p>
 
                     <p>
-                        The subtlety is that this does not look like a crash. It looks like bad interpretation. The profile is still there, but it is no longer trustworthy. In performance work, that is often worse than an outright failure because it
-                        quietly poisons the analysis.
+                        For instance, if a site utilized the page-initiated <a href="https://wicg.github.io/js-self-profiling/" target="_blank" rel="noopener noreferrer">JS Self-Profiling API</a> for real-user monitoring (RUM) metrics, and
+                        concurrently an engineer opened the performance panel to record a trace or turned on internal V8 tracing, their respective samples would collide. DevTools would interleave the sample ticks from different configurations,
+                        completely corrupting JavaScript call frame attribution. This did not crash the browser, but it quietly poisoned the accuracy of performance reports with impossible call stacks.
                     </p>
 
-                    <h2>The fix across three layers</h2>
-                    <p>The fix ended up being a small but important change in the metadata plane. Instead of treating every CPU profile stream as anonymous, we gave each one a source tag. The flow was:</p>
+                    <h2>Step 1: Tagging the Source in V8</h2>
+                    <p>
+                        To resolve this, we had to carry attribution metadata from the very bottom of the execution stack up to the front-end parser. The first change took place in V8's public profiler header (<code>include/v8-profiler.h</code>). We
+                        introduced a new <code>CpuProfileSource</code> enum class to tag what component triggered the profile stream:
+                    </p>
 
-                    <ul>
-                        <li>V8 added a <code>CpuProfileSource</code> field to profile events so a stream could be labeled at the point it was emitted.</li>
-                        <li>Chromium set that source to <code>kSelfProfiling</code> when the JS Self-Profiling API started a V8 CPU profile.</li>
-                        <li>DevTools ingested the optional <code>args.data.source</code> field and selected one stream per thread based on source priority, rather than blindly merging them.</li>
-                    </ul>
+                    <pre><code>namespace v8 {
+/**
+ * Identifies which component initiated CPU profiling for proper attribution.
+ */
+enum class CpuProfileSource : uint8_t {
+  /** Default value when no explicit source is specified. */
+  kUnspecified = 0,
+  /** Profiling initiated via the DevTools Inspector protocol. */
+  kInspector = 1,
+  /** Profiling initiated by the embedder (e.g., Blink) via self-profiling API. */
+  kSelfProfiling = 2,
+  /** Profiling initiated internally by V8 (e.g., tracing CPU profiler). */
+  kInternal = 3,
+};
+}</code></pre>
+
+                    <p>
+                        Whenever V8 registers a new profiling session, it preserves this enum. When generating trace events, V8 uses this tag to append an explicit <code>source</code> attribute to the arguments payload of its
+                        <code>"Profile"</code> and <code>"ProfileChunk"</code> trace events.
+                    </p>
+
+                    <h2>Step 2: Propagating the Tag in Chromium</h2>
+                    <p>
+                        Next, we needed the browser engine's embedder layer to pass this context. In the Chromium repository, we modified the Blink-side JS Self-Profiling integration. When starting the underlying V8 CPU profile, Blink now specifies
+                        the <code>v8::CpuProfileSource::kSelfProfiling</code> origin tag.
+                    </p>
+
+                    <p>As a result, V8 traces for these API runs started emitting trace structures enriched with the source attribute:</p>
 
                     <pre><code>{
   "name": "Profile",
+  "cat": "disabled-by-default-v8.cpu_profiler",
+  "ph": "P",
   "args": {
     "data": {
       "source": "SelfProfiling"
@@ -95,32 +124,77 @@
   }
 }</code></pre>
 
+                    <h2>Step 3: Disambiguating Streams in DevTools</h2>
                     <p>
-                        That small piece of metadata turned out to be enough to preserve correct attribution. The important part was not the machinery of sampling; it was the identity of the stream. Once the source was explicit, DevTools could keep
-                        the streams separate and build its models from the right one.
+                        The final step was updating Chrome DevTools' trace engine to interpret these tags. In the <code>devtools-frontend</code> repository, we updated the trace event types in
+                        <code>front_end/models/trace/types/TraceEvents.ts</code> to ingest the new optional metadata field:
                     </p>
 
-                    <h2>Why this mattered</h2>
-                    <p>
-                        This issue sat at the border between browser internals and developer tools. It was a classic case of a bug that only appears when the system is doing more than one thing at once. The real failure mode was not a missing
-                        profile; it was a profile that looked plausible but was logically inconsistent.
-                    </p>
+                    <pre><code>export type ProfileSource = 'Inspector' | 'SelfProfiling' | 'Internal';
+export const VALID_PROFILE_SOURCES: readonly ProfileSource[] = ['Inspector', 'SelfProfiling', 'Internal'] as const;</code></pre>
 
                     <p>
-                        The fix made profiling more reliable in exactly the situations where developers are most likely to rely on it: when they are instrumenting a page, tracing internals, or trying to understand JavaScript execution under
-                        concurrent activity. In other words: it made the profiler less likely to lie.
+                        Then, we refactored DevTools' CPU sample trace handler (<code>front_end/models/trace/handlers/SamplesHandler.ts</code>). Instead of merging every candidate profile stream on a thread, we set up a robust priority queue to
+                        select exactly one stream per thread based on the profiling mode:
                     </p>
 
-                    <h2>Related work</h2>
+                    <pre><code>/**
+ * Profile source selection priority when multiple profiles exist for the same thread.
+ *
+ * Profile sources and their typical scenarios:
+ * - 'Internal': Browser-initiated profiling performance panel traces.
+ *   This is the profiling mechanism when users click "Record" in the Devtools UI.
+ * - 'Inspector': User-initiated via console.profile()/profileEnd() calls.
+ *   Represents explicit developer intent to profile specific code.
+ * - 'SelfProfiling': Page-initiated via JS Self-Profiling API.
+ *    Lower signal vs the two above; treated as fallback.
+ *
+ * Selection strategy:
+ * - CPU Profile mode: Prefer 'Inspector' (explicit user request).
+ * - Performance trace: Prefer 'Internal' (integrated timeline context), then 'Inspector'.
+ * - Sources not in the priority list (including 'SelfProfiling') act as fallbacks.
+ *   When no priority source matches, the first candidate profile is selected.
+ */
+const PROFILE_SOURCES_BY_PRIORITY = {
+  cpuProfile: ['Inspector'] as Types.Events.ProfileSource[],
+  performanceTrace: ['Internal', 'Inspector'] as Types.Events.ProfileSource[],
+};</code></pre>
+
                     <p>
-                        The change landed across three public Chromium projects:
-                        <a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/6877206" target="_blank" rel="noopener noreferrer">DevTools CL 6877206</a>,
-                        <a href="https://chromium-review.googlesource.com/c/chromium/src/+/6874588" target="_blank" rel="noopener noreferrer">Chromium CL 6874588</a>, and
-                        <a href="https://chromium-review.googlesource.com/c/v8/v8/+/7122240" target="_blank" rel="noopener noreferrer">V8 CL 7122240</a>. The bug is tracked in
-                        <a href="https://issues.chromium.org/issues/375614293" target="_blank" rel="noopener noreferrer">Chromium issue 375614293</a>.
+                        Now, when <code>SamplesHandler</code> processes a trace, it groups profile candidates by thread ID, determines the active profile mode, matches candidates against the priority list, and selects the single most relevant stream:
                     </p>
 
-                    <p>The lesson is simple: when systems become compositional, identity matters. A profiler is only as trustworthy as the metadata that tells you which stream each sample belongs to.</p>
+                    <pre><code>const priorityList = parseOptions.isCPUProfile 
+  ? PROFILE_SOURCES_BY_PRIORITY.cpuProfile 
+  : PROFILE_SOURCES_BY_PRIORITY.performanceTrace;
+
+// Selection loop
+let chosen = candidates[0];
+for (const source of priorityList) {
+  const match = candidates.find(p => p.data.source === source);
+  if (match) {
+    chosen = match;
+    break;
+  }
+}</code></pre>
+
+                    <p>
+                        The engine then isolates and builds the final <code>CPUProfileDataModel</code> exclusively using the samples of the chosen profile candidate. It discards other concurrent candidates on the same thread, preventing sample
+                        pollution. This selection maintains backward compatibility: if trace files lack the <code>source</code> tag (e.g. legacy traces), the parser gracefully falls back to the first available candidate.
+                    </p>
+
+                    <h2>The Result</h2>
+                    <p>
+                        By aligning the metadata plane across V8, Blink, and DevTools, we turned a quiet and frustrating telemetry corruption case into a reliable, predictable system. Developers can now run real-user monitoring libraries utilizing JS
+                        Self-Profiling concurrently with local DevTools recordings, knowing that their profile streams will remain cleanly isolated.
+                    </p>
+
+                    <h2>References</h2>
+                    <ul>
+                        <li><a href="https://chromium-review.googlesource.com/c/v8/v8/+/7122240" target="_blank" rel="noopener noreferrer">V8 CL 7122240</a>: Reland [profiler] Add CpuProfileSource</li>
+                        <li><a href="https://chromium-review.googlesource.com/c/chromium/src/+/6874588" target="_blank" rel="noopener noreferrer">Chromium CL 6874588</a>: Tag JS Self Profiling CPU streams as "SelfProfiling"</li>
+                        <li><a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/6877206" target="_blank" rel="noopener noreferrer">DevTools CL 6877206</a>: Select one CPU profile stream per thread by source</li>
+                    </ul>
                 </div>
 
                 <div class="article-foot">
