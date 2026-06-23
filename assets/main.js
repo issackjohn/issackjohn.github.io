@@ -38,28 +38,7 @@
         },
     ];
 
-    const projects = [
-        {
-            title: "V8 commits by issackjohn",
-            desc: "Recent commits authored on the V8 main branch.",
-            date: "",
-            url: "https://github.com/v8/v8/commits/main/?author=issackjohn",
-            external: true,
-        },
-        {
-            title: "DevTools frontend commits by issackjohn",
-            desc: "Recent commits authored on the Chrome DevTools frontend main branch.",
-            date: "",
-            url: "https://github.com/ChromeDevTools/devtools-frontend/commits/main/?author=issackjohn",
-            external: true,
-        },
-        {
-            title: "Chromium commits by issackjohn",
-            desc: "Recent commits authored on the Chromium main branch.",
-            date: "",
-            url: "https://github.com/chromium/chromium/commits/main/?author=issackjohn",
-            external: true,
-        },
+    const benchmarks = [
         {
             title: "Speedometer 3.0 test runner",
             desc: "A simple page for comparing benchmark suites and jumping into specific workloads.",
@@ -93,6 +72,30 @@
             desc: "A todoMVC-style benchmark implemented with native web components.",
             date: "",
             url: "https://issackjohn.github.io/SpeedometerJSWebComponents",
+            external: true,
+        },
+    ];
+
+    const references = [
+        {
+            title: "V8 commits by issackjohn",
+            desc: "Recent commits authored on the V8 main branch.",
+            date: "",
+            url: "https://github.com/v8/v8/commits/main/?author=issackjohn",
+            external: true,
+        },
+        {
+            title: "DevTools frontend commits by issackjohn",
+            desc: "Recent commits authored on the Chrome DevTools frontend main branch.",
+            date: "",
+            url: "https://github.com/ChromeDevTools/devtools-frontend/commits/main/?author=issackjohn",
+            external: true,
+        },
+        {
+            title: "Chromium commits by issackjohn",
+            desc: "Recent commits authored on the Chromium main branch.",
+            date: "",
+            url: "https://github.com/chromium/chromium/commits/main/?author=issackjohn",
             external: true,
         },
     ];
@@ -136,26 +139,49 @@
             });
         }
 
-        const projectList = document.getElementById("projectsList");
-        if (projectList) {
-            projects.forEach(function (p) {
+        const benchmarksList = document.getElementById("benchmarksList");
+        if (benchmarksList) {
+            benchmarks.forEach(function (item) {
                 const a = el("a", "item");
-                a.href = p.url;
-                if (p.external) externalAttrs(a);
+                a.href = item.url;
+                if (item.external) externalAttrs(a);
 
                 const head = el("div", "item-head");
-                const title = el("span", "item-title", p.title);
+                const title = el("span", "item-title", item.title);
                 head.appendChild(title);
-                if (p.date) head.appendChild(el("span", "item-date", p.date));
+                if (item.date) head.appendChild(el("span", "item-date", item.date));
                 a.appendChild(head);
 
                 const desc = el("p", "item-desc");
                 desc.innerHTML = "";
-                desc.appendChild(document.createTextNode(p.desc + " "));
+                desc.appendChild(document.createTextNode(item.desc + " "));
                 const arrow = el("span", "arrow", "\u2192");
                 desc.appendChild(arrow);
                 a.appendChild(desc);
-                projectList.appendChild(a);
+                benchmarksList.appendChild(a);
+            });
+        }
+
+        const referencesList = document.getElementById("referencesList");
+        if (referencesList) {
+            references.forEach(function (item) {
+                const a = el("a", "item");
+                a.href = item.url;
+                if (item.external) externalAttrs(a);
+
+                const head = el("div", "item-head");
+                const title = el("span", "item-title", item.title);
+                head.appendChild(title);
+                if (item.date) head.appendChild(el("span", "item-date", item.date));
+                a.appendChild(head);
+
+                const desc = el("p", "item-desc");
+                desc.innerHTML = "";
+                desc.appendChild(document.createTextNode(item.desc + " "));
+                const arrow = el("span", "arrow", "→");
+                desc.appendChild(arrow);
+                a.appendChild(desc);
+                referencesList.appendChild(a);
             });
         }
 
