@@ -79,21 +79,21 @@
     const references = [
         {
             title: "V8 commits by issackjohn",
-            desc: "Recent commits authored on the V8 main branch.",
+            desc: "",
             date: "",
             url: "https://github.com/v8/v8/commits/main/?author=issackjohn",
             external: true,
         },
         {
             title: "DevTools frontend commits by issackjohn",
-            desc: "Recent commits authored on the Chrome DevTools frontend main branch.",
+            desc: "",
             date: "",
             url: "https://github.com/ChromeDevTools/devtools-frontend/commits/main/?author=issackjohn",
             external: true,
         },
         {
             title: "Chromium commits by issackjohn",
-            desc: "Recent commits authored on the Chromium main branch.",
+            desc: "",
             date: "",
             url: "https://github.com/chromium/chromium/commits/main/?author=issackjohn",
             external: true,
@@ -119,6 +119,31 @@
         a.rel = "noopener noreferrer";
     }
 
+    function renderItem(item) {
+        const a = el("a", "item");
+        a.href = item.url;
+        if (item.external) externalAttrs(a);
+
+        const head = el("div", "item-head");
+        head.appendChild(el("span", "item-title", item.title));
+        if (item.date) head.appendChild(el("span", "item-date", item.date));
+        a.appendChild(head);
+
+        const desc = el("p", "item-desc");
+        if (item.desc) desc.appendChild(document.createTextNode(item.desc + " "));
+        desc.appendChild(el("span", "arrow", "\u2192"));
+        a.appendChild(desc);
+        return a;
+    }
+
+    function renderList(id, data) {
+        const list = document.getElementById(id);
+        if (!list) return;
+        data.forEach(function (item) {
+            list.appendChild(renderItem(item));
+        });
+    }
+
     function renderContent() {
         const blogList = document.getElementById("blogPostsList");
         if (blogList) {
@@ -139,51 +164,8 @@
             });
         }
 
-        const benchmarksList = document.getElementById("benchmarksList");
-        if (benchmarksList) {
-            benchmarks.forEach(function (item) {
-                const a = el("a", "item");
-                a.href = item.url;
-                if (item.external) externalAttrs(a);
-
-                const head = el("div", "item-head");
-                const title = el("span", "item-title", item.title);
-                head.appendChild(title);
-                if (item.date) head.appendChild(el("span", "item-date", item.date));
-                a.appendChild(head);
-
-                const desc = el("p", "item-desc");
-                desc.innerHTML = "";
-                desc.appendChild(document.createTextNode(item.desc + " "));
-                const arrow = el("span", "arrow", "\u2192");
-                desc.appendChild(arrow);
-                a.appendChild(desc);
-                benchmarksList.appendChild(a);
-            });
-        }
-
-        const referencesList = document.getElementById("referencesList");
-        if (referencesList) {
-            references.forEach(function (item) {
-                const a = el("a", "item");
-                a.href = item.url;
-                if (item.external) externalAttrs(a);
-
-                const head = el("div", "item-head");
-                const title = el("span", "item-title", item.title);
-                head.appendChild(title);
-                if (item.date) head.appendChild(el("span", "item-date", item.date));
-                a.appendChild(head);
-
-                const desc = el("p", "item-desc");
-                desc.innerHTML = "";
-                desc.appendChild(document.createTextNode(item.desc + " "));
-                const arrow = el("span", "arrow", "→");
-                desc.appendChild(arrow);
-                a.appendChild(desc);
-                referencesList.appendChild(a);
-            });
-        }
+        renderList("benchmarksList", benchmarks);
+        renderList("referencesList", references);
 
         const videosList = document.getElementById("videosList");
         if (videosList) {
