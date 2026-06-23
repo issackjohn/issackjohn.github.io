@@ -69,163 +69,83 @@
 
         <main id="main" class="wrap">
             <header class="hero reveal">
-                <div class="hero-main">
-                    <p class="eyebrow">Browser performance · Microsoft Edge</p>
-                    <h1>Issack John</h1>
-                    <p class="lede">I work on benchmark design, browser performance, and the kind of details that make a fast web feel obvious instead of accidental.</p>
-
-                    <nav class="social" aria-label="Profiles and links">
-                        <a href="https://github.com/issackjohn" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.16-.02-2.1-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.26-1.28-5.26-5.71 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.44-2.7 5.42-5.27 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.68.8.56A11.53 11.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5z"
-                                />
-                            </svg>
-                            GitHub
-                        </a>
-                        <a href="https://blogs.windows.com/msedgedev/" target="_blank" rel="noopener noreferrer">Blog</a>
-                        <a href="https://browserbench.org/Speedometer3.0/" target="_blank" rel="noopener noreferrer">Speedometer 3.0</a>
-                    </nav>
-                </div>
-
-                <aside class="hero-aside">
-                    <div class="panel panel-soft">
-                        <p class="label">Currently</p>
-                        <p class="aside-copy">Profiling real workloads, cleaning up benchmark cases, and keeping the tooling practical.</p>
-                    </div>
-                </aside>
+                <p class="kicker">Browser performance — Microsoft Edge</p>
+                <h1 class="name">Issack John</h1>
+                <p class="lede">I work on benchmark design, browser performance, and the kind of details that make a fast web feel deliberate instead of accidental.</p>
+                <nav class="links" aria-label="Profiles and links">
+                    <a href="https://github.com/issackjohn" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://blogs.windows.com/msedgedev/" target="_blank" rel="noopener noreferrer">Blog</a>
+                    <a href="https://browserbench.org/Speedometer3.0/" target="_blank" rel="noopener noreferrer">Speedometer 3.0</a>
+                </nav>
             </header>
 
-            <section class="reveal intro-grid" aria-label="About and current focus">
-                <article class="panel prose">
-                    <h2 class="section-title" id="about-title">About</h2>
-                    <p>
+            <section class="reveal block" aria-labelledby="about-title">
+                <div class="block-index"><span class="num">00</span><span class="block-label" id="about-title">About</span></div>
+                <div class="block-body">
+                    <p class="block-lead">
                         I’m a software engineer at Microsoft Edge focused on browser performance and benchmark design. Most of the work is less glamorous than it sounds: looking at real workloads, cutting away noise, and making the signal easier to
                         trust.
                     </p>
-                    <p>My work centers on Speedometer 3.0 and on the practical parts of performance work that usually get left out of the story: measurement fidelity, benchmark honesty, and keeping the tooling useful.</p>
-                    <div class="tags" aria-label="Focus areas">
-                        <span class="tag">Web Performance</span>
-                        <span class="tag">Browser Benchmarking</span>
-                        <span class="tag">Speedometer 3.0</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">DOM</span>
-                    </div>
-                </article>
-
-                <article class="panel mini-list">
-                    <h2 class="section-title">Right now</h2>
-                    <ul>
-                        <li>Looking at real-world performance regressions.</li>
-                        <li>Refining benchmark cases until they feel honest.</li>
-                        <li>Keeping the workflow simple rather than flashy.</li>
-                    </ul>
-                </article>
-            </section>
-
-            <section class="reveal work-map" aria-label="Work map">
-                <div class="panel work-map-intro">
-                    <p class="label">Work map</p>
-                    <h2>What this site is for</h2>
-                    <p>This is a record of how I approach browser performance: experiments first, public notes second, and the work itself always visible.</p>
-                </div>
-                <div class="work-map-grid">
-                    <article class="panel work-card">
-                        <p class="label">Benchmarks</p>
-                        <h3>Making performance legible</h3>
-                        <p>Speedometer and the related experiments are about measuring what real sites do, not just what a synthetic harness can pretend.</p>
-                    </article>
-                    <article class="panel work-card">
-                        <p class="label">Browser history</p>
-                        <h3>Tracing the work in public repos</h3>
-                        <p>V8, Chromium, and DevTools commits show the path from idea to patch, without hiding the rough edges.</p>
-                    </article>
-                    <article class="panel work-card">
-                        <p class="label">Writing</p>
-                        <h3>Notes that stay useful</h3>
-                        <p>Short writeups explain the tradeoffs, the failures, and why a change mattered in the first place.</p>
-                    </article>
+                    <p>My work centers on Speedometer 3.0 and on the practical parts of performance work that usually get left out of the story — measurement fidelity, benchmark honesty, and keeping the tooling useful.</p>
+                    <p class="meta">Web Performance / Browser Benchmarking / Speedometer 3.0 / JavaScript / DOM</p>
                 </div>
             </section>
 
-            <section class="reveal playground-section" aria-labelledby="playground-title">
-                <div class="section-heading">
-                    <h2 class="section-title" id="playground-title">Performance Lab</h2>
-                    <p class="section-copy">Live interactive browser-native micro-benchmarks.</p>
-                </div>
-                <div class="panel playground-box">
-                    <div class="playground-header">
-                        <span class="label">Layout Thrashing Simulator</span>
-                        <h3>Interactive: The Cost of Forced Synchronous Reflow</h3>
-                        <p class="playground-intro-desc">
-                            Compare how the browser handles 150 independent element updates. Thrashing interleaves reads and writes, forcing layout recalculation on every iteration. Batched separates reads and writes into discrete steps.
-                        </p>
-                    </div>
-
-                    <div class="playground-sandbox">
-                        <div id="thrashingSandboxContainer" class="sandbox-container">
-                            <!-- Visual elements updated dynamically during the test -->
-                        </div>
-                    </div>
-
-                    <div class="playground-controls">
-                        <button id="runThrashingBtn" class="btn btn-danger">Run Thrashing (Interleaved)</button>
-                        <button id="runBatchedBtn" class="btn btn-success">Run Batched (Optimized)</button>
-                        <button id="resetPlaygroundBtn" class="btn btn-secondary">Reset</button>
-                    </div>
-
-                    <div class="playground-results">
-                        <div class="result-tile" id="thrashingResult">
-                            <span class="result-label">Interleaved Duration</span>
-                            <span class="result-value" id="thrashingTime">--</span>
-                        </div>
-                        <div class="result-tile" id="batchedResult">
-                            <span class="result-label">Batched Duration</span>
-                            <span class="result-value" id="batchedTime">--</span>
-                        </div>
-                        <div class="result-tile highlight" id="speedupResult">
-                            <span class="result-label">Fidelity Speedup</span>
-                            <span class="result-value" id="speedupValue">--</span>
-                        </div>
-                    </div>
+            <section class="reveal block" aria-labelledby="approach-title">
+                <div class="block-index"><span class="num">01</span><span class="block-label" id="approach-title">Approach</span></div>
+                <div class="block-body">
+                    <ol class="approach">
+                        <li>
+                            <h3>Make performance legible</h3>
+                            <p>Speedometer and the related experiments measure what real sites actually do, not what a synthetic harness can pretend.</p>
+                        </li>
+                        <li>
+                            <h3>Trace the work in public repos</h3>
+                            <p>V8, Chromium, and DevTools commits show the path from idea to patch — without hiding the rough edges.</p>
+                        </li>
+                        <li>
+                            <h3>Keep notes that stay useful</h3>
+                            <p>Short writeups explain the tradeoffs, the failures, and why a change mattered in the first place.</p>
+                        </li>
+                    </ol>
                 </div>
             </section>
 
-            <section class="reveal" aria-labelledby="benchmarks-title">
-                <div class="section-heading">
-                    <h2 class="section-title" id="benchmarks-title">Benchmarks and experiments</h2>
-                    <p class="section-copy">The work that started as experiments and became useful reference points.</p>
+            <section class="reveal block" aria-labelledby="benchmarks-title">
+                <div class="block-index"><span class="num">02</span><span class="block-label" id="benchmarks-title">Benchmarks</span></div>
+                <div class="block-body">
+                    <p class="block-note">Experiments that became useful reference points.</p>
+                    <div class="ledger" id="benchmarksList"></div>
                 </div>
-                <div class="stack" id="benchmarksList"></div>
             </section>
 
-            <section class="reveal" aria-labelledby="references-title">
-                <div class="section-heading">
-                    <h2 class="section-title" id="references-title">Browser history and references</h2>
-                    <p class="section-copy">Commit history and project links that reflect the work itself.</p>
+            <section class="reveal block" aria-labelledby="references-title">
+                <div class="block-index"><span class="num">03</span><span class="block-label" id="references-title">History</span></div>
+                <div class="block-body">
+                    <p class="block-note">Commit history across the browser engines I work in.</p>
+                    <div class="ledger" id="referencesList"></div>
                 </div>
-                <div class="stack" id="referencesList"></div>
             </section>
 
-            <section class="reveal" aria-labelledby="writing-title">
-                <div class="section-heading">
-                    <h2 class="section-title" id="writing-title">Writing</h2>
-                    <p class="section-copy">Short notes and posts that explain the work in more detail.</p>
+            <section class="reveal block" aria-labelledby="writing-title">
+                <div class="block-index"><span class="num">04</span><span class="block-label" id="writing-title">Writing</span></div>
+                <div class="block-body">
+                    <p class="block-note">Notes and posts that explain the work in more detail.</p>
+                    <div class="ledger" id="blogPostsList"></div>
                 </div>
-                <div class="stack" id="blogPostsList"></div>
             </section>
 
-            <section class="reveal" aria-labelledby="watching-title">
-                <div class="section-heading">
-                    <h2 class="section-title" id="watching-title">Recommended watching</h2>
-                    <p class="section-copy">A small list of things I still return to.</p>
+            <section class="reveal block" aria-labelledby="watching-title">
+                <div class="block-index"><span class="num">05</span><span class="block-label" id="watching-title">Watching</span></div>
+                <div class="block-body">
+                    <p class="block-note">A small list of things I still return to.</p>
+                    <div class="ledger" id="videosList"></div>
                 </div>
-                <div class="stack" id="videosList"></div>
             </section>
         </main>
 
         <footer class="site-footer">
-            <div class="wrap">&copy; <span id="year">2025</span> Issack John · Built for speed, no framework fuss.</div>
+            <div class="wrap">© <span id="year">2025</span> Issack John — built by hand, no framework.</div>
         </footer>
 
         <script src="/assets/main.js" defer></script>
