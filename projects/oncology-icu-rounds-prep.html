@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" data-theme-default>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oncology ICU Rounds Prep — Issack John</title>
+
+        <meta name="description" content="A clinical prep app exploring Google's MedGemma and Gemma models for oncology ICU rounds — by Issack John." />
+        <meta name="author" content="Issack John" />
+        <link rel="canonical" href="https://issackjohn.github.io/projects/oncology-icu-rounds-prep.html" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://issackjohn.github.io/projects/oncology-icu-rounds-prep.html" />
+        <meta property="og:title" content="Oncology ICU Rounds Prep" />
+        <meta property="og:description" content="Exploring Google's MedGemma and Gemma models in a clinical prep app." />
+        <meta name="twitter:card" content="summary" />
+
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+
+        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t === "light" || t === "dark") {
+                        document.documentElement.setAttribute("data-theme", t);
+                    }
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <div class="topbar">
+            <div class="wrap">
+                <a class="brand" href="/">Issack John</a>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <main id="main" class="wrap">
+            <a class="back-link" href="/#work">← Projects</a>
+
+            <article class="article reveal">
+                <p class="article-meta">Project · MedGemma &amp; Gemma · React + Vite</p>
+                <h1 class="article-title">Oncology ICU Rounds Prep</h1>
+
+                <div class="prose">
+                    <p>
+                        <strong>OncoICU Rounds Studio</strong> is a small clinical-prep application I built to explore Google’s <a href="https://deepmind.google/models/gemma/medgemma/" target="_blank" rel="noopener noreferrer">MedGemma</a> and
+                        <a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank" rel="noopener noreferrer">Gemma</a> models in a real product setting. The idea was to see how well an open, medically-tuned model could support preparing
+                        for oncology ICU rounds — organizing patient context and surfacing the right things to review before walking into the unit.
+                    </p>
+                    <p>
+                        It walks through a four-step flow — <em>Case Room → Pre-round → Rounds → Debrief</em> — built around a library of synthetic ICU cases (no PHI). You pick a teaching lens and a learner role, work up the chart yourself, then
+                        check your reasoning against the model. It was as much an exploration of the models as it was of the app: where MedGemma is genuinely helpful, where it needs guardrails, and what a responsible interface around a medical model
+                        should actually look like.
+                    </p>
+
+                    <p>
+                        <a href="https://oncology-prep.pages.dev/" target="_blank" rel="noopener noreferrer">Live demo →</a>
+                    </p>
+
+                    <h2>Why I built it</h2>
+                    <p>
+                        I wanted hands-on intuition for the MedGemma/Gemma family beyond a notebook — to understand what it feels like to put a medical model behind a real UI, with real latency, real prompts, and the real responsibility that comes
+                        with anything clinical. Rounds prep is a concrete, high-context task, which made it a good forcing function.
+                    </p>
+
+                    <h2>Stack</h2>
+                    <ul>
+                        <li>
+                            Google
+                            <a href="https://deepmind.google/models/gemma/medgemma/" target="_blank" rel="noopener noreferrer">MedGemma</a> and
+                            <a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank" rel="noopener noreferrer">Gemma</a> for the model layer.
+                        </li>
+                        <li><strong>React + Vite</strong> front end.</li>
+                        <li>Deployed on <strong>Cloudflare Pages</strong>.</li>
+                    </ul>
+
+                    <h2>Interface</h2>
+                    <figure class="shot">
+                        <img src="/projects/assets/oncology-case-room.jpg" alt="The Case Room: a teaching-lens grid and a library of synthetic oncology ICU cases." loading="lazy" width="1600" height="1025" />
+                        <figcaption>Case Room — pick a teaching lens and a synthetic case (or generate one) before pre-round.</figcaption>
+                    </figure>
+                    <figure class="shot">
+                        <img src="/projects/assets/oncology-pre-round.jpg" alt="The Pre-round view: patient chart with key labs, active problems, and a differentials panel." loading="lazy" width="1600" height="1025" />
+                        <figcaption>Pre-round — build your own problem list and presentation against the chart before checking the prep deck.</figcaption>
+                    </figure>
+
+                    <h2>What I took away</h2>
+                    <p>
+                        The interesting problems were never just “call the model.” They were about context, trust, and restraint — how much to show, how to keep a medical model from overstepping, and how to make the output something a person could
+                        actually rely on. It’s an exploration, not a clinical tool, but it taught me a lot about building seriously around open medical models.
+                    </p>
+
+                    <h2>References</h2>
+                    <ul>
+                        <li><a href="https://deepmind.google/models/gemma/medgemma/" target="_blank" rel="noopener noreferrer">MedGemma</a> — Google DeepMind’s medically-tuned Gemma variant.</li>
+                        <li>
+                            <a href="https://research.google/blog/next-generation-medical-image-interpretation-with-medgemma-15-and-medical-speech-to-text-with-medasr/" target="_blank" rel="noopener noreferrer">MedGemma 1.5 &amp; MedASR</a> —
+                            next-generation medical image interpretation and speech-to-text.
+                        </li>
+                        <li><a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank" rel="noopener noreferrer">Gemma 4</a> — the open base model family.</li>
+                    </ul>
+                </div>
+
+                <div class="article-foot">
+                    <a class="back-link" href="/#work">← Back to projects</a>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+        </footer>
+
+        <script src="/assets/main.js" defer></script>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>
