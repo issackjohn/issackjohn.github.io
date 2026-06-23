@@ -31,6 +31,16 @@
 
     const blogPosts = [];
 
+    const projects = [
+        {
+            title: "Oncology ICU Rounds Prep",
+            desc: "A clinical prep app exploring Google’s MedGemma and Gemma models for oncology ICU rounds.",
+            date: "",
+            url: "https://oncology-prep.pages.dev/",
+            external: true,
+        },
+    ];
+
     const benchmarks = [
         {
             title: "Complex workloads explorer",
@@ -151,6 +161,7 @@
             });
         }
 
+        renderList("projectsList", projects);
         renderList("benchmarksList", benchmarks);
         renderList("referencesList", references);
 
