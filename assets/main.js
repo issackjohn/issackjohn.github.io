@@ -25,7 +25,112 @@
 
         renderContent();
         setupReveal();
+        setupPlayground();
     });
+
+    // --- Performance Playground --------------------------------------------
+
+    let thrashingMs = null;
+    let batchedMs = null;
+
+    function setupPlayground() {
+        const container = document.getElementById("thrashingSandboxContainer");
+        const thrashingTimeEl = document.getElementById("thrashingTime");
+        const batchedTimeEl = document.getElementById("batchedTime");
+        const speedupValueEl = document.getElementById("speedupValue");
+
+        if (!container) return;
+
+        // Populate with 150 sandbox nodes
+        const count = 150;
+        for (let i = 0; i < count; i++) {
+            const node = el("div", "sandbox-node");
+            container.appendChild(node);
+        }
+
+        const nodes = Array.from(container.children);
+
+        function updateSpeedup() {
+            if (thrashingMs !== null && batchedMs !== null) {
+                const ratio = thrashingMs / Math.max(batchedMs, 0.001);
+                speedupValueEl.textContent = ratio.toFixed(1) + "x";
+            }
+        }
+
+        document.getElementById("runThrashingBtn").addEventListener("click", function () {
+            nodes.forEach((n) => {
+                n.className = "sandbox-node active-thrash";
+                n.style.transform = "";
+            });
+
+            // Force layout sync
+            container.offsetWidth;
+
+            const t0 = performance.now();
+
+            // Run 5 outer iterations to increase layout work and make duration solid
+            for (let iter = 0; iter < 5; iter++) {
+                nodes.forEach((node, idx) => {
+                    // Force a layout read
+                    const w = node.offsetWidth;
+                    // Interleave a write immediately
+                    node.style.transform = "scale(" + (1.0 + Math.sin(idx + iter) * 0.1) + ")";
+                });
+            }
+
+            // Force one final layout calculation to capture all pending writes inside the benchmark timeframe
+            container.offsetWidth;
+
+            const t1 = performance.now();
+            thrashingMs = t1 - t0;
+            thrashingTimeEl.textContent = thrashingMs.toFixed(2) + "ms";
+            updateSpeedup();
+        });
+
+        document.getElementById("runBatchedBtn").addEventListener("click", function () {
+            nodes.forEach((n) => {
+                n.className = "sandbox-node active-batch";
+                n.style.transform = "";
+            });
+
+            // Force layout sync
+            container.offsetWidth;
+
+            const t0 = performance.now();
+
+            const cachedWidths = new Array(nodes.length);
+            for (let iter = 0; iter < 5; iter++) {
+                // 1. Read everything first
+                nodes.forEach((node, idx) => {
+                    cachedWidths[idx] = node.offsetWidth;
+                });
+                // 2. Write everything
+                nodes.forEach((node, idx) => {
+                    node.style.transform = "scale(" + (1.0 + Math.sin(idx + iter) * 0.1) + ")";
+                });
+            }
+
+            // Force final layout sync
+            container.offsetWidth;
+
+            const t1 = performance.now();
+            batchedMs = t1 - t0;
+            batchedTimeEl.textContent = batchedMs.toFixed(2) + "ms";
+            updateSpeedup();
+        });
+
+        document.getElementById("resetPlaygroundBtn").addEventListener("click", function () {
+            nodes.forEach((n) => {
+                n.className = "sandbox-node";
+                n.style.transform = "";
+            });
+            thrashingMs = null;
+            batchedMs = null;
+            thrashingTimeEl.textContent = "--";
+            batchedTimeEl.textContent = "--";
+            speedupValueEl.textContent = "--";
+        });
+    }
 
     // --- Dynamic content ---------------------------------------------------
 

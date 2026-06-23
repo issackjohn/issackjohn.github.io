@@ -70,9 +70,9 @@
         <main id="main" class="wrap">
             <header class="hero reveal">
                 <div class="hero-main">
-                    <p class="eyebrow">Web performance engineer · Microsoft Edge</p>
+                    <p class="eyebrow">Browser performance · Microsoft Edge</p>
                     <h1>Issack John</h1>
-                    <p class="lede">I work on browser performance, benchmark design, and the kind of small details that make the web feel a little lighter.</p>
+                    <p class="lede">I work on benchmark design, browser performance, and the kind of details that make a fast web feel obvious instead of accidental.</p>
 
                     <nav class="social" aria-label="Profiles and links">
                         <a href="https://github.com/issackjohn" target="_blank" rel="noopener noreferrer">
@@ -99,8 +99,11 @@
             <section class="reveal intro-grid" aria-label="About and current focus">
                 <article class="panel prose">
                     <h2 class="section-title" id="about-title">About</h2>
-                    <p>I’m a software engineer at Microsoft Edge focused on browser performance and benchmark design. I spend a lot of time looking at the workloads that actually matter and making them easier to understand.</p>
-                    <p>My work centers on Speedometer 3.0 and on the more awkward, practical parts of performance work: measuring real behavior, removing noise, and keeping the tooling useful.</p>
+                    <p>
+                        I’m a software engineer at Microsoft Edge focused on browser performance and benchmark design. Most of the work is less glamorous than it sounds: looking at real workloads, cutting away noise, and making the signal easier to
+                        trust.
+                    </p>
+                    <p>My work centers on Speedometer 3.0 and on the practical parts of performance work that usually get left out of the story: measurement fidelity, benchmark honesty, and keeping the tooling useful.</p>
                     <div class="tags" aria-label="Focus areas">
                         <span class="tag">Web Performance</span>
                         <span class="tag">Browser Benchmarking</span>
@@ -118,6 +121,74 @@
                         <li>Keeping the workflow simple rather than flashy.</li>
                     </ul>
                 </article>
+            </section>
+
+            <section class="reveal work-map" aria-label="Work map">
+                <div class="panel work-map-intro">
+                    <p class="label">Work map</p>
+                    <h2>What this site is for</h2>
+                    <p>This is a record of how I approach browser performance: experiments first, public notes second, and the work itself always visible.</p>
+                </div>
+                <div class="work-map-grid">
+                    <article class="panel work-card">
+                        <p class="label">Benchmarks</p>
+                        <h3>Making performance legible</h3>
+                        <p>Speedometer and the related experiments are about measuring what real sites do, not just what a synthetic harness can pretend.</p>
+                    </article>
+                    <article class="panel work-card">
+                        <p class="label">Browser history</p>
+                        <h3>Tracing the work in public repos</h3>
+                        <p>V8, Chromium, and DevTools commits show the path from idea to patch, without hiding the rough edges.</p>
+                    </article>
+                    <article class="panel work-card">
+                        <p class="label">Writing</p>
+                        <h3>Notes that stay useful</h3>
+                        <p>Short writeups explain the tradeoffs, the failures, and why a change mattered in the first place.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="reveal playground-section" aria-labelledby="playground-title">
+                <div class="section-heading">
+                    <h2 class="section-title" id="playground-title">Performance Lab</h2>
+                    <p class="section-copy">Live interactive browser-native micro-benchmarks.</p>
+                </div>
+                <div class="panel playground-box">
+                    <div class="playground-header">
+                        <span class="label">Layout Thrashing Simulator</span>
+                        <h3>Interactive: The Cost of Forced Synchronous Reflow</h3>
+                        <p class="playground-intro-desc">
+                            Compare how the browser handles 150 independent element updates. Thrashing interleaves reads and writes, forcing layout recalculation on every iteration. Batched separates reads and writes into discrete steps.
+                        </p>
+                    </div>
+
+                    <div class="playground-sandbox">
+                        <div id="thrashingSandboxContainer" class="sandbox-container">
+                            <!-- Visual elements updated dynamically during the test -->
+                        </div>
+                    </div>
+
+                    <div class="playground-controls">
+                        <button id="runThrashingBtn" class="btn btn-danger">Run Thrashing (Interleaved)</button>
+                        <button id="runBatchedBtn" class="btn btn-success">Run Batched (Optimized)</button>
+                        <button id="resetPlaygroundBtn" class="btn btn-secondary">Reset</button>
+                    </div>
+
+                    <div class="playground-results">
+                        <div class="result-tile" id="thrashingResult">
+                            <span class="result-label">Interleaved Duration</span>
+                            <span class="result-value" id="thrashingTime">--</span>
+                        </div>
+                        <div class="result-tile" id="batchedResult">
+                            <span class="result-label">Batched Duration</span>
+                            <span class="result-value" id="batchedTime">--</span>
+                        </div>
+                        <div class="result-tile highlight" id="speedupResult">
+                            <span class="result-label">Fidelity Speedup</span>
+                            <span class="result-value" id="speedupValue">--</span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section class="reveal" aria-labelledby="benchmarks-title">
