@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>404 — Page not found · Issack John</title>
+        <meta name="robots" content="noindex" />
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <main class="wrap" style="min-height: 80vh; display: grid; place-content: center; text-align: center; gap: 1rem">
+            <div class="avatar" aria-hidden="true" style="margin-bottom: 0.5rem">404</div>
+            <h1 style="margin: 0; font-size: 2rem">Page not found</h1>
+            <p style="color: var(--text-muted); margin: 0">The page you're looking for doesn't exist or has moved.</p>
+            <p style="margin: 0.5rem 0 0"><a href="/">&larr; Back to home</a></p>
+        </main>
+    </body>
+</html>
