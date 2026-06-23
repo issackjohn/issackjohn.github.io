@@ -40,31 +40,10 @@
 
     const benchmarks = [
         {
-            title: "Speedometer 3.0 test runner",
-            desc: "A simple page for comparing benchmark suites and jumping into specific workloads.",
-            date: "Jan 2024",
-            url: "/speedometer.html",
-            external: false,
-        },
-        {
             title: "Complex workloads explorer",
             desc: "A small tool for browsing the heavier, more realistic DOM-based cases.",
             date: "",
             url: "/complex-workloads.html",
-            external: false,
-        },
-        {
-            title: "Speedometer with complex DOM",
-            desc: "A set of experiments built around deeper and more realistic DOM structures.",
-            date: "Jun 2023",
-            url: "/speedometer-with-complex.html",
-            external: false,
-        },
-        {
-            title: "Speedometer — new structure complex DOM",
-            desc: "Another round of experiments on the same benchmark idea, with a cleaner structure.",
-            date: "Sep 2023",
-            url: "/speedometer-with-new-structure.html",
             external: false,
         },
         {
@@ -145,6 +124,21 @@
     }
 
     function renderContent() {
+        const evidence = document.getElementById("evidence");
+        if (evidence) {
+            const stats = [
+                { value: String(benchmarks.length), label: "Benchmarks & experiments" },
+                { value: String(references.length), label: "Engine commit streams" },
+                { value: "3.0", label: "Speedometer release" },
+            ];
+            stats.forEach(function (s) {
+                const item = el("div", "evidence-item");
+                item.appendChild(el("span", "evidence-value", s.value));
+                item.appendChild(el("span", "evidence-label", s.label));
+                evidence.appendChild(item);
+            });
+        }
+
         const blogList = document.getElementById("blogPostsList");
         if (blogList) {
             blogPosts.forEach(function (post) {

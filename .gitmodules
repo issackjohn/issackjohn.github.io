@@ -1,24 +1,4 @@
-[submodule "SpeedometerWithComplex"]
-	path = SpeedometerWithComplex
-	url = https://github.com/lpardosixtosMs/Speedometer.git
-	branch = issackjohn/EnableTestSuitesForComplexDOMVersions
 [submodule "SpeedometerJSWebComponents"]
 	path = SpeedometerJSWebComponents
 	url = https://github.com/lpardosixtosMs/Speedometer.git
 	branch = lpardosixtos/ComplexDOMWebComponents
-[submodule "Speedometer1"]
-	path = Speedometer1
-	url = https://github.com/issackjohn/Speedometer
-	branch = issackjohn/FixHiddenDropDownMenus
-[submodule "Speedometer2"]
-	path = Speedometer2
-	url = https://github.com/issackjohn/Speedometer
-[submodule "Speedometer3"]
-	path = Speedometer3
-	url = https://github.com/issackjohn/Speedometer
-[submodule "SpeedometerWithReminderOpen"]
-	path = SpeedometerWithReminderOpen
-	url = https://github.com/issackjohn/Speedometer.git
-[submodule "SpeedometerWithBacklogOpen"]
-	path = SpeedometerWithBacklogOpen
-	url = https://github.com/issackjohn/Speedometer.git

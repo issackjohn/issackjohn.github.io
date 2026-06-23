@@ -17,37 +17,28 @@ contributor to [Speedometer 3.0](https://browserbench.org/Speedometer3.0/).
 
 ```
 .
-├── index.html          # Portfolio home
-├── 404.html            # Friendly not-found page
+├── index.html               # Portfolio home
+├── 404.html                 # Friendly not-found page
+├── complex-workloads.html   # Index of individual complex benchmark workloads
 ├── assets/
-│   ├── styles.css      # Theme tokens, layout, components, dark mode
-│   ├── main.js         # Theme toggle + content rendering + scroll reveal
-│   └── favicon.svg     # Inline-gradient "IJ" mark
-└── speedometer*.html   # Benchmark runners (see below)
+│   ├── styles.css           # Theme tokens, layout, components, dark mode
+│   ├── main.js              # Theme toggle + content rendering + scroll reveal
+│   └── favicon.svg          # Inline-gradient "IJ" mark
+└── SpeedometerJSWebComponents/  # Web-components Speedometer demo (git submodule)
 ```
 
 ## Pages
 
-| Page                                                                       | Description                                                    |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| [index.html](index.html)                                                   | Portfolio home — about, projects, writing, and links           |
-| [speedometer.html](speedometer.html)                                       | Speedometer 3.0 test runner with side-by-side suite comparison |
-| [complex-workloads.html](complex-workloads.html)                           | Browse and launch individual complex benchmark workloads       |
-| [speedometer-with-complex.html](speedometer-with-complex.html)             | Benchmark experiments with complex DOM structures (June 2023)  |
-| [speedometer-with-new-structure.html](speedometer-with-new-structure.html) | Updated complex DOM architecture experiments (September 2023)  |
-| [hang.html](hang.html)                                                     | Page-hang debugging sandbox                                    |
+| Page                                             | Description                                              |
+| ------------------------------------------------ | -------------------------------------------------------- |
+| [index.html](index.html)                         | Portfolio home — about, benchmarks, history, and writing |
+| [complex-workloads.html](complex-workloads.html) | Browse and launch individual complex benchmark workloads |
 
 ## Benchmark variants (git submodules)
 
-| Submodule                     | Description                                 |
-| ----------------------------- | ------------------------------------------- |
-| `Speedometer1`                | Fork with complex DOM workloads added       |
-| `Speedometer2`                | Speedometer 2.x variant                     |
-| `Speedometer3`                | Speedometer 3.0 reference                   |
-| `SpeedometerJSWebComponents`  | JavaScript Web Components implementation    |
-| `SpeedometerWithBacklogOpen`  | Speedometer with backlog panel open         |
-| `SpeedometerWithReminderOpen` | Speedometer with reminder panel open        |
-| `SpeedometerWithComplex`      | Speedometer with complex workload additions |
+| Submodule                    | Description                              |
+| ---------------------------- | ---------------------------------------- |
+| `SpeedometerJSWebComponents` | JavaScript Web Components implementation |
 
 ## Development
 
