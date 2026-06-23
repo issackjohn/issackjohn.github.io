@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-theme-default>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>When Two Profilers Share a Thread — Issack John</title>
+
+        <meta name="description" content="How concurrent CPU profiling streams from the JS Self-Profiling API and internal tracing could corrupt attribution in DevTools, and how tagging each stream by source fixed it." />
+        <meta name="author" content="Issack John" />
+        <link rel="canonical" href="https://issackjohn.github.io/blog/when-two-profilers-share-a-thread.html" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://issackjohn.github.io/blog/when-two-profilers-share-a-thread.html" />
+        <meta property="og:title" content="When Two Profilers Share a Thread" />
+        <meta property="og:description" content="A cross-project fix to keep CPU profiler streams separate when the JS Self-Profiling API and V8 tracing run at the same time." />
+        <meta name="twitter:card" content="summary" />
+
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+
+        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t === "light" || t === "dark") {
+                        document.documentElement.setAttribute("data-theme", t);
+                    }
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <div class="topbar">
+            <div class="wrap">
+                <a class="brand" href="/">Issack John</a>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <main id="main" class="wrap">
+            <a class="back-link" href="/blog/">← Writing</a>
+
+            <article class="article reveal">
+                <p class="article-meta">November 12, 2025 · DevTools · V8 · Profiling</p>
+                <h1 class="article-title">When Two Profilers Share a Thread</h1>
+
+                <div class="prose">
+                    <p>
+                        Profilers have a reputation for being straightforward. You turn them on, they collect samples, and the output is supposed to tell you what the program was doing. In practice, the interesting bugs are often not in the sampling
+                        itself, but in the handoff between layers.
+                    </p>
+
+                    <p>
+                        In Chromium, that handoff became subtle when the JavaScript Self-Profiling API and internal tracing were active at the same time. Both of them could emit CPU profile streams for the same thread. The problem was not that the
+                        sampler was wrong; it was that DevTools had no reliable way to tell which stream a sample belonged to.
+                    </p>
+
+                    <h2>The bug</h2>
+                    <p>
+                        When multiple profiling sources are active concurrently, DevTools can end up merging their streams on the same thread. That sounds harmless until you look at the consequences. A profile can become a blur of mixed samples, and
+                        JavaScript attribution gets corrupted. What should have been a precise view of a self-profiling run instead became a case of “which source did this sample really come from?”
+                    </p>
+
+                    <p>
+                        The subtlety is that this does not look like a crash. It looks like bad interpretation. The profile is still there, but it is no longer trustworthy. In performance work, that is often worse than an outright failure because it
+                        quietly poisons the analysis.
+                    </p>
+
+                    <h2>The fix across three layers</h2>
+                    <p>The fix ended up being a small but important change in the metadata plane. Instead of treating every CPU profile stream as anonymous, we gave each one a source tag. The flow was:</p>
+
+                    <ul>
+                        <li>V8 added a <code>CpuProfileSource</code> field to profile events so a stream could be labeled at the point it was emitted.</li>
+                        <li>Chromium set that source to <code>kSelfProfiling</code> when the JS Self-Profiling API started a V8 CPU profile.</li>
+                        <li>DevTools ingested the optional <code>args.data.source</code> field and selected one stream per thread based on source priority, rather than blindly merging them.</li>
+                    </ul>
+
+                    <pre><code>{
+  "name": "Profile",
+  "args": {
+    "data": {
+      "source": "SelfProfiling"
+    }
+  }
+}</code></pre>
+
+                    <p>
+                        That small piece of metadata turned out to be enough to preserve correct attribution. The important part was not the machinery of sampling; it was the identity of the stream. Once the source was explicit, DevTools could keep
+                        the streams separate and build its models from the right one.
+                    </p>
+
+                    <h2>Why this mattered</h2>
+                    <p>
+                        This issue sat at the border between browser internals and developer tools. It was a classic case of a bug that only appears when the system is doing more than one thing at once. The real failure mode was not a missing
+                        profile; it was a profile that looked plausible but was logically inconsistent.
+                    </p>
+
+                    <p>
+                        The fix made profiling more reliable in exactly the situations where developers are most likely to rely on it: when they are instrumenting a page, tracing internals, or trying to understand JavaScript execution under
+                        concurrent activity. In other words: it made the profiler less likely to lie.
+                    </p>
+
+                    <h2>Related work</h2>
+                    <p>
+                        The change landed across three public Chromium projects:
+                        <a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/6877206" target="_blank" rel="noopener noreferrer">DevTools CL 6877206</a>,
+                        <a href="https://chromium-review.googlesource.com/c/chromium/src/+/6874588" target="_blank" rel="noopener noreferrer">Chromium CL 6874588</a>, and
+                        <a href="https://chromium-review.googlesource.com/c/v8/v8/+/7122240" target="_blank" rel="noopener noreferrer">V8 CL 7122240</a>. The bug is tracked in
+                        <a href="https://issues.chromium.org/issues/375614293" target="_blank" rel="noopener noreferrer">Chromium issue 375614293</a>.
+                    </p>
+
+                    <p>The lesson is simple: when systems become compositional, identity matters. A profiler is only as trustworthy as the metadata that tells you which stream each sample belongs to.</p>
+                </div>
+
+                <div class="article-foot">
+                    <a class="back-link" href="/blog/">← Back to writing</a>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+        </footer>
+
+        <script src="/assets/main.js" defer></script>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>
