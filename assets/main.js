@@ -32,7 +32,7 @@
     const blogPosts = [
         {
             title: "Contributing to Speedometer 3.0",
-            summary: "How a cross-browser team captured real-world web application challenges in the industry-standard benchmark.",
+            summary: "A look at how the benchmark was shaped around real web-app behavior rather than synthetic shortcuts.",
             url: "https://blogs.windows.com/msedgedev/2024/03/11/contributing-to-speedometer-30/",
             date: "March 11, 2024",
         },
@@ -40,57 +40,57 @@
 
     const projects = [
         {
-            title: "V8 Commits by issackjohn",
-            desc: "Recent commits authored on V8 main branch.",
+            title: "V8 commits by issackjohn",
+            desc: "Recent commits authored on the V8 main branch.",
             date: "",
             url: "https://github.com/v8/v8/commits/main/?author=issackjohn",
             external: true,
         },
         {
-            title: "DevTools Frontend Commits by issackjohn",
-            desc: "Recent commits authored on Chrome DevTools frontend main branch.",
+            title: "DevTools frontend commits by issackjohn",
+            desc: "Recent commits authored on the Chrome DevTools frontend main branch.",
             date: "",
             url: "https://github.com/ChromeDevTools/devtools-frontend/commits/main/?author=issackjohn",
             external: true,
         },
         {
-            title: "Chromium Commits by issackjohn",
-            desc: "Recent commits authored on Chromium main branch.",
+            title: "Chromium commits by issackjohn",
+            desc: "Recent commits authored on the Chromium main branch.",
             date: "",
             url: "https://github.com/chromium/chromium/commits/main/?author=issackjohn",
             external: true,
         },
         {
-            title: "Speedometer 3.0 Test Runner",
-            desc: "Compare benchmark suites side-by-side and launch individual workloads.",
+            title: "Speedometer 3.0 test runner",
+            desc: "A simple page for comparing benchmark suites and jumping into specific workloads.",
             date: "Jan 2024",
             url: "/speedometer.html",
             external: false,
         },
         {
-            title: "Complex Workloads Explorer",
-            desc: "Browse and launch individual complex DOM benchmark workloads.",
+            title: "Complex workloads explorer",
+            desc: "A small tool for browsing the heavier, more realistic DOM-based cases.",
             date: "",
             url: "/complex-workloads.html",
             external: false,
         },
         {
-            title: "Speedometer with Complex DOM",
-            desc: "Benchmark experiments using deeper, more realistic DOM structures.",
+            title: "Speedometer with complex DOM",
+            desc: "A set of experiments built around deeper and more realistic DOM structures.",
             date: "Jun 2023",
             url: "/speedometer-with-complex.html",
             external: false,
         },
         {
-            title: "Speedometer — New Structure Complex DOM",
-            desc: "Updated architecture experiments built on the complex-DOM workloads.",
+            title: "Speedometer — new structure complex DOM",
+            desc: "Another round of experiments on the same benchmark idea, with a cleaner structure.",
             date: "Sep 2023",
             url: "/speedometer-with-new-structure.html",
             external: false,
         },
         {
-            title: "JavaScript Web Components Speedometer",
-            desc: "TodoMVC benchmark implemented with native Web Components.",
+            title: "JavaScript web components speedometer",
+            desc: "A todoMVC-style benchmark implemented with native web components.",
             date: "",
             url: "https://issackjohn.github.io/SpeedometerJSWebComponents",
             external: true,
@@ -99,7 +99,7 @@
 
     const videos = [
         {
-            title: "Jim Rohn — Give To Receive",
+            title: "Jim Rohn — Give to Receive",
             url: "https://youtu.be/Lp3e1C54jZM?si=S_DvlMjmYVTo4exo",
         },
     ];

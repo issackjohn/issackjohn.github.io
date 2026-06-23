@@ -68,37 +68,39 @@
         </div>
 
         <main id="main" class="wrap">
-            <!-- Hero -->
-            <header class="hero">
-                <div class="avatar" aria-hidden="true">IJ</div>
-                <h1>Issack John</h1>
-                <p class="role">Web Performance Engineer · Microsoft Edge</p>
-                <p class="tagline">Building a faster, simpler web.</p>
+            <header class="hero reveal">
+                <div class="hero-main">
+                    <p class="eyebrow">Web performance engineer · Microsoft Edge</p>
+                    <h1>Issack John</h1>
+                    <p class="lede">I work on browser performance, benchmark design, and the kind of small details that make the web feel a little lighter.</p>
 
-                <nav class="social" aria-label="Profiles and links">
-                    <a href="https://github.com/issackjohn" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path
-                                d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.16-.02-2.1-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.26-1.28-5.26-5.71 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.44-2.7 5.42-5.27 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.68.8.56A11.53 11.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5z"
-                            />
-                        </svg>
-                        GitHub
-                    </a>
-                    <a href="https://blogs.windows.com/msedgedev/" target="_blank" rel="noopener noreferrer"> Blog </a>
-                    <a href="https://browserbench.org/Speedometer3.0/" target="_blank" rel="noopener noreferrer"> Speedometer 3.0 </a>
-                </nav>
+                    <nav class="social" aria-label="Profiles and links">
+                        <a href="https://github.com/issackjohn" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.16-.02-2.1-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.26-1.28-5.26-5.71 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.44-2.7 5.42-5.27 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.68.8.56A11.53 11.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5z"
+                                />
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://blogs.windows.com/msedgedev/" target="_blank" rel="noopener noreferrer">Blog</a>
+                        <a href="https://browserbench.org/Speedometer3.0/" target="_blank" rel="noopener noreferrer">Speedometer 3.0</a>
+                    </nav>
+                </div>
+
+                <aside class="hero-aside">
+                    <div class="panel panel-soft">
+                        <p class="label">Currently</p>
+                        <p class="aside-copy">Profiling real workloads, cleaning up benchmark cases, and keeping the tooling practical.</p>
+                    </div>
+                </aside>
             </header>
 
-            <!-- About -->
-            <section class="reveal" aria-labelledby="about-title">
-                <h2 class="section-title" id="about-title">About</h2>
-                <div class="card prose">
-                    <p>
-                        I'm a software engineer at Microsoft Edge focused on web performance and browser benchmarking. I'm a core contributor to
-                        <a href="https://browserbench.org/Speedometer3.0/" target="_blank" rel="noopener noreferrer">Speedometer 3.0</a>, the cross-browser benchmark — built by Apple, Google, Microsoft, and Mozilla — that measures how browsers handle
-                        the demands of real-world web applications.
-                    </p>
-                    <p>My work centers on making the web measurably faster: profiling real workloads, designing representative benchmarks, and chasing simplicity in the process.</p>
+            <section class="reveal intro-grid" aria-label="About and current focus">
+                <article class="panel prose">
+                    <h2 class="section-title" id="about-title">About</h2>
+                    <p>I’m a software engineer at Microsoft Edge focused on browser performance and benchmark design. I spend a lot of time looking at the workloads that actually matter and making them easier to understand.</p>
+                    <p>My work centers on Speedometer 3.0 and on the more awkward, practical parts of performance work: measuring real behavior, removing noise, and keeping the tooling useful.</p>
                     <div class="tags" aria-label="Focus areas">
                         <span class="tag">Web Performance</span>
                         <span class="tag">Browser Benchmarking</span>
@@ -106,30 +108,45 @@
                         <span class="tag">JavaScript</span>
                         <span class="tag">DOM</span>
                     </div>
-                </div>
+                </article>
+
+                <article class="panel mini-list">
+                    <h2 class="section-title">Right now</h2>
+                    <ul>
+                        <li>Looking at real-world performance regressions.</li>
+                        <li>Refining benchmark cases until they feel honest.</li>
+                        <li>Keeping the workflow simple rather than flashy.</li>
+                    </ul>
+                </article>
             </section>
 
-            <!-- Projects -->
             <section class="reveal" aria-labelledby="projects-title">
-                <h2 class="section-title" id="projects-title">Projects &amp; Tools</h2>
+                <div class="section-heading">
+                    <h2 class="section-title" id="projects-title">Selected work</h2>
+                    <p class="section-copy">A few links and experiments I keep coming back to.</p>
+                </div>
                 <div class="stack" id="projectsList"></div>
             </section>
 
-            <!-- Blog -->
             <section class="reveal" aria-labelledby="writing-title">
-                <h2 class="section-title" id="writing-title">Writing</h2>
+                <div class="section-heading">
+                    <h2 class="section-title" id="writing-title">Writing</h2>
+                    <p class="section-copy">Notes and posts that explain the work in a bit more detail.</p>
+                </div>
                 <div class="stack" id="blogPostsList"></div>
             </section>
 
-            <!-- Videos -->
             <section class="reveal" aria-labelledby="watching-title">
-                <h2 class="section-title" id="watching-title">Recommended Watching</h2>
+                <div class="section-heading">
+                    <h2 class="section-title" id="watching-title">Recommended watching</h2>
+                    <p class="section-copy">A short list of things I still return to.</p>
+                </div>
                 <div class="stack" id="videosList"></div>
             </section>
         </main>
 
         <footer class="site-footer">
-            <div class="wrap">&copy; <span id="year">2025</span> Issack John · Built for speed, no frameworks.</div>
+            <div class="wrap">&copy; <span id="year">2025</span> Issack John · Built for speed, no framework fuss.</div>
         </footer>
 
         <script src="/assets/main.js" defer></script>
