@@ -562,7 +562,8 @@ main {
     margin: 2.6rem 0 1rem;
 }
 
-.prose ul {
+.prose ul,
+.prose ol {
     margin: 0 0 1.3rem;
     padding-left: 1.2rem;
 }

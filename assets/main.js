@@ -58,6 +58,12 @@
                 date: "Jul 24, 2026",
                 url: "/blog/who-actually-uses-js-call-stacks-in-crash-reports.html",
             },
+            {
+                title: "Fixing a Reporting API Race in Chromium",
+                summary: "A crash report could be dropped because its reporting source was expired before the report finished being added to the cache. Fixing the ordering re-enabled a long-disabled test suite.",
+                date: "Jul 24, 2026",
+                url: "/blog/fixing-a-reporting-api-race-in-chromium.html",
+            },
         ],
         projects: [
             {

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" data-theme-default>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fixing a Reporting API Race in Chromium — Issack John</title>
+
+        <meta name="description" content="A crash report could be dropped because its reporting source was expired before the report finished being added to the cache. Fixing the ordering re-enabled a long-disabled test suite." />
+        <meta name="author" content="Issack John" />
+        <link rel="canonical" href="https://issackjohn.github.io/blog/fixing-a-reporting-api-race-in-chromium.html" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://issackjohn.github.io/blog/fixing-a-reporting-api-race-in-chromium.html" />
+        <meta property="og:title" content="Fixing a Reporting API Race in Chromium" />
+        <meta property="og:description" content="An ordering bug in net/reporting where expiring a reporting source could overtake a queued report and cause it to be dropped." />
+        <meta name="twitter:card" content="summary" />
+
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+
+        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t === "light" || t === "dark") {
+                        document.documentElement.setAttribute("data-theme", t);
+                    }
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <div class="topbar">
+            <div class="wrap">
+                <a class="brand" href="/">Issack John</a>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <main id="main" class="wrap">
+            <a class="back-link" href="/blog/">← Writing</a>
+
+            <article class="article reveal">
+                <p class="article-meta">July 24, 2026 · Chromium · Networking · Reporting API</p>
+                <h1 class="article-title">Fixing a Reporting API Race in Chromium</h1>
+
+                <div class="prose">
+                    <p>Chromium's crash reporting browser tests were disabled, with comments above them pointing at two flakiness bugs, one for Mac and one for every other platform.</p>
+
+                    <p>I enabled them once in April 2024 by loosening an assertion. They were disabled again after that. The second attempt found an ordering bug in the Reporting API itself, which is the part worth writing down.</p>
+
+                    <h2>The First Attempt</h2>
+
+                    <p>
+                        These tests drive the crash reporting path end to end. A page opts in, the test makes the renderer unresponsive, the browser kills the process with <code>RESULT_CODE_HUNG</code>, and the test asserts on the resulting report:
+                        its URL, a <code>reason</code> of <code>"unresponsive"</code>, and for the opted-in case a JavaScript call stack.
+                    </p>
+
+                    <p>
+                        <a href="https://chromium-review.googlesource.com/c/chromium/src/+/5422052" target="_blank" rel="noopener noreferrer">CL 5422052</a> addressed a race between two of those steps. Collecting the call stack needs a round trip to
+                        the renderer, and the shutdown could finish before the response came back. The change accepted either the real stack or a placeholder:
+                    </p>
+
+                    <pre><code>// The process may be shutdown before we receive a response from the
+// renderer with the call stack.
+EXPECT_TRUE(call_stack->find("infiniteLoop") != std::string::npos ||
+            *call_stack == "Unable to collect JS call stack.");</code></pre>
+
+                    <p>That let the tests run, at the cost of allowing a passing run in which the call stack was never collected. The flakiness came back.</p>
+
+                    <h2>The Race</h2>
+
+                    <p>The second time, the problem turned out not to be in the test. A report could be dropped between being queued and being stored:</p>
+
+                    <ol>
+                        <li>A report is queued with a reporting source.</li>
+                        <li><code>SendReportsAndRemoveSource()</code> is called for that source, because the document that produced it is gone.</li>
+                        <li>No reports are found to deliver, because the report has not been added to the cache yet.</li>
+                        <li>The source is marked as expired.</li>
+                        <li>The queued report reaches <code>ReportingCacheImpl::AddReport()</code>, which drops it, because its source is now expired.</li>
+                    </ol>
+
+                    <p>The drop in step 5 is deliberate:</p>
+
+                    <pre><code>// Drop the report if its reporting source is already marked as expired.
+// This should only happen in testing as reporting source is only marked
+// expiring when the document that can generate report is gone.
+if (reporting_source.has_value() &&
+    expired_sources_.find(reporting_source.value()) !=
+        expired_sources_.end()) {
+  return;
+}</code></pre>
+
+                    <p>The reasoning in that comment holds as long as the two operations run in the order they were requested. They did not.</p>
+
+                    <h2>Why the Order Broke</h2>
+
+                    <p><code>ReportingServiceImpl</code> defers work while it is still loading. Anything routed through <code>DoOrBacklogTask()</code> either runs immediately or goes onto a backlog to be replayed once initialization completes:</p>
+
+                    <pre><code>void DoOrBacklogTask(base::OnceClosure task) {
+  if (shut_down_)
+    return;
+
+  FetchAllClientsFromStoreIfNecessary();
+
+  if (!initialized_) {
+    task_backlog_.push_back(std::move(task));
+    return;
+  }
+
+  std::move(task).Run();
+}</code></pre>
+
+                    <p>
+                        <code>QueueReport()</code> went through that path. <code>SendReportsAndRemoveSource()</code> did not, and instead called into the delivery agent and the cache directly. While the service was still loading, queueing a report
+                        was deferred and expiring its source was not, which produces exactly the inversion above.
+                    </p>
+
+                    <h2>The Fix</h2>
+
+                    <p>Route the expiration through the same queue:</p>
+
+                    <pre><code>void SendReportsAndRemoveSource(
+    const base::UnguessableToken& reporting_source) override {
+  DCHECK(!reporting_source.is_empty());
+  // Queue expiration of the reporting sources as backlog tasks if the
+  // reporting service is not yet initialized, so that reports and expirations
+  // remain well-ordered.
+  DoOrBacklogTask(
+      base::BindOnce(&ReportingServiceImpl::DoSendReportsAndRemoveSource,
+                     base::Unretained(this), reporting_source));
+}
+
+void DoSendReportsAndRemoveSource(
+    const base::UnguessableToken& reporting_source) {
+  context_->delivery_agent()->SendReportsForSource(reporting_source);
+  context_->cache()->SetExpiredSource(reporting_source);
+}</code></pre>
+
+                    <p>Both operations now pass through one ordered path, so a report queued before a source expiration is processed before it.</p>
+
+                    <p>
+                        The backlog is only used before the service finishes initializing, which only happens with a persistent reporting store, because that store loads asynchronously. The window is therefore narrow: a renderer has to become
+                        unresponsive while the store is still loading. It was reachable often enough to keep the test suite disabled.
+                    </p>
+
+                    <h2>Testing It</h2>
+
+                    <p>A unit test drives the sequence directly instead of trying to hit it by timing:</p>
+
+                    <pre><code>TEST_P(ReportingServiceTest,
+       ProcessReportsBeforeSourceExpirationWhenUninitialized) {
+  // Test only relevant when using a persistent store. The store requires async
+  // loading, creating the opportunity for backlog tasks to accumulate before
+  // initialization completes.
+  if (!store()) {
+    GTEST_SKIP();
+  }
+  // ... set up document reporting endpoints ...
+
+  // Add a "create report" task to the backlog (service not initialized yet).
+  service()->QueueReport(kUrl_, kReportingSource_, kNak_, kUserAgent_, kGroup_,
+                         kType_, base::Value::Dict(), 0,
+                         ReportingTargetType::kDeveloper);
+
+  // Now simulate the source being destroyed, adding a "mark source as
+  // expired" task to the backlog.
+  service()->SendReportsAndRemoveSource(*kReportingSource_);
+
+  // Verify neither operation has been processed yet.
+  // ...
+
+  // Now finish loading, which should process the backlog.
+  FinishLoading(true /* load_success */);
+
+  // 1. First the "create report" task was processed
+  context()->cache()->GetReports(&reports);
+  EXPECT_EQ(1u, reports.size());
+  // 2. Then the "mark source as expired" task was processed
+  EXPECT_TRUE(
+      context()->cache()->GetExpiredSources().contains(*kReportingSource_));
+}</code></pre>
+
+                    <p>
+                        The browser tests needed a separate change. They were marking the renderer unresponsive, calling <code>Shutdown(RESULT_CODE_HUNG)</code>, and continuing without waiting for the process to actually exit. That got replaced with
+                        a helper in <code>content/public/test/browser_test_utils.cc</code> that waits:
+                    </p>
+
+                    <pre><code>void SimulateUnresponsivePrimaryMainFrameAndWaitForExit(
+    WebContents* web_contents) {
+  RenderProcessHost* rph = web_contents->GetPrimaryMainFrame()->GetProcess();
+  RenderProcessHostWatcher watcher(
+      rph, RenderProcessHostWatcher::WATCH_FOR_PROCESS_EXIT);
+
+  SimulateUnresponsiveRenderer(
+      web_contents, web_contents->GetPrimaryMainFrame()->GetRenderWidgetHost());
+
+  EXPECT_TRUE(rph->Shutdown(RESULT_CODE_HUNG));
+  watcher.Wait();
+  EXPECT_FALSE(watcher.did_exit_normally());
+  EXPECT_TRUE(web_contents->IsCrashed());
+}</code></pre>
+
+                    <p>Four call sites in the reporting browser tests now share it, and the <code>DISABLED_</code> prefixes came off.</p>
+
+                    <h2>Conclusion</h2>
+
+                    <p>The fix landed on April 4, 2025, in a change of about 90 lines, two of which were the actual bug.</p>
+
+                    <p>
+                        One gap is left. The call stack assertion only runs when a call stack is present, so that part of the coverage is still weaker than the rest. It is tracked in
+                        <a href="https://issues.chromium.org/issues/407473725" target="_blank" rel="noopener noreferrer">crbug.com/407473725</a>.
+                    </p>
+
+                    <h2>References</h2>
+                    <ul>
+                        <li><a href="https://chromium-review.googlesource.com/c/chromium/src/+/6406078" target="_blank" rel="noopener noreferrer">Chromium CL 6406078</a>: Fix and enable crash report tests</li>
+                        <li><a href="https://chromium-review.googlesource.com/c/chromium/src/+/5422052" target="_blank" rel="noopener noreferrer">Chromium CL 5422052</a>: Enable call stacks in crash reports tests, the first attempt</li>
+                        <li><a href="https://issues.chromium.org/issues/40268201" target="_blank" rel="noopener noreferrer">crbug.com/40268201</a>: the tracking bug</li>
+                        <li><a href="https://chromium.googlesource.com/chromium/src/+/main/net/reporting/reporting_service.cc" target="_blank" rel="noopener noreferrer">net/reporting/reporting_service.cc</a>: current source</li>
+                    </ul>
+                </div>
+
+                <div class="article-foot">
+                    <a class="back-link" href="/blog/">← Back to writing</a>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+        </footer>
+
+        <script src="/assets/main.js" defer></script>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>
