@@ -85,8 +85,8 @@ EXPECT_TRUE(call_stack->find("infiniteLoop") != std::string::npos ||
                     <h2>The Race</h2>
 
                     <p>
-                        The second time, the problem turned out not to be in the test. A report could be dropped between being queued and being stored, which means a site that had opted into crash reports would not receive one for a hang that should
-                        have produced it. The sequence:
+                        I found it by adding logging along the path a report takes through the service, and watching one get dropped rather than delivered. The problem was not in the test. A report could be dropped between being queued and being
+                        stored, which means a site that had opted into crash reports would not receive one for a hang that should have produced it. The sequence:
                     </p>
 
                     <ol>
