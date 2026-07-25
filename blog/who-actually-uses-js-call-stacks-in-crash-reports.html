@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en" data-theme-default>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Who Actually Uses JS Call Stacks in Crash Reports? — Issack John</title>
+
+        <meta name="description" content="Fourteen months after Chrome shipped include-js-call-stacks-in-crash-reports, a look at who deployed it — using the Web Almanac and a scan of the Tranco top 5,000." />
+        <meta name="author" content="Issack John" />
+        <link rel="canonical" href="https://issackjohn.github.io/blog/who-actually-uses-js-call-stacks-in-crash-reports.html" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://issackjohn.github.io/blog/who-actually-uses-js-call-stacks-in-crash-reports.html" />
+        <meta property="og:title" content="Who Actually Uses JS Call Stacks in Crash Reports?" />
+        <meta property="og:description" content="Measuring real-world adoption of a Document Policy directive by reading response headers across the Tranco top 5,000." />
+        <meta name="twitter:card" content="summary" />
+
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+
+        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (t === "light" || t === "dark") {
+                        document.documentElement.setAttribute("data-theme", t);
+                    }
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <div class="topbar">
+            <div class="wrap">
+                <a class="brand" href="/">Issack John</a>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <main id="main" class="wrap">
+            <a class="back-link" href="/blog/">← Writing</a>
+
+            <article class="article reveal">
+                <p class="article-meta">July 24, 2026 · Crash Reporting · Document Policy · Measurement</p>
+                <h1 class="article-title">Who Actually Uses JS Call Stacks in Crash Reports?</h1>
+
+                <div class="prose">
+                    <p>
+                        I worked on <a href="https://chromestatus.com/feature/4731248572628992" target="_blank" rel="noopener noreferrer">call stacks in crash reports from unresponsive web pages</a>, which lets a site opt into receiving the
+                        JavaScript call stack that was running when its page hung. It went to dev trial in Chrome 125, ran an origin trial through 127–132, and shipped on by default in Chrome 137, about fourteen months ago.
+                    </p>
+
+                    <p>I wanted to know whether anyone had turned it on. For this feature the question is answerable from outside the browser, because the opt-in is a response header. Anyone can go and look.</p>
+
+                    <h2>The Opt-In</h2>
+
+                    <p>A page opts in with a <a href="https://wicg.github.io/document-policy/" target="_blank" rel="noopener noreferrer">Document Policy</a> directive and a reporting endpoint for the reports to land on:</p>
+
+                    <pre><code>Document-Policy: include-js-call-stacks-in-crash-reports
+Reporting-Endpoints: default="https://example.com/reports"</code></pre>
+
+                    <p>
+                        When the renderer decides a page is unresponsive, the crash report it generates can carry a <code>stack</code> field alongside the usual <code>reason: "unresponsive"</code>. The
+                        <a href="https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/CrashReporting/AddStackToCrashReports.md" target="_blank" rel="noopener noreferrer">explainer</a>
+                        and the <a href="https://wicg.github.io/crash-reporting/" target="_blank" rel="noopener noreferrer">Crash Reporting spec</a> cover the mechanics.
+                    </p>
+
+                    <p>Because the opt-in is a header rather than a script call, it is visible to any HTTP client. A JavaScript API can only be counted with a use counter inside the browser. A header can be counted by anyone.</p>
+
+                    <h2>What the Web Almanac Shows</h2>
+
+                    <p>
+                        The 2025 <a href="https://almanac.httparchive.org/en/2025/security" target="_blank" rel="noopener noreferrer">Web Almanac</a> security chapter added a section on Document Policy, based on the HTTP Archive crawl. Its breakdown
+                        of the most common header values:
+                    </p>
+
+                    <figure class="chart">
+                        <div class="table-scroll">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Document-Policy value</th>
+                                        <th class="numeric">Desktop</th>
+                                        <th class="numeric">Mobile</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>include-js-call-stacks-in-crash-reports</code></td>
+                                        <td class="numeric">68.48%<span class="bar" style="--pct: 68.48%" aria-hidden="true"></span></td>
+                                        <td class="numeric">71.99%<span class="bar" style="--pct: 71.99%" aria-hidden="true"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>js-profiling</code></td>
+                                        <td class="numeric">12.66%<span class="bar" style="--pct: 12.66%" aria-hidden="true"></span></td>
+                                        <td class="numeric">15.24%<span class="bar" style="--pct: 15.24%" aria-hidden="true"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>js-profiling; include-js-call-stacks-in-crash-reports</code></td>
+                                        <td class="numeric">17.41%<span class="bar" style="--pct: 17.41%" aria-hidden="true"></span></td>
+                                        <td class="numeric">11.94%<span class="bar" style="--pct: 11.94%" aria-hidden="true"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>force-load-at-top</code></td>
+                                        <td class="numeric">1.25%<span class="bar" style="--pct: 1.25%" aria-hidden="true"></span></td>
+                                        <td class="numeric">0.65%<span class="bar" style="--pct: 0.65%" aria-hidden="true"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>no-font-display-late-swap</code></td>
+                                        <td class="numeric">0.06%<span class="bar" style="--pct: 0.06%" aria-hidden="true"></span></td>
+                                        <td class="numeric">0.05%<span class="bar" style="--pct: 0.05%" aria-hidden="true"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <figcaption>Most common Document Policy header values — Web Almanac 2025, Security. Bars are proportional to the desktop and mobile shares in each column.</figcaption>
+                    </figure>
+
+                    <p>
+                        The directive is the most common Document Policy value on the web, appearing in roughly 86% of policies on desktop and 84% on mobile once the combined <code>js-profiling</code> value is counted. That sounds better than it is.
+                        The Almanac found Document Policy on about 24,000 desktop and 29,500 mobile pages, which is <strong>0.10% of all pages crawled</strong>. The directive dominates a category that is itself rare.
+                    </p>
+
+                    <p>The Almanac's own conclusion is measured: "We expect to see a rise in adoption of Document Policy headers going forward, although future adoption may not happen quickly."</p>
+
+                    <h2>Finding Names</h2>
+
+                    <p>HTTP Archive publishes aggregates rather than site lists, and the percentages above are page-weighted, so a single origin with many crawled pages can dominate them. I wanted specific names.</p>
+
+                    <p>
+                        The results below come from checking the <code>Document-Policy</code> response header across the <a href="https://tranco-list.eu/" target="_blank" rel="noopener noreferrer">Tranco</a> top 5,000 domains on July 24, 2026, plus a
+                        short list of application subdomains and public document URLs that apex-only ranking data misses. Response headers only.
+                    </p>
+
+                    <h2>Results</h2>
+
+                    <p>
+                        Of the top 5,000 domains, 3,682 answered. <strong>53 sent a <code>Document-Policy</code> header, and 32 of those included <code>include-js-call-stacks-in-crash-reports</code>.</strong> Grouped by who runs them:
+                    </p>
+
+                    <figure>
+                        <div class="table-scroll">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Domains observed sending the directive</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Meta</td>
+                                        <td>facebook.com, instagram.com, whatsapp.com, whatsapp.net, wa.me, threads.com, threads.net, meta.com, fb.com, fb.me, fb.watch, m.me, oculus.com, fbcdn.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Google</td>
+                                        <td>youtube.com, youtu.be, gemini.google.com, docs.google.com (document and spreadsheet URLs)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Microsoft</td>
+                                        <td>
+                                            outlook.com, live.com, hotmail.com, outlook.live.com, outlook.office.com, outlook.office365.com, outlook.cloud.microsoft, teams.microsoft.com, teams.cloud.microsoft, skype.com, web.skype.com,
+                                            to-do.office.com
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>VK</td>
+                                        <td>vk.com, vk.ru, vkontakte.ru, vkvideo.ru, userapi.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ByteDance</td>
+                                        <td>douyin.com, amemv.com, doubao.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Others</td>
+                                        <td>temu.com, clickup.com, usatoday.com, thestreet.com, parade.com</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <figcaption>Domains observed sending <code>include-js-call-stacks-in-crash-reports</code> — Tranco top 5,000 plus targeted app subdomains, July 24, 2026.</figcaption>
+                    </figure>
+
+                    <p>Google sends it on YouTube, Gemini and Workspace, where it arrives on document URLs with a per-document <code>Reporting-Endpoints</code> alongside it.</p>
+
+                    <p>The other 21 domains sent a Document Policy header without the crash-stack directive, mostly <code>js-profiling</code> from sites running Sentry's browser profiling. Those are not counted above.</p>
+
+                    <h2>Limitations</h2>
+
+                    <p>A header scan is easy to over-read, so the limits are worth stating.</p>
+
+                    <ul>
+                        <li>
+                            This is a lower bound. Apex domains miss application subdomains, and unauthenticated requests miss anything behind a sign-in. <code>google.com</code> does not send it but <code>youtube.com</code> does,
+                            <code>microsoft.com</code> does not but <code>teams.microsoft.com</code> does, and <code>docs.google.com/</code> does not but an actual Google Doc does. A "no" from an origin that redirects to a login screen means unknown
+                            rather than absent, and this feature is aimed at exactly the kind of long-lived application that sits behind a sign-in. The real number is well above 32.
+                        </li>
+                        <li>Page-weighted and domain-weighted counts are different measurements. The Almanac's 68% and my 32 of 53 are not the same quantity and should not be compared directly.</li>
+                        <li>
+                            A header is an opt-in, not a working pipeline. A site also needs <code>Reporting-Endpoints</code> configured, an actual unresponsiveness event, and something on the backend that reads the <code>stack</code> field. The
+                            header shows intent, not use.
+                        </li>
+                        <li>
+                            Attribution is by domain, and a domain count is not a measure of scale. Several operators here own many aliases that all resolve to the same product. "Meta properties send this header" is a statement about bytes on the
+                            wire. What any of these companies do with the reports, I do not know.
+                        </li>
+                        <li>This is a snapshot from one day, July 24, 2026. Headers change.</li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+
+                    <p>Because the feature is enabled by a response header rather than a script call, adoption can be measured by reading headers that sites already send.</p>
+
+                    <p>That is a practical argument for header-based opt-ins. They can be inspected and audited by people outside the browser team.</p>
+
+                    <p>Disclosure: I worked on this feature, and nothing here reflects the views of my employer.</p>
+
+                    <h2>References</h2>
+                    <ul>
+                        <li><a href="https://almanac.httparchive.org/en/2025/security" target="_blank" rel="noopener noreferrer">Web Almanac 2025 — Security</a>: Document Policy section, "Most common document policy header values"</li>
+                        <li><a href="https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/CrashReporting/AddStackToCrashReports.md" target="_blank" rel="noopener noreferrer">Explainer</a>: Add JS call stacks to crash reports</li>
+                        <li><a href="https://wicg.github.io/crash-reporting/" target="_blank" rel="noopener noreferrer">Crash Reporting</a>: WICG specification</li>
+                        <li><a href="https://wicg.github.io/document-policy/" target="_blank" rel="noopener noreferrer">Document Policy</a>: WICG specification</li>
+                        <li><a href="https://chromestatus.com/feature/4731248572628992" target="_blank" rel="noopener noreferrer">Chrome Platform Status</a>: dev trial 125, origin trial 127–132, shipped 137</li>
+                        <li><a href="https://tranco-list.eu/" target="_blank" rel="noopener noreferrer">Tranco</a>: the domain ranking used for the scan</li>
+                    </ul>
+                </div>
+
+                <div class="article-foot">
+                    <a class="back-link" href="/blog/">← Back to writing</a>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+        </footer>
+
+        <script src="/assets/main.js" defer></script>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>

@@ -33,6 +33,7 @@
         renderContent();
         setupEmail();
         setupReveal();
+        setupCharts();
     });
 
     // --- Dynamic content ---------------------------------------------------
@@ -50,6 +51,12 @@
                 summary: "How a standard C++ string move/copy chain caused Intl.DateTimeFormat to fail on Windows x86 official builds, and how replacing it with const char* made it faster and safer.",
                 date: "Feb 12, 2026",
                 url: "/blog/fixing-intl-datetimeformat-corruption-in-v8.html",
+            },
+            {
+                title: "Who Actually Uses JS Call Stacks in Crash Reports?",
+                summary: "Fourteen months after Chrome shipped include-js-call-stacks-in-crash-reports, a scan of the Tranco top 5,000 to find out who deployed it — and why a header-based opt-in is its own telemetry.",
+                date: "Jul 24, 2026",
+                url: "/blog/who-actually-uses-js-call-stacks-in-crash-reports.html",
             },
         ],
         projects: [
@@ -209,6 +216,34 @@
         );
         items.forEach(function (i) {
             io.observe(i);
+        });
+    }
+
+    // Fill proportional bars once a chart scrolls into view
+    function setupCharts() {
+        const charts = document.querySelectorAll(".chart");
+        if (charts.length === 0) {
+            return;
+        }
+        if (!("IntersectionObserver" in window)) {
+            charts.forEach(function (c) {
+                c.classList.add("is-visible");
+            });
+            return;
+        }
+        const io = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        io.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.25 }
+        );
+        charts.forEach(function (c) {
+            io.observe(c);
         });
     }
 })();

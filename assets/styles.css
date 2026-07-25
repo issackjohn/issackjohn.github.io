@@ -635,6 +635,86 @@ main {
     color: var(--text-faint);
 }
 
+.prose .table-scroll {
+    margin: 1.8rem 0;
+    overflow-x: auto;
+}
+
+.prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+    padding: 0.55rem 0.9rem 0.55rem 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+}
+
+.prose thead th {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    border-bottom: 1px solid var(--frame);
+}
+
+.prose td.numeric,
+.prose th.numeric {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* Proportional bars inside numeric table cells */
+
+.prose .chart td.numeric {
+    position: relative;
+    padding-bottom: 1.1rem;
+}
+
+.prose .chart th.numeric,
+.prose .chart td.numeric {
+    width: 5.5rem;
+}
+
+.prose .bar {
+    position: absolute;
+    left: 0;
+    bottom: 0.5rem;
+    height: 2px;
+    width: 0;
+    min-width: 1px;
+    background: var(--accent);
+    opacity: 0.5;
+    transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.prose .chart.is-visible .bar {
+    width: var(--pct);
+}
+
+.prose .chart tbody tr:nth-child(2) .bar {
+    transition-delay: 0.08s;
+}
+
+.prose .chart tbody tr:nth-child(3) .bar {
+    transition-delay: 0.16s;
+}
+
+.prose .chart tbody tr:nth-child(4) .bar {
+    transition-delay: 0.24s;
+}
+
+.prose .chart tbody tr:nth-child(5) .bar {
+    transition-delay: 0.32s;
+}
+
 .back-link {
     display: inline-block;
     font-family: var(--mono);
@@ -696,5 +776,8 @@ main {
     .reveal {
         opacity: 1;
         transform: none;
+    }
+    .prose .bar {
+        width: var(--pct);
     }
 }
