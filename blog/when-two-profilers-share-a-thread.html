@@ -18,19 +18,19 @@
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="stylesheet" href="/assets/styles.css" />
 
-        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <!-- Runs before first paint: applies the stored theme and marks JS as available. -->
         <script>
             (function () {
+                var root = document.documentElement;
+                root.classList.add("js");
                 try {
                     var t = localStorage.getItem("theme");
-                    if (t === "light" || t === "dark") {
-                        document.documentElement.setAttribute("data-theme", t);
-                    }
+                    if (t === "light" || t === "dark") root.setAttribute("data-theme", t);
                 } catch (e) {}
             })();
         </script>
     </head>
-    <body>
+    <body class="page-article">
         <a class="skip-link" href="#main">Skip to content</a>
 
         <div class="topbar">
@@ -84,7 +84,7 @@
                         introduced a new <code>CpuProfileSource</code> enum class to tag what component triggered the profile stream:
                     </p>
 
-                    <pre><code>namespace v8 {
+                    <pre><code class="language-cpp">namespace v8 {
 /**
  * Identifies which component initiated CPU profiling for proper attribution.
  */
@@ -113,7 +113,7 @@ enum class CpuProfileSource : uint8_t {
 
                     <p>As a result, V8 traces for these API runs started emitting trace structures enriched with the source attribute:</p>
 
-                    <pre><code>{
+                    <pre><code class="language-json">{
   "name": "Profile",
   "cat": "disabled-by-default-v8.cpu_profiler",
   "ph": "P",
@@ -130,7 +130,7 @@ enum class CpuProfileSource : uint8_t {
                         <code>front_end/models/trace/types/TraceEvents.ts</code> to ingest the new optional metadata field:
                     </p>
 
-                    <pre><code>export type ProfileSource = 'Inspector' | 'SelfProfiling' | 'Internal';
+                    <pre><code class="language-ts">export type ProfileSource = 'Inspector' | 'SelfProfiling' | 'Internal';
 export const VALID_PROFILE_SOURCES: readonly ProfileSource[] = ['Inspector', 'SelfProfiling', 'Internal'] as const;</code></pre>
 
                     <p>
@@ -138,7 +138,7 @@ export const VALID_PROFILE_SOURCES: readonly ProfileSource[] = ['Inspector', 'Se
                         select exactly one stream per thread based on the profiling mode:
                     </p>
 
-                    <pre><code>/**
+                    <pre><code class="language-ts">/**
  * Profile source selection priority when multiple profiles exist for the same thread.
  *
  * Profile sources and their typical scenarios:
@@ -164,7 +164,7 @@ const PROFILE_SOURCES_BY_PRIORITY = {
                         Now, when <code>SamplesHandler</code> processes a trace, it groups profile candidates by thread ID, determines the active profile mode, matches candidates against the priority list, and selects the single most relevant stream:
                     </p>
 
-                    <pre><code>const priorityList = parseOptions.isCPUProfile 
+                    <pre><code class="language-ts">const priorityList = parseOptions.isCPUProfile 
   ? PROFILE_SOURCES_BY_PRIORITY.cpuProfile 
   : PROFILE_SOURCES_BY_PRIORITY.performanceTrace;
 
@@ -208,8 +208,5 @@ for (const source of priorityList) {
         </footer>
 
         <script src="/assets/main.js" defer></script>
-        <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-        </script>
     </body>
 </html>

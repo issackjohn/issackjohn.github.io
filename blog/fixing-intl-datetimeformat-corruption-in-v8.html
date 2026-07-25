@@ -18,19 +18,19 @@
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="stylesheet" href="/assets/styles.css" />
 
-        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <!-- Runs before first paint: applies the stored theme and marks JS as available. -->
         <script>
             (function () {
+                var root = document.documentElement;
+                root.classList.add("js");
                 try {
                     var t = localStorage.getItem("theme");
-                    if (t === "light" || t === "dark") {
-                        document.documentElement.setAttribute("data-theme", t);
-                    }
+                    if (t === "light" || t === "dark") root.setAttribute("data-theme", t);
                 } catch (e) {}
             })();
         </script>
     </head>
-    <body>
+    <body class="page-article">
         <a class="skip-link" href="#main">Skip to content</a>
 
         <div class="topbar">
@@ -62,7 +62,7 @@
                         empty strings.
                     </p>
 
-                    <pre><code>const formatter = new Intl.DateTimeFormat('en-US', {
+                    <pre><code class="language-js">const formatter = new Intl.DateTimeFormat('en-US', {
   hour: '2-digit',
   minute: '2-digit',
   second: '2-digit'
@@ -108,7 +108,7 @@ console.log(formatter.format(new Date()));</code></pre>
 
                     <p>The solution was simple and elegant: refactor the <code>PatternMap</code> structure to store lightweight <code>const char*</code> pointers instead of <code>std::string</code>.</p>
 
-                    <pre><code>// Before
+                    <pre><code class="language-cpp">// Before
 struct PatternMap {
   std::string key;
   std::string pattern;
@@ -149,8 +149,5 @@ struct PatternMap {
         </footer>
 
         <script src="/assets/main.js" defer></script>
-        <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-        </script>
     </body>
 </html>

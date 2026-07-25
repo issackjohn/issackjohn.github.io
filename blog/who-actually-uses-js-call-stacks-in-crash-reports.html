@@ -19,19 +19,19 @@
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="stylesheet" href="/assets/styles.css" />
 
-        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <!-- Runs before first paint: applies the stored theme and marks JS as available. -->
         <script>
             (function () {
+                var root = document.documentElement;
+                root.classList.add("js");
                 try {
                     var t = localStorage.getItem("theme");
-                    if (t === "light" || t === "dark") {
-                        document.documentElement.setAttribute("data-theme", t);
-                    }
+                    if (t === "light" || t === "dark") root.setAttribute("data-theme", t);
                 } catch (e) {}
             })();
         </script>
     </head>
-    <body>
+    <body class="page-article">
         <a class="skip-link" href="#main">Skip to content</a>
 
         <div class="topbar">
@@ -68,7 +68,7 @@
 
                     <p>A page opts in with a <a href="https://wicg.github.io/document-policy/" target="_blank" rel="noopener noreferrer">Document Policy</a> directive and a reporting endpoint for the reports to land on:</p>
 
-                    <pre><code>Document-Policy: include-js-call-stacks-in-crash-reports
+                    <pre><code class="language-http">Document-Policy: include-js-call-stacks-in-crash-reports
 Reporting-Endpoints: default="https://example.com/reports"</code></pre>
 
                     <p>
@@ -249,8 +249,5 @@ Reporting-Endpoints: default="https://example.com/reports"</code></pre>
         </footer>
 
         <script src="/assets/main.js" defer></script>
-        <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-        </script>
     </body>
 </html>

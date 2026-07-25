@@ -18,19 +18,19 @@
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="stylesheet" href="/assets/styles.css" />
 
-        <!-- Avoid theme flash: apply stored preference before paint. -->
+        <!-- Runs before first paint: applies the stored theme and marks JS as available. -->
         <script>
             (function () {
+                var root = document.documentElement;
+                root.classList.add("js");
                 try {
                     var t = localStorage.getItem("theme");
-                    if (t === "light" || t === "dark") {
-                        document.documentElement.setAttribute("data-theme", t);
-                    }
+                    if (t === "light" || t === "dark") root.setAttribute("data-theme", t);
                 } catch (e) {}
             })();
         </script>
     </head>
-    <body>
+    <body class="page-article">
         <a class="skip-link" href="#main">Skip to content</a>
 
         <div class="topbar">
@@ -72,7 +72,7 @@
                         the renderer, and the shutdown could finish before the response came back. The change accepted either the real stack or a placeholder:
                     </p>
 
-                    <pre><code>// The process may be shutdown before we receive a response from the
+                    <pre><code class="language-cpp">// The process may be shutdown before we receive a response from the
 // renderer with the call stack.
 EXPECT_TRUE(call_stack->find("infiniteLoop") != std::string::npos ||
             *call_stack == "Unable to collect JS call stack.");</code></pre>
@@ -99,7 +99,7 @@ EXPECT_TRUE(call_stack->find("infiniteLoop") != std::string::npos ||
 
                     <p>The drop in step 5 is deliberate:</p>
 
-                    <pre><code>// Drop the report if its reporting source is already marked as expired.
+                    <pre><code class="language-cpp">// Drop the report if its reporting source is already marked as expired.
 // This should only happen in testing as reporting source is only marked
 // expiring when the document that can generate report is gone.
 if (reporting_source.has_value() &&
@@ -114,7 +114,7 @@ if (reporting_source.has_value() &&
 
                     <p><code>ReportingServiceImpl</code> defers work while it is still loading. Anything routed through <code>DoOrBacklogTask()</code> either runs immediately or goes onto a backlog to be replayed once initialization completes:</p>
 
-                    <pre><code>void DoOrBacklogTask(base::OnceClosure task) {
+                    <pre><code class="language-cpp">void DoOrBacklogTask(base::OnceClosure task) {
   if (shut_down_)
     return;
 
@@ -135,7 +135,7 @@ if (reporting_source.has_value() &&
 
                     <p>Routing the expiration through the same queue is the whole fix:</p>
 
-                    <pre><code>void SendReportsAndRemoveSource(
+                    <pre><code class="language-cpp">void SendReportsAndRemoveSource(
     const base::UnguessableToken& reporting_source) override {
   DCHECK(!reporting_source.is_empty());
   // Queue expiration of the reporting sources as backlog tasks if the
@@ -163,7 +163,7 @@ void DoSendReportsAndRemoveSource(
 
                     <p>A unit test drives the sequence directly instead of trying to hit it by timing:</p>
 
-                    <pre><code>TEST_P(ReportingServiceTest,
+                    <pre><code class="language-cpp">TEST_P(ReportingServiceTest,
        ProcessReportsBeforeSourceExpirationWhenUninitialized) {
   // Test only relevant when using a persistent store. The store requires async
   // loading, creating the opportunity for backlog tasks to accumulate before
@@ -201,7 +201,7 @@ void DoSendReportsAndRemoveSource(
                         a helper in <code>content/public/test/browser_test_utils.cc</code> that waits:
                     </p>
 
-                    <pre><code>void SimulateUnresponsivePrimaryMainFrameAndWaitForExit(
+                    <pre><code class="language-cpp">void SimulateUnresponsivePrimaryMainFrameAndWaitForExit(
     WebContents* web_contents) {
   RenderProcessHost* rph = web_contents->GetPrimaryMainFrame()->GetProcess();
   RenderProcessHostWatcher watcher(
@@ -248,8 +248,5 @@ void DoSendReportsAndRemoveSource(
         </footer>
 
         <script src="/assets/main.js" defer></script>
-        <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-        </script>
     </body>
 </html>

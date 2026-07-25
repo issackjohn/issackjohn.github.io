@@ -8,6 +8,7 @@
     color-scheme: light dark;
 
     --max-width: 50rem;
+    --prose-width: 40rem;
 
     --bg: #fbfaf8;
     --text: #15140f;
@@ -105,6 +106,12 @@ a:hover {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 1.5rem;
+}
+
+/* Article pages give the shell extra room so code and tables can breathe
+   without stretching the reading measure. */
+.page-article {
+    --max-width: 56rem;
 }
 
 main {
@@ -250,26 +257,6 @@ main {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text-faint);
-}
-
-.signal {
-    padding-top: 0.9rem;
-    border-top: 1px solid var(--line);
-}
-
-.signal-label {
-    display: block;
-    margin-bottom: 0.25rem;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-}
-
-.signal-value {
-    font-size: 0.95rem;
-    color: var(--text-muted);
 }
 
 .links {
@@ -544,9 +531,19 @@ main {
 }
 
 .prose {
-    max-width: 38rem;
     font-size: 1.06rem;
     line-height: 1.7;
+}
+
+/* The reading measure is applied to running text only. Code, tables and
+   figures use the full page width, which long C++ and TS lines need. */
+.prose > p,
+.prose > h2,
+.prose > h3,
+.prose > ul,
+.prose > ol,
+.prose > blockquote {
+    max-width: var(--prose-width);
 }
 
 .prose p {
@@ -672,7 +669,8 @@ main {
     white-space: nowrap;
 }
 
-/* Proportional bars inside numeric table cells */
+/* Proportional bars inside numeric table cells. They render at full width by
+   default and only animate from zero when scripting is available. */
 
 .prose .chart td.numeric {
     position: relative;
@@ -689,14 +687,18 @@ main {
     left: 0;
     bottom: 0.5rem;
     height: 2px;
-    width: 0;
+    width: var(--pct);
     min-width: 1px;
     background: var(--accent);
     opacity: 0.5;
     transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.prose .chart.is-visible .bar {
+.js .prose .bar {
+    width: 0;
+}
+
+.js .prose .chart.is-visible .bar {
     width: var(--pct);
 }
 
@@ -734,9 +736,11 @@ main {
     border-top: 1px solid var(--line);
 }
 
-/* Reveal-on-scroll animation ---------------------------------------------- */
+/* Reveal-on-scroll animation -----------------------------------------------
+   Scoped to `.js` (set on <html> by the inline head script) so that content
+   stays visible if scripting is unavailable or main.js fails to load. */
 
-.reveal {
+.js .reveal {
     opacity: 0;
     transform: translateY(12px);
     transition:
@@ -744,9 +748,41 @@ main {
         transform 0.5s ease;
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
     opacity: 1;
     transform: none;
+}
+
+/* Not found ---------------------------------------------------------------- */
+
+.notfound {
+    display: grid;
+    place-content: center;
+    gap: 1rem;
+    min-height: 70vh;
+    text-align: center;
+}
+
+.notfound-code {
+    font-family: var(--mono);
+    font-size: 3rem;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+}
+
+.notfound h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    line-height: 1.1;
+}
+
+.notfound p {
+    margin: 0;
+    color: var(--text-muted);
 }
 
 /* Responsive -------------------------------------------------------------- */
@@ -774,11 +810,11 @@ main {
         animation-duration: 0.001ms !important;
         transition-duration: 0.001ms !important;
     }
-    .reveal {
+    .js .reveal {
         opacity: 1;
         transform: none;
     }
-    .prose .bar {
+    .js .prose .bar {
         width: var(--pct);
     }
 }
