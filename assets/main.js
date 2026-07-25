@@ -249,6 +249,121 @@
         });
     }
 
+    // --- Syntax highlighting -------------------------------------------------
+    //
+    // A deliberately small tokenizer rather than a highlighting library: one
+    // regex pass per code block splitting it into comments, strings, numbers
+    // and identifiers, then classifying identifiers by keyword list and shape.
+    // That is enough structure for the C++, JS/TS, JSON and header snippets
+    // this site publishes, and it keeps the page dependency-free.
+
+    const JS_KEYWORDS =
+        "as async await break case catch class const continue debugger default delete do else export extends false finally for from function get if import in instanceof let new null of return set static super switch this throw true try typeof undefined var void while yield";
+
+    const GRAMMARS = {
+        cpp: {
+            keywords:
+                "alignas alignof auto bool break case catch char class concept const const_cast constexpr continue decltype default delete do double dynamic_cast else enum explicit export extern false final float for friend goto if inline int long mutable namespace new noexcept nullptr operator override private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typename union unsigned using virtual void volatile while size_t int8_t int16_t int32_t int64_t uint8_t uint16_t uint32_t uint64_t",
+            pattern:
+                "(?<comment>//[^\\n]*|/\\*[\\s\\S]*?\\*/)|(?<preproc>^[ \\t]*#[A-Za-z]+)|(?<string>\"(?:\\\\.|[^\"\\\\\\n])*\"?|'(?:\\\\.|[^'\\\\\\n])*'?)|(?<number>\\b0[xX][0-9a-fA-F]+\\b|\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?\\b)|(?<ident>[A-Za-z_][A-Za-z0-9_]*)",
+        },
+        js: {
+            keywords: JS_KEYWORDS,
+            pattern:
+                "(?<comment>//[^\\n]*|/\\*[\\s\\S]*?\\*/)|(?<string>\"(?:\\\\.|[^\"\\\\\\n])*\"?|'(?:\\\\.|[^'\\\\\\n])*'?|`(?:\\\\.|[^`\\\\])*`?)|(?<number>\\b0[xX][0-9a-fA-F]+\\b|\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?\\b)|(?<ident>[A-Za-z_$][A-Za-z0-9_$]*)",
+        },
+        json: {
+            keywords: "true false null",
+            pattern: '(?<attr>"(?:\\\\.|[^"\\\\\\n])*"(?=\\s*:))|(?<string>"(?:\\\\.|[^"\\\\\\n])*"?)|(?<number>-?\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?\\b)|(?<ident>[A-Za-z]+)',
+        },
+        http: {
+            keywords: "",
+            pattern: '(?<attr>^[A-Za-z][A-Za-z0-9-]*(?=:))|(?<string>"[^"\\n]*")',
+        },
+    };
+
+    GRAMMARS.ts = {
+        keywords: JS_KEYWORDS + " abstract any boolean declare enum implements infer interface is keyof namespace never number private protected public readonly satisfies string symbol type unknown",
+        pattern: GRAMMARS.js.pattern,
+    };
+
+    const LANG_ALIASES = {
+        c: "cpp",
+        cc: "cpp",
+        "c++": "cpp",
+        h: "cpp",
+        javascript: "js",
+        typescript: "ts",
+        jsonc: "json",
+        headers: "http",
+    };
+
+    const keywordSets = {};
+
+    function keywordsFor(lang) {
+        if (!keywordSets[lang]) {
+            keywordSets[lang] = new Set(GRAMMARS[lang].keywords.split(" ").filter(Boolean));
+        }
+        return keywordSets[lang];
+    }
+
+    // Identifiers carry no marker of their own, so classify them by shape:
+    // keyword list first, then SCREAMING_CASE as a macro, a following "(" as a
+    // call, and a leading capital as a type.
+    function classifyIdent(word, text, endIndex, lang) {
+        if (keywordsFor(lang).has(word)) return "keyword";
+        if (word.length > 1 && /^[A-Z][A-Z0-9_]*$/.test(word)) return "macro";
+        if (/^\s*\(/.test(text.slice(endIndex))) return "func";
+        if (/^[A-Z]/.test(word)) return "type";
+        return null;
+    }
+
+    function tokenClass(match, text, endIndex, lang) {
+        const groups = match.groups || {};
+        if (groups.comment) return "comment";
+        if (groups.preproc) return "preproc";
+        if (groups.attr) return "attr";
+        if (groups.string) return "string";
+        if (groups.number) return "number";
+        if (groups.ident) return classifyIdent(groups.ident, text, endIndex, lang);
+        return null;
+    }
+
+    function highlight(text, lang) {
+        const frag = document.createDocumentFragment();
+        const re = new RegExp(GRAMMARS[lang].pattern, "gm");
+        let last = 0;
+        let match;
+
+        while ((match = re.exec(text)) !== null) {
+            if (match[0] === "") {
+                re.lastIndex++;
+                continue;
+            }
+            if (match.index > last) {
+                frag.appendChild(document.createTextNode(text.slice(last, match.index)));
+            }
+            const cls = tokenClass(match, text, re.lastIndex, lang);
+            frag.appendChild(cls ? el("span", "tok-" + cls, match[0]) : document.createTextNode(match[0]));
+            last = re.lastIndex;
+        }
+
+        if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+        return frag;
+    }
+
+    // Highlighting is applied after load, so the markup stays readable plain
+    // text and the code is still legible if this script never runs.
+    function setupHighlighting() {
+        document.querySelectorAll("pre > code[class*='language-']").forEach(function (code) {
+            const declared = (code.className.match(/language-([\w+#-]+)/) || [])[1];
+            if (!declared) return;
+            const lang = LANG_ALIASES[declared.toLowerCase()] || declared.toLowerCase();
+            if (!GRAMMARS[lang]) return;
+            code.replaceChildren(highlight(code.textContent, lang));
+        });
+    }
+
     // --- Footer --------------------------------------------------------------
 
     function setupYear() {
@@ -261,6 +376,7 @@
         renderContent();
         setupEmail();
         setupYear();
+        setupHighlighting();
         revealOnScroll(".reveal", 0.08);
         revealOnScroll(".chart", 0.25);
     });
