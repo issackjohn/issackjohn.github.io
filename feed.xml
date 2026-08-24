@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Issack John</title>
+        <link>https://issackjohn.github.io/</link>
+        <description>Notes on browser performance, benchmark design, and engineering automations by Issack John.</description>
+        <language>en-us</language>
+        <atom:link href="https://issackjohn.github.io/feed.xml" rel="self" type="application/rss+xml" />
+        <item>
+            <title>I Got ChatGPT to Monitor the Visa Bulletin for Me</title>
+            <link>https://issackjohn.github.io/automations/monitoring-the-visa-bulletin-with-chatgpt.html</link>
+            <guid>https://issackjohn.github.io/automations/monitoring-the-visa-bulletin-with-chatgpt.html</guid>
+            <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
+            <description>A scheduled prompt routine to track U.S. State Department Visa Bulletin movements and priority dates automatically without manual monthly checking.</description>
+        </item>
+        <item>
+            <title>Who Actually Uses JS Call Stacks in Crash Reports?</title>
+            <link>https://issackjohn.github.io/blog/who-actually-uses-js-call-stacks-in-crash-reports.html</link>
+            <guid>https://issackjohn.github.io/blog/who-actually-uses-js-call-stacks-in-crash-reports.html</guid>
+            <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+            <description>Fourteen months after Chrome shipped include-js-call-stacks-in-crash-reports, a scan of the Tranco top 5,000 to find out who deployed it — and why a header-based opt-in is its own telemetry.</description>
+        </item>
+        <item>
+            <title>Fixing a Reporting API Race in Chromium</title>
+            <link>https://issackjohn.github.io/blog/fixing-a-reporting-api-race-in-chromium.html</link>
+            <guid>https://issackjohn.github.io/blog/fixing-a-reporting-api-race-in-chromium.html</guid>
+            <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+            <description>A crash report could be dropped because its reporting source was expired before the report finished being added to the cache. Fixing the ordering re-enabled a long-disabled test suite.</description>
+        </item>
+        <item>
+            <title>Fixing a Mysterious x86 String Corruption in V8</title>
+            <link>https://issackjohn.github.io/blog/fixing-intl-datetimeformat-corruption-in-v8.html</link>
+            <guid>https://issackjohn.github.io/blog/fixing-intl-datetimeformat-corruption-in-v8.html</guid>
+            <pubDate>Thu, 12 Feb 2026 00:00:00 GMT</pubDate>
+            <description>How a standard C++ string move/copy chain caused Intl.DateTimeFormat to fail on Windows x86 official builds, and how replacing it with const char* made it faster and safer.</description>
+        </item>
+        <item>
+            <title>When Two Profilers Share a Thread</title>
+            <link>https://issackjohn.github.io/blog/when-two-profilers-share-a-thread.html</link>
+            <guid>https://issackjohn.github.io/blog/when-two-profilers-share-a-thread.html</guid>
+            <pubDate>Wed, 12 Nov 2025 00:00:00 GMT</pubDate>
+            <description>How concurrent CPU profiling streams from the JS Self-Profiling API and internal tracing could corrupt attribution in DevTools, and how tagging each stream by source fixed it.</description>
+        </item>
+    </channel>
+</rss>

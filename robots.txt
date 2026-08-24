@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://issackjohn.github.io/sitemap.xml
