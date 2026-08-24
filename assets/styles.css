@@ -164,30 +164,6 @@ main {
     color: var(--accent);
 }
 
-.topbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-.topbar-nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.02em;
-}
-
-.topbar-nav a {
-    color: var(--text-muted);
-}
-
-.topbar-nav a:hover,
-.topbar-nav a.is-active {
-    color: var(--accent);
-}
-
 .theme-toggle {
     appearance: none;
     border: 1px solid var(--line);

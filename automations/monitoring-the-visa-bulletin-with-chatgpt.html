@@ -37,21 +37,15 @@
         <div class="topbar">
             <div class="wrap">
                 <a class="brand" href="/">Issack John</a>
-                <div class="topbar-actions">
-                    <nav class="topbar-nav" aria-label="Sections">
-                        <a href="/blog/">Writing</a>
-                        <a href="/automations/" class="is-active">Automations</a>
-                    </nav>
-                    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
-                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                        </svg>
-                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-                        </svg>
-                    </button>
-                </div>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
             </div>
         </div>
 
@@ -63,57 +57,32 @@
                 <h1 class="article-title">I Got ChatGPT to Monitor the Visa Bulletin for Me</h1>
 
                 <div class="prose">
-                    <p>
-                        If you're tracking an employment-based or family-based green card priority date, you've probably spent years refreshing the Department of State’s Visa Bulletin every month between the 10th and 15th just to see if your cutoff
-                        date shifted.
-                    </p>
+                    <p>If you're waiting for your green card priority date to become current, you've probably checked the Visa Bulletin more times than you'd like to admit.</p>
 
-                    <p>
-                        It’s a tedious manual routine: navigate to the State Department site, locate the latest month's release, find your preference category and country column in two separate tables (Final Action Dates and Dates for Filing), and
-                        compare the dates against your priority date.
-                    </p>
+                    <p>Instead of manually checking the State Department page every month, I set up a scheduled ChatGPT prompt to monitor it for me.</p>
 
-                    <p>Instead of remembering to check manually, I set up a scheduled ChatGPT automation to monitor the official bulletin and notify me only when there's an actual update.</p>
-
-                    <h2>The Prompt Recipe</h2>
-
-                    <p>You can configure a scheduled task with a prompt structured like this:</p>
+                    <h2>The Prompt</h2>
 
                     <pre><code class="language-markdown">Check the official U.S. Department of State Visa Bulletin page regularly.
 
-Monitor the following parameters for my case:
-- Category: [e.g., EB-2 / EB-3]
-- Country of Chargeability: [e.g., India / China / All Other Areas]
-- Priority Date: [e.g., January 15, 2023]
-- Tables to watch: Both "Final Action Dates" and "Dates for Filing"
+Monitor EB-2 for India under both Final Action Dates and Dates for Filing against priority date January 15, 2023.
 
 Only notify me if:
-1. A new monthly bulletin has been published.
-2. The cutoff dates for my specific category/country advance or retrogress.
-3. My priority date becomes current under either table.
+1. A new monthly bulletin is published.
+2. The cutoff dates move or my priority date becomes current.
 
-When reporting a change, provide:
-- The previous cutoff date vs. the new cutoff date
-- Whether the date is current
-- A direct link to the official State Department bulletin source.</code></pre>
+Include the previous date, new date, current status, and a link to the official bulletin.</code></pre>
 
-                    <h2>How It Works</h2>
-
-                    <ol>
-                        <li><strong>Official Source Anchoring:</strong> Explicitly instructing it to use the official Department of State Visa Bulletin page prevents it from summarizing second-hand immigration blogs or outdated forum posts.</li>
-                        <li><strong>Delta-Only Alerts:</strong> Defining strict notification criteria prevents noise. If nothing has moved, it stays quiet until the next release.</li>
-                        <li><strong>Structured Diffs:</strong> Asking for previous date, new date, and the official source link makes verifying the notification take under ten seconds.</li>
-                    </ol>
+                    <p>Swap in your category, country of chargeability, and priority date.</p>
 
                     <div class="callout">
                         <p>
-                            <strong>A Quick Caveat:</strong> Use this strictly as an alerting mechanism, never as legal counsel. Whenever an alert fires, always cross-reference against the official
-                            <a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" rel="noopener noreferrer">travel.state.gov</a> bulletin and the USCIS adjustment of status filing charts before taking
-                            any action.
+                            <strong>Note:</strong> Use this as a notification trigger, not legal advice. When an alert fires, always verify it directly against the official
+                            <a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" rel="noopener noreferrer">Visa Bulletin</a> and USCIS charts.
                         </p>
                     </div>
 
-                    <p>It took two minutes to configure, and it completely eliminates the monthly chore of checking a static government webpage.</p>
+                    <p>It took two minutes to set up, and it eliminates having to remember to check a government site every month.</p>
                 </div>
             </article>
         </main>
