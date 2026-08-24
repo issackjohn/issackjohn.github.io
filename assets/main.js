@@ -73,6 +73,15 @@
                 url: "/blog/when-two-profilers-share-a-thread.html",
             },
         ],
+        automations: [
+            {
+                title: "I Got ChatGPT to Monitor the Visa Bulletin for Me",
+                summary: "A scheduled prompt routine to track U.S. State Department Visa Bulletin movements and priority dates automatically without manual monthly checking.",
+                date: "2026-08-24",
+                url: "/automations/monitoring-the-visa-bulletin-with-chatgpt.html",
+                tags: ["ChatGPT", "Workflows", "Automation"],
+            },
+        ],
         projects: [
             {
                 title: "Oncology ICU Rounds Prep",
@@ -180,9 +189,41 @@
         return article;
     }
 
-    function renderInto(id, data, build) {
+    function renderAutomation(item) {
+        const article = el("article", "post");
+        article.appendChild(el("h3", null, item.title));
+        article.appendChild(el("p", null, item.summary));
+
+        const link = el("a", null, "View recipe →");
+        link.href = item.url;
+        link.setAttribute("aria-label", "View recipe: " + item.title);
+        if (isExternal(item.url)) markExternal(link);
+
+        const foot = el("div", "post-foot");
+        foot.appendChild(link);
+
+        const meta = el("div", "post-meta-group");
+        if (item.tags && item.tags.length) {
+            const tagsSpan = el("span", "post-tags", item.tags.join(" · "));
+            meta.appendChild(tagsSpan);
+        }
+        if (item.date) {
+            const time = el("time", null, formatDate(item.date));
+            time.dateTime = item.date;
+            meta.appendChild(time);
+        }
+        foot.appendChild(meta);
+        article.appendChild(foot);
+        return article;
+    }
+
+    function renderInto(id, data, build, emptyMessage) {
         const container = document.getElementById(id);
         if (!container) return;
+        if (data.length === 0 && emptyMessage) {
+            container.replaceChildren(el("p", "block-note", emptyMessage));
+            return;
+        }
         const frag = document.createDocumentFragment();
         data.forEach(function (entry) {
             frag.appendChild(build(entry));
@@ -195,6 +236,7 @@
         if (referencesCount) referencesCount.textContent = String(content.references.length);
 
         renderInto("blogPostsList", content.blogPosts.slice().sort(byNewest), renderPost);
+        renderInto("automationsList", content.automations.slice().sort(byNewest), renderAutomation, "No automations published yet.");
         renderInto("projectsList", content.projects, renderItem);
         renderInto("referencesList", content.references, renderItem);
         renderInto("videosList", content.videos, renderItem);
@@ -260,6 +302,10 @@
     const JS_KEYWORDS =
         "as async await break case catch class const continue debugger default delete do else export extends false finally for from function get if import in instanceof let new null of return set static super switch this throw true try typeof undefined var void while yield";
 
+    const BASH_KEYWORDS = "if then else elif fi for while until do done case esac in function select time return exit export local readonly alias declare source exec trap echo test set unset git cd mkdir rm cp mv";
+
+    const PYTHON_KEYWORDS = "def class return if elif else for while try except finally with as import from pass break continue lambda yield global nonlocal async await match case and or not is in True False None";
+
     const GRAMMARS = {
         cpp: {
             keywords:
@@ -271,6 +317,14 @@
             keywords: JS_KEYWORDS,
             pattern:
                 "(?<comment>//[^\\n]*|/\\*[\\s\\S]*?\\*/)|(?<string>\"(?:\\\\.|[^\"\\\\\\n])*\"?|'(?:\\\\.|[^'\\\\\\n])*'?|`(?:\\\\.|[^`\\\\])*`?)|(?<number>\\b0[xX][0-9a-fA-F]+\\b|\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?\\b)|(?<ident>[A-Za-z_$][A-Za-z0-9_$]*)",
+        },
+        bash: {
+            keywords: BASH_KEYWORDS,
+            pattern: "(?<comment>#[^\\n]*)|(?<string>\"(?:\\\\.|[^\"\\\\\\n])*\"?|'(?:\\\\.|[^'\\\\\\n])*')|(?<number>\\b\\d+(?:\\.\\d+)?\\b)|(?<ident>\\$[A-Za-z_0-9]+|\\$\\{[^}]+\\}|[A-Za-z_][A-Za-z0-9_-]*)",
+        },
+        python: {
+            keywords: PYTHON_KEYWORDS,
+            pattern: "(?<comment>#[^\\n]*)|(?<string>\"\"\"[\\s\\S]*?\"\"\"|'''[\\s\\S]*?'''|\"(?:\\\\.|[^\"\\\\\\n])*\"?|'(?:\\\\.|[^'\\\\\\n])*'?)|(?<number>\\b\\d+(?:\\.\\d+)?\\b)|(?<ident>[A-Za-z_][A-Za-z0-9_]*)",
         },
         json: {
             keywords: "true false null",
@@ -296,6 +350,12 @@
         typescript: "ts",
         jsonc: "json",
         headers: "http",
+        bash: "bash",
+        sh: "bash",
+        zsh: "bash",
+        shell: "bash",
+        python: "python",
+        py: "python",
     };
 
     const keywordSets = {};
