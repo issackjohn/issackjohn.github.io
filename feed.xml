@@ -28,7 +28,7 @@
             <description>A crash report could be dropped because its reporting source was expired before the report finished being added to the cache. Fixing the ordering re-enabled a long-disabled test suite.</description>
         </item>
         <item>
-            <title>Fixing a Mysterious x86 String Corruption in V8</title>
+            <title>Fixing x86 String Corruption in V8</title>
             <link>https://issackjohn.github.io/blog/fixing-intl-datetimeformat-corruption-in-v8.html</link>
             <guid>https://issackjohn.github.io/blog/fixing-intl-datetimeformat-corruption-in-v8.html</guid>
             <pubDate>Thu, 12 Feb 2026 00:00:00 GMT</pubDate>

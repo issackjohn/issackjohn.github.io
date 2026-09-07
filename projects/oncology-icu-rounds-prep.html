@@ -58,14 +58,13 @@
 
                 <div class="prose">
                     <p>
-                        <strong>OncoICU Rounds Studio</strong> is a small clinical-prep application I built to explore Google’s <a href="https://deepmind.google/models/gemma/medgemma/" target="_blank" rel="noopener noreferrer">MedGemma</a> and
-                        <a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank" rel="noopener noreferrer">Gemma</a> models in a real product setting. The idea was to see how well an open, medically-tuned model could support preparing
-                        for oncology ICU rounds — organizing patient context and surfacing the right things to review before walking into the unit.
+                        <strong>OncoICU Rounds Studio</strong> is a clinical-prep application using Google’s <a href="https://deepmind.google/models/gemma/medgemma/" target="_blank" rel="noopener noreferrer">MedGemma</a> and
+                        <a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank" rel="noopener noreferrer">Gemma</a> models. It organizes synthetic patient information for oncology ICU rounds and identifies material to review before
+                        entering the unit.
                     </p>
                     <p>
                         It walks through a four-step flow — <em>Case Room → Pre-round → Rounds → Debrief</em> — built around a library of synthetic ICU cases (no PHI). You pick a teaching lens and a learner role, work up the chart yourself, then
-                        check your reasoning against the model. It was as much an exploration of the models as it was of the app: where MedGemma is genuinely helpful, where it needs guardrails, and what a responsible interface around a medical model
-                        should actually look like.
+                        check your reasoning against the model. The project tests where MedGemma helps, where it needs guardrails, and how its output should be presented in a clinical-prep interface.
                     </p>
 
                     <p>
@@ -74,8 +73,8 @@
 
                     <h2>Why I built it</h2>
                     <p>
-                        I wanted hands-on intuition for the MedGemma/Gemma family beyond a notebook — to understand what it feels like to put a medical model behind a real UI, with real latency, real prompts, and the real responsibility that comes
-                        with anything clinical. Rounds prep is a concrete, high-context task, which made it a good forcing function.
+                        I wanted to test the MedGemma/Gemma family outside a notebook, including the latency, prompts, and interface constraints involved in a clinical use case. Rounds prep provided a specific task with enough patient context to
+                        expose those constraints.
                     </p>
 
                     <h2>Stack</h2>
@@ -100,10 +99,7 @@
                     </figure>
 
                     <h2>What I took away</h2>
-                    <p>
-                        The interesting problems were never just “call the model.” They were about context, trust, and restraint — how much to show, how to keep a medical model from overstepping, and how to make the output something a person could
-                        actually rely on. It’s an exploration, not a clinical tool, but it taught me a lot about building seriously around open medical models.
-                    </p>
+                    <p>The main problems were deciding how much context to send, how much output to show, and where the model needed explicit limits. This remains an experiment with synthetic cases, not a clinical tool.</p>
 
                     <h2>References</h2>
                     <ul>

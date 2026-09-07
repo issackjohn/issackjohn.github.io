@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Fixing a Mysterious x86 String Corruption in V8 — Issack John</title>
+        <title>Fixing x86 String Corruption in V8 — Issack John</title>
 
         <meta name="description" content="How a standard C++ string move/copy chain caused Intl.DateTimeFormat to fail on Windows x86 official builds, and how replacing it with const char* made it faster and safer." />
         <meta name="author" content="Issack John" />
@@ -11,7 +11,7 @@
 
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://issackjohn.github.io/blog/fixing-intl-datetimeformat-corruption-in-v8.html" />
-        <meta property="og:title" content="Fixing a Mysterious x86 String Corruption in V8" />
+        <meta property="og:title" content="Fixing x86 String Corruption in V8" />
         <meta property="og:description" content="How replacing std::string with const char* in PatternMap resolved platform-specific string corruption in Intl.DateTimeFormat." />
         <meta name="twitter:card" content="summary" />
 
@@ -54,7 +54,7 @@
 
             <article class="article reveal">
                 <p class="article-meta">February 12, 2026 · V8 Internals · C++</p>
-                <h1 class="article-title">Fixing a Mysterious x86 String Corruption in V8</h1>
+                <h1 class="article-title">Fixing x86 String Corruption in V8</h1>
 
                 <div class="prose">
                     <p>
@@ -123,14 +123,14 @@ struct PatternMap {
 
                     <p>
                         This change completely bypassed the C++ standard library's <code>std::string</code> move/copy constructor chain and SSO code paths, instantly resolving the compiler-induced string corruption on 32-bit Windows official builds.
-                        Even better, it turned a dynamic, memory-allocating data structure into a purely pointer-based, zero-overhead structure. This eliminated heap allocations, shrank V8's memory footprint, and made
-                        <code>Intl.DateTimeFormat</code> lookups faster and safer.
+                        It also replaced a dynamic, memory-allocating data structure with pointers to static string literals. This removed the heap allocations, reduced V8's memory use, and made <code>Intl.DateTimeFormat</code> lookups faster and
+                        safer.
                     </p>
 
                     <h2>Conclusion</h2>
                     <p>
                         Sometimes, the most robust fix is not to make a complex system more resilient to bugs, but to realize you didn't need the complexity in the first place. By replacing heap-allocated standard strings with raw pointers to static
-                        literals, we eliminated a mysterious, platform-specific compiler optimization bug and made the engine faster in the process.
+                        literals, the platform-specific compiler optimization bug no longer occurred and the code required fewer allocations.
                     </p>
 
                     <p>
