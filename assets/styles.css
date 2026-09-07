@@ -7,7 +7,7 @@
 :root {
     color-scheme: light dark;
 
-    --max-width: 50rem;
+    --max-width: 60rem;
     --prose-width: 40rem;
 
     --bg: #fbfaf8;
@@ -148,15 +148,14 @@ main {
 .topbar .wrap {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 58px;
+    gap: 1.5rem;
+    height: 64px;
 }
 
 .brand {
-    font-family: var(--mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
     color: var(--text);
 }
 
@@ -174,9 +173,35 @@ main {
     cursor: pointer;
     display: inline-grid;
     place-items: center;
+    margin-left: 0.25rem;
+    border-radius: 50%;
     transition:
         color 0.15s ease,
         border-color 0.15s ease;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.76rem;
+}
+
+.site-nav a {
+    color: var(--text-muted);
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+    color: var(--text);
+}
+
+.site-nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 0.35rem;
 }
 
 .theme-toggle:hover {
@@ -213,8 +238,8 @@ main {
 /* Hero -------------------------------------------------------------------- */
 
 .hero {
-    padding: 4.5rem 0 3.5rem;
-    border-bottom: 1px solid var(--line);
+    padding: clamp(5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+    border-bottom: 1px solid var(--frame);
 }
 
 .kicker {
@@ -229,16 +254,15 @@ main {
 .statement {
     font-family: var(--serif);
     font-weight: 500;
-    font-style: italic;
-    font-size: clamp(2.4rem, 7.5vw, 4.3rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
     margin: 0 0 1.5rem;
-    max-width: 18ch;
+    max-width: 13ch;
 }
 
 .lede {
-    max-width: 34rem;
+    max-width: 38rem;
     margin: 0;
     font-size: 1.18rem;
     line-height: 1.5;
@@ -277,7 +301,7 @@ main {
 .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1.25rem;
     margin-top: 2.25rem;
     font-family: var(--mono);
     font-size: 0.85rem;
@@ -315,16 +339,17 @@ main {
 
 .block {
     display: grid;
-    grid-template-columns: 8rem 1fr;
-    gap: 1.5rem 2.5rem;
-    padding: 3rem 0;
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 1.5rem 3rem;
+    padding: clamp(3.5rem, 7vw, 5rem) 0;
+    border-bottom: 1px solid var(--frame);
 }
 
 .block-index {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+    padding-top: 0.25rem;
     font-family: var(--mono);
 }
 
@@ -335,7 +360,7 @@ main {
 }
 
 .block-label {
-    font-size: 0.8rem;
+    font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text);
@@ -384,11 +409,21 @@ main {
 .ledger .item,
 .ledger .post {
     display: block;
-    padding: 0.95rem 0;
+    padding: 1.25rem 0;
     border-top: 1px solid var(--line);
     background: none;
     border-radius: 0;
     box-shadow: none;
+}
+
+.ledger .item,
+.ledger .post {
+    transition: padding 0.15s ease;
+}
+
+.ledger .item:hover,
+.ledger .post:hover {
+    padding-left: 0.6rem;
 }
 
 .ledger .item:first-child,
@@ -449,15 +484,52 @@ main {
 
 .post h3 {
     margin: 0 0 0.3rem;
-    font-size: 1rem;
+    font-family: var(--serif);
+    font-size: 1.15rem;
     font-weight: 600;
     color: var(--text);
 }
 
 .post p {
     margin: 0 0 0.5rem;
-    font-size: 0.92rem;
+    max-width: 44rem;
+    font-size: 0.94rem;
     color: var(--text-muted);
+}
+
+.block-writing .ledger {
+    border-top: 1px solid var(--frame);
+}
+
+.block-writing .post:first-child {
+    padding: 1.35rem 0 1.5rem;
+}
+
+.block-writing .post:first-child h3 {
+    max-width: 24ch;
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+}
+
+.block-writing .post:first-child p {
+    margin-bottom: 0.85rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.section-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--line);
+}
+
+.section-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .post-foot {
@@ -518,10 +590,9 @@ main {
 .page-title {
     font-family: var(--serif);
     font-weight: 500;
-    font-style: italic;
-    font-size: clamp(2.2rem, 6vw, 3.4rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.8rem, 7vw, 4.8rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
     margin: 0 0 1rem;
 }
 
@@ -868,6 +939,19 @@ main {
 /* Responsive -------------------------------------------------------------- */
 
 @media (max-width: 680px) {
+    .topbar .wrap {
+        gap: 1rem;
+    }
+
+    .site-nav {
+        gap: 0.9rem;
+        font-size: 0.69rem;
+    }
+
+    .site-nav a:nth-child(2) {
+        display: none;
+    }
+
     .block {
         grid-template-columns: 1fr;
         gap: 0.75rem;

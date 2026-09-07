@@ -42,6 +42,33 @@
         syncToggleState(getActiveTheme());
     }
 
+    function setupNavigation() {
+        const bar = document.querySelector(".topbar .wrap");
+        const toggle = document.getElementById("themeToggle");
+        if (!bar || !toggle || bar.querySelector(".site-nav")) return;
+
+        const nav = el("nav", "site-nav");
+        nav.setAttribute("aria-label", "Primary navigation");
+
+        [
+            ["Writing", "/blog/"],
+            ["Projects", "/#work"],
+            ["Automations", "/automations/"],
+        ].forEach(function (entry) {
+            const link = el("a", null, entry[0]);
+            link.href = entry[1];
+
+            const path = window.location.pathname;
+            if ((entry[1] === "/blog/" && path.startsWith("/blog/")) || (entry[1] === "/automations/" && path.startsWith("/automations/"))) {
+                link.setAttribute("aria-current", "page");
+            }
+
+            nav.appendChild(link);
+        });
+
+        bar.insertBefore(nav, toggle);
+    }
+
     // --- Content -------------------------------------------------------------
 
     // Dates are ISO (YYYY-MM-DD) so the list can be sorted and so each row can
@@ -50,25 +77,25 @@
         blogPosts: [
             {
                 title: "Who Actually Uses JS Call Stacks in Crash Reports?",
-                summary: "Fourteen months after Chrome shipped include-js-call-stacks-in-crash-reports, a scan of the Tranco top 5,000 to find out who deployed it — and why a header-based opt-in is its own telemetry.",
+                summary: "A scan of the Tranco top 5,000 found which sites enabled Chrome’s JavaScript call stacks in crash reports.",
                 date: "2026-07-24",
                 url: "/blog/who-actually-uses-js-call-stacks-in-crash-reports.html",
             },
             {
                 title: "Fixing a Reporting API Race in Chromium",
-                summary: "A crash report could be dropped because its reporting source was expired before the report finished being added to the cache. Fixing the ordering re-enabled a long-disabled test suite.",
+                summary: "Chromium could expire a reporting source before its crash report reached the cache, causing the report to be dropped.",
                 date: "2026-07-24",
                 url: "/blog/fixing-a-reporting-api-race-in-chromium.html",
             },
             {
-                title: "Fixing a Mysterious x86 String Corruption in V8",
-                summary: "How a standard C++ string move/copy chain caused Intl.DateTimeFormat to fail on Windows x86 official builds, and how replacing it with const char* made it faster and safer.",
+                title: "Fixing x86 String Corruption in V8",
+                summary: "A C++ string move and copy chain corrupted Intl.DateTimeFormat output in official Windows x86 builds.",
                 date: "2026-02-12",
                 url: "/blog/fixing-intl-datetimeformat-corruption-in-v8.html",
             },
             {
                 title: "When Two Profilers Share a Thread",
-                summary: "How concurrent CPU profiling streams from the JS Self-Profiling API and internal tracing could corrupt attribution in DevTools, and how tagging each stream by source fixed it.",
+                summary: "Two profiling streams shared state on one thread and corrupted attribution in DevTools.",
                 date: "2025-11-12",
                 url: "/blog/when-two-profilers-share-a-thread.html",
             },
@@ -76,7 +103,7 @@
         automations: [
             {
                 title: "I Got ChatGPT to Monitor the Visa Bulletin for Me",
-                summary: "A scheduled prompt routine to track U.S. State Department Visa Bulletin movements and priority dates automatically without manual monthly checking.",
+                summary: "A scheduled ChatGPT task checks each Visa Bulletin and reports changes for a saved priority date.",
                 date: "2026-08-24",
                 url: "/automations/monitoring-the-visa-bulletin-with-chatgpt.html",
                 tags: ["ChatGPT", "Workflows", "Automation"],
@@ -85,7 +112,7 @@
         projects: [
             {
                 title: "Oncology ICU Rounds Prep",
-                desc: "A clinical prep app exploring Google’s MedGemma and Gemma models for oncology ICU rounds.",
+                desc: "A clinical prep app using MedGemma and Gemma with synthetic oncology ICU cases.",
                 url: "/projects/oncology-icu-rounds-prep.html",
             },
         ],
@@ -432,6 +459,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        setupNavigation();
         setupTheme();
         renderContent();
         setupEmail();
