@@ -57,32 +57,32 @@
                 <h1 class="article-title">I Got ChatGPT to Monitor the Visa Bulletin for Me</h1>
 
                 <div class="prose">
-                    <p>If you're waiting for your green card priority date to become current, you've probably checked the Visa Bulletin more times than you'd like to admit.</p>
+                    <p>Every month around the second week, the State Department drops the latest Visa Bulletin, and anyone waiting on a priority date goes and mashes refresh on that table.</p>
 
-                    <p>Instead of manually checking the State Department page every month, I set up a scheduled ChatGPT prompt to monitor it for me.</p>
+                    <p>It's tedious and easy to forget, so I just set up a recurring ChatGPT task to check it instead.</p>
 
                     <h2>The Prompt</h2>
 
                     <pre><code class="language-markdown">Check the official U.S. Department of State Visa Bulletin page regularly.
 
-Monitor EB-2 for India under both Final Action Dates and Dates for Filing against priority date January 15, 2023.
+Monitor [Category, e.g. EB-3 / EB-2] for [Country / Chargeability, e.g. All Chargeability Areas (ROW)] under both Final Action Dates and Dates for Filing against my priority date: [Month Day, Year].
 
 Only notify me if:
 1. A new monthly bulletin is published.
 2. The cutoff dates move or my priority date becomes current.
 
-Include the previous date, new date, current status, and a link to the official bulletin.</code></pre>
+Include the previous cutoff date, the new cutoff date, my current status, and a link to the official bulletin.</code></pre>
 
-                    <p>Swap in your category, country of chargeability, and priority date.</p>
+                    <p>Fill in your category, chargeability country, and priority date.</p>
 
                     <div class="callout">
                         <p>
-                            <strong>Note:</strong> Use this as a notification trigger, not legal advice. When an alert fires, always verify it directly against the official
-                            <a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" rel="noopener noreferrer">Visa Bulletin</a> and USCIS charts.
+                            <strong>Heads up:</strong> Treat this purely as a ping, not legal guidance. Whenever it alerts you, go look at the actual
+                            <a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" rel="noopener noreferrer">Visa Bulletin</a> and USCIS filing charts yourself before making any filing plans.
                         </p>
                     </div>
 
-                    <p>It took two minutes to set up, and it eliminates having to remember to check a government site every month.</p>
+                    <p>Takes two minutes to set up, and you can stop manually watching the site.</p>
                 </div>
             </article>
         </main>
