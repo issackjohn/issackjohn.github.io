@@ -3,131 +3,258 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Complex workloads</title>
+        <title>Complex workloads · Issack John</title>
+        <meta name="description" content="Run and compare Speedometer 3.0 vanilla and complex DOM workloads." />
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+        <style>
+            .workloads-main {
+                padding-top: 3.5rem;
+            }
+
+            .workloads-header {
+                padding-bottom: 2rem;
+            }
+
+            .workloads-header h1 {
+                margin: 0;
+                font-family: var(--serif);
+                font-size: clamp(2.4rem, 7vw, 4.5rem);
+                line-height: 1;
+                letter-spacing: -0.035em;
+            }
+
+            .workloads-header p {
+                max-width: 36rem;
+                color: var(--text-muted);
+            }
+
+            .all-tests-link {
+                display: inline-flex;
+                align-items: center;
+                min-height: 44px;
+            }
+
+            .workload-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 1.25rem;
+            }
+
+            .workload-panel {
+                min-width: 0;
+                border-top: 1px solid var(--frame);
+                padding-top: 1rem;
+            }
+
+            .workload-panel h2 {
+                margin: 0 0 1rem;
+                font-family: var(--serif);
+                font-size: 1.35rem;
+                font-weight: 500;
+            }
+
+            .workload-list,
+            .test-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .workload-list {
+                display: grid;
+                gap: 0.35rem;
+            }
+
+            .workload-list a,
+            .test-list a {
+                display: flex;
+                align-items: center;
+                min-height: 44px;
+                padding: 0.35rem 0;
+                overflow-wrap: anywhere;
+            }
+
+            .test-list {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.25rem 1rem;
+            }
+
+            .compare-form {
+                display: grid;
+                gap: 0.75rem;
+            }
+
+            .form-field {
+                display: grid;
+                gap: 0.35rem;
+            }
+
+            .form-field label {
+                font-family: var(--mono);
+                font-size: 0.78rem;
+                color: var(--text-muted);
+            }
+
+            .form-field select,
+            .compare-form button {
+                width: 100%;
+                min-height: 44px;
+                border: 1px solid var(--frame);
+                border-radius: 4px;
+                background: var(--bg);
+                color: var(--text);
+                font: inherit;
+            }
+
+            .form-field select {
+                padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+            }
+
+            .compare-form button {
+                cursor: pointer;
+                background: var(--text);
+                color: var(--bg);
+                font-weight: 650;
+            }
+
+            .compare-form button:disabled {
+                cursor: not-allowed;
+                opacity: 0.55;
+            }
+
+            .suite-status {
+                min-height: 1.5em;
+                margin: 0;
+                color: var(--text-muted);
+                font-size: 0.85rem;
+            }
+
+            @media (max-width: 900px) {
+                .workload-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .compare-panel {
+                    grid-column: 1 / -1;
+                }
+            }
+
+            @media (max-width: 620px) {
+                .workloads-main {
+                    padding-top: 2.25rem;
+                }
+
+                .workload-grid,
+                .test-list {
+                    grid-template-columns: 1fr;
+                }
+
+                .compare-panel {
+                    grid-column: auto;
+                }
+            }
+        </style>
+        <script>
+            (function () {
+                var root = document.documentElement;
+                root.classList.add("js");
+                try {
+                    var theme = localStorage.getItem("theme");
+                    if (theme === "light" || theme === "dark") root.setAttribute("data-theme", theme);
+                } catch (error) {}
+            })();
+        </script>
     </head>
     <body>
-        <div style="display: flex; justify-content: space-evenly">
-            <div>
-                <h1>Speedometer 3.0 Test Runner</h1>
-                <ul>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer" target="_blank" rel="noopener noreferrer"> All tests</a>
-                    </li>
-                </ul>
-                <h3>Vanilla</h3>
-                <ul id="vanilla-test-runner"></ul>
-                <h3>Complex</h3>
-                <ul id="complex-test-runner"></ul>
+        <a class="skip-link" href="#main">Skip to content</a>
 
-                <div>
-                    <h3>Compare two suites</h3>
-                    <label for="suite1">Select suite 1:</label>
-                    <select id="suite1"></select>
+        <header class="topbar">
+            <div class="wrap">
+                <a class="brand" href="/">Issack John</a>
+                <nav class="site-nav" aria-label="Page navigation">
+                    <a href="/">&larr; Back to home</a>
+                </nav>
+            </div>
+        </header>
 
-                    <label for="suite2">Select suite 2:</label>
-                    <select id="suite2"></select>
-                    <button onclick="runTests()">Run tests</button>
-                </div>
+        <main id="main" class="wrap workloads-main" tabindex="-1">
+            <header class="workloads-header">
+                <p class="kicker">Speedometer 3.0</p>
+                <h1>Complex workloads</h1>
+                <p>Browse vanilla and complex TodoMVC suites, or compare two suites in the Speedometer runner.</p>
+                <a class="all-tests-link" href="https://issackjohn.github.io/Speedometer" target="_blank" rel="noopener noreferrer">Open all tests &rarr;</a>
+            </header>
+
+            <div class="workload-grid">
+                <section class="workload-panel" aria-labelledby="vanilla-heading">
+                    <h2 id="vanilla-heading">Vanilla</h2>
+                    <ul class="test-list" id="vanilla-test-runner"></ul>
+                </section>
+
+                <section class="workload-panel" aria-labelledby="complex-heading">
+                    <h2 id="complex-heading">Complex</h2>
+                    <ul class="test-list" id="complex-test-runner"></ul>
+                </section>
+
+                <section class="workload-panel compare-panel" aria-labelledby="compare-heading">
+                    <h2 id="compare-heading">Compare</h2>
+                    <form class="compare-form" id="suite-form" aria-describedby="suite-status">
+                        <div class="form-field">
+                            <label for="suite1">Suite 1</label>
+                            <select id="suite1" name="suite1"></select>
+                        </div>
+                        <div class="form-field">
+                            <label for="suite2">Suite 2</label>
+                            <select id="suite2" name="suite2"></select>
+                        </div>
+                        <button id="run-tests" type="submit">Run tests</button>
+                        <p class="suite-status" id="suite-status" role="status" aria-live="polite"></p>
+                    </form>
+                </section>
+
+                <section class="workload-panel" aria-labelledby="complex-workloads-heading">
+                    <h2 id="complex-workloads-heading">Complex workload links</h2>
+                    <ul class="workload-list">
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/angular-complex/dist/" target="_blank" rel="noopener noreferrer">Angular</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/backbone-complex/dist/" target="_blank" rel="noopener noreferrer">Backbone</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/jquery-complex/dist/" target="_blank" rel="noopener noreferrer">Jquery</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es5-complex/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es5</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6-complex/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6-webpack-complex/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6-webpack</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/preact-complex/dist/" target="_blank" rel="noopener noreferrer">Preact</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react-complex/dist/" target="_blank" rel="noopener noreferrer">React</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react-redux-complex/dist/" target="_blank" rel="noopener noreferrer">React-Redux</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/svelte-complex/dist/" target="_blank" rel="noopener noreferrer">Svelte</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/vue-complex/dist/" target="_blank" rel="noopener noreferrer">Vue</a></li>
+                    </ul>
+                </section>
+
+                <section class="workload-panel" aria-labelledby="workloads-heading">
+                    <h2 id="workloads-heading">Workload links</h2>
+                    <ul class="workload-list">
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/angular/dist/" target="_blank" rel="noopener noreferrer">Angular</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/backbone/dist/" target="_blank" rel="noopener noreferrer">Backbone</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/jquery/dist/" target="_blank" rel="noopener noreferrer">Jquery</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es5/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es5</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6-webpack/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6-webpack</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/preact/dist/" target="_blank" rel="noopener noreferrer">Preact</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react/dist/" target="_blank" rel="noopener noreferrer">React</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react-redux/dist/" target="_blank" rel="noopener noreferrer">React-Redux</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/svelte/dist/" target="_blank" rel="noopener noreferrer">Svelte</a></li>
+                        <li><a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/vue/dist/" target="_blank" rel="noopener noreferrer">Vue</a></li>
+                    </ul>
+                </section>
             </div>
-            <div>
-                <h1>Complex Workloads</h1>
-                <ul>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/angular-complex/dist/" target="_blank" rel="noopener noreferrer">Angular</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/backbone-complex/dist/" target="_blank" rel="noopener noreferrer">Backbone</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/jquery-complex/dist/" target="_blank" rel="noopener noreferrer">Jquery</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es5-complex/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es5</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6-complex/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6-webpack-complex/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6-webpack</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/preact-complex/dist/" target="_blank" rel="noopener noreferrer">Preact</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react-complex/dist/" target="_blank" rel="noopener noreferrer">React</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react-redux-complex/dist/" target="_blank" rel="noopener noreferrer">React-Redux</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/svelte-complex/dist/" target="_blank" rel="noopener noreferrer">Svelte</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/vue-complex/dist/" target="_blank" rel="noopener noreferrer">Vue</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h1>Workloads</h1>
-                <ul>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/angular/dist/" target="_blank" rel="noopener noreferrer">Angular</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/backbone/dist/" target="_blank" rel="noopener noreferrer">Backbone</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/jquery/dist/" target="_blank" rel="noopener noreferrer">Jquery</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es5/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es5</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/vanilla-examples/javascript-es6-webpack/dist/" target="_blank" rel="noopener noreferrer">JavaScript-es6-webpack</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/preact/dist/" target="_blank" rel="noopener noreferrer">Preact</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react/dist/" target="_blank" rel="noopener noreferrer">React</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/react-redux/dist/" target="_blank" rel="noopener noreferrer">React-Redux</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/svelte/dist/" target="_blank" rel="noopener noreferrer">Svelte</a>
-                    </li>
-                    <li>
-                        <a href="https://issackjohn.github.io/Speedometer/resources/todomvc/architecture-examples/vue/dist/" target="_blank" rel="noopener noreferrer">Vue</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="wrap">&copy; <span id="year">2026</span> Issack John</div>
+        </footer>
+
         <script>
-            // TodoMVC-JavaScript-ES5,
-            // TodoMVC-JavaScript-ES5-Complex-DOM,
-            // TodoMVC-JavaScript-ES6,
-            // TodoMVC-JavaScript-ES6-Complex-DOM,
-            // TodoMVC-JavaScript-ES6-Webpack,
-            // TodoMVC-JavaScript-ES6-Webpack-Complex-DOM,
-            // TodoMVC-React,TodoMVC-React-Complex-DOM,
-            // TodoMVC-React-Tentative-Complex-DOM,
-            // TodoMVC-React-Redux,
-            // TodoMVC-React-Redux-Complex-DOM,
-            // TodoMVC-Backbone,
-            // TodoMVC-Backbone-Complex-DOM,
-            // TodoMVC-Angular,TodoMVC-Angular-Complex-DOM,
-            // TodoMVC-Vue,
-            // TodoMVC-Vue-Complex-DOM,
-            // TodoMVC-jQuery,
-            // TodoMVC-jQuery-Complex-DOM,
-            // TodoMVC-Preact,
-            // TodoMVC-Preact-Complex-DOM,
-            // TodoMVC-Svelte,
-            // TodoMVC-Svelte-Complex-DOM
             const benchmarksMap = new Map();
             benchmarksMap.set("angular", "TodoMVC-Angular");
             benchmarksMap.set("backbone", "TodoMVC-Backbone");
@@ -181,13 +308,6 @@
                 complexTestRunner.appendChild(li);
             });
 
-            function runTests() {
-                const suite1 = document.getElementById("suite1").value;
-                const suite2 = document.getElementById("suite2").value;
-                const url = `https://issackjohn.github.io/Speedometer?suite=${suite1},${suite2}`;
-                window.open(url, "_blank");
-            }
-
             const suite1Dropdown = document.getElementById("suite1");
             const suite2Dropdown = document.getElementById("suite2");
 
@@ -214,6 +334,43 @@
                 option2.innerText = `complex ${key}`;
                 suite2Dropdown.appendChild(option2);
             }
+
+            suite1Dropdown.selectedIndex = 0;
+            suite2Dropdown.selectedIndex = 1;
+
+            const suiteForm = document.getElementById("suite-form");
+            const runButton = document.getElementById("run-tests");
+            const suiteStatus = document.getElementById("suite-status");
+
+            function validateSuites() {
+                const suite1 = suite1Dropdown.value;
+                const suite2 = suite2Dropdown.value;
+                const equal = suite1 === suite2;
+
+                runButton.disabled = equal;
+                suiteStatus.textContent = equal ? "Choose two different suites." : "Ready to compare the selected suites.";
+
+                suite1Dropdown.setAttribute("aria-invalid", equal ? "true" : "false");
+                suite2Dropdown.setAttribute("aria-invalid", equal ? "true" : "false");
+
+                return !equal;
+            }
+
+            suite1Dropdown.addEventListener("change", validateSuites);
+            suite2Dropdown.addEventListener("change", validateSuites);
+
+            suiteForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (!validateSuites()) return;
+
+                const suite1 = suite1Dropdown.value;
+                const suite2 = suite2Dropdown.value;
+                const url = `https://issackjohn.github.io/Speedometer?suite=${suite1},${suite2}`;
+                window.open(url, "_blank", "noopener,noreferrer");
+            });
+
+            validateSuites();
         </script>
+        <script src="/assets/main.js" defer></script>
     </body>
 </html>

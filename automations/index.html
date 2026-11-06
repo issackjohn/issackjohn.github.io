@@ -34,10 +34,10 @@
     <body>
         <a class="skip-link" href="#main">Skip to content</a>
 
-        <div class="topbar">
+        <header class="topbar">
             <div class="wrap">
                 <a class="brand" href="/">Issack John</a>
-                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false">
                     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
@@ -47,9 +47,9 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </header>
 
-        <main id="main" class="wrap">
+        <main id="main" class="wrap" tabindex="-1">
             <header class="page-header reveal">
                 <p class="kicker">Issack John — Automations</p>
                 <h1 class="page-title">Automations</h1>
@@ -57,12 +57,24 @@
             </header>
 
             <div class="post-list reveal">
-                <div class="ledger" id="automationsList"></div>
+                <div class="ledger" id="automationsList">
+                    <article class="post">
+                        <h3>I Got ChatGPT to Monitor the Visa Bulletin for Me</h3>
+                        <p>A scheduled ChatGPT task checks each Visa Bulletin and reports changes for a saved priority date.</p>
+                        <div class="post-foot">
+                            <a href="/automations/monitoring-the-visa-bulletin-with-chatgpt.html" aria-label="View recipe: I Got ChatGPT to Monitor the Visa Bulletin for Me">View recipe →</a>
+                            <div class="post-meta-group">
+                                <span class="post-tags">ChatGPT · Workflows · Automation</span>
+                                <time datetime="2026-08-24">Aug 24, 2026</time>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
         </main>
 
         <footer class="site-footer">
-            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+            <div class="wrap">© <span id="year">2026</span> Issack John</div>
         </footer>
 
         <script src="/assets/main.js" defer></script>

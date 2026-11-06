@@ -53,10 +53,10 @@
     <body>
         <a class="skip-link" href="#main">Skip to content</a>
 
-        <div class="topbar">
+        <header class="topbar">
             <div class="wrap">
                 <a class="brand" href="/">Issack John</a>
-                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false">
                     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
@@ -66,9 +66,9 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </header>
 
-        <main id="main" class="wrap">
+        <main id="main" class="wrap" tabindex="-1">
             <header class="hero reveal">
                 <p class="kicker">Issack John</p>
                 <h1 class="statement">Web Performance Engineer at Microsoft Edge.</h1>
@@ -78,14 +78,48 @@
                     <a href="https://www.linkedin.com/in/issack-john/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                     <a href="/blog/" rel="noopener">Blog</a>
                     <a href="/automations/" rel="noopener">Automations</a>
-                    <a id="emailLink" class="email-link" data-e="aXNzYWNrLmpvaG5Ab3V0bG9vay5jb20=" rel="nofollow">Email</a>
+                    <a id="emailLink" class="email-link" data-e="aXNzYWNrLmpvaG5Ab3V0bG9vay5jb20=" rel="nofollow" aria-disabled="true">Email</a>
+                    <noscript><a class="email-link" href="mailto:issack.john@outlook.com" rel="nofollow">Email</a></noscript>
                 </nav>
             </header>
 
             <section class="reveal block block-writing" aria-labelledby="writing-title">
                 <div class="block-index"><span class="block-label" id="writing-title">Latest writing</span></div>
                 <div class="block-body">
-                    <div class="ledger" id="blogPostsList"></div>
+                    <div class="ledger" id="blogPostsList">
+                        <article class="post">
+                            <h3>Who Actually Uses JS Call Stacks in Crash Reports?</h3>
+                            <p>A scan of the Tranco top 5,000 found which sites enabled Chrome’s JavaScript call stacks in crash reports.</p>
+                            <div class="post-foot">
+                                <a href="/blog/who-actually-uses-js-call-stacks-in-crash-reports.html" aria-label="Read more: Who Actually Uses JS Call Stacks in Crash Reports?">Read more →</a>
+                                <time datetime="2026-07-24">Jul 24, 2026</time>
+                            </div>
+                        </article>
+                        <article class="post">
+                            <h3>Fixing a Reporting API Race in Chromium</h3>
+                            <p>Chromium could expire a reporting source before its crash report reached the cache, causing the report to be dropped.</p>
+                            <div class="post-foot">
+                                <a href="/blog/fixing-a-reporting-api-race-in-chromium.html" aria-label="Read more: Fixing a Reporting API Race in Chromium">Read more →</a>
+                                <time datetime="2026-07-24">Jul 24, 2026</time>
+                            </div>
+                        </article>
+                        <article class="post">
+                            <h3>Fixing x86 String Corruption in V8</h3>
+                            <p>A C++ string move and copy chain corrupted Intl.DateTimeFormat output in official Windows x86 builds.</p>
+                            <div class="post-foot">
+                                <a href="/blog/fixing-intl-datetimeformat-corruption-in-v8.html" aria-label="Read more: Fixing x86 String Corruption in V8">Read more →</a>
+                                <time datetime="2026-02-12">Feb 12, 2026</time>
+                            </div>
+                        </article>
+                        <article class="post">
+                            <h3>When Two Profilers Share a Thread</h3>
+                            <p>Two profiling streams shared state on one thread and corrupted attribution in DevTools.</p>
+                            <div class="post-foot">
+                                <a href="/blog/when-two-profilers-share-a-thread.html" aria-label="Read more: When Two Profilers Share a Thread">Read more →</a>
+                                <time datetime="2025-11-12">Nov 12, 2025</time>
+                            </div>
+                        </article>
+                    </div>
                     <a class="section-link" href="/blog/">All writing →</a>
                 </div>
             </section>
@@ -107,7 +141,19 @@
             <section class="reveal block" aria-labelledby="automations-title">
                 <div class="block-index"><span class="block-label" id="automations-title">Automations</span></div>
                 <div class="block-body">
-                    <div class="ledger" id="automationsList"></div>
+                    <div class="ledger" id="automationsList">
+                        <article class="post">
+                            <h3>I Got ChatGPT to Monitor the Visa Bulletin for Me</h3>
+                            <p>A scheduled ChatGPT task checks each Visa Bulletin and reports changes for a saved priority date.</p>
+                            <div class="post-foot">
+                                <a href="/automations/monitoring-the-visa-bulletin-with-chatgpt.html" aria-label="View recipe: I Got ChatGPT to Monitor the Visa Bulletin for Me">View recipe →</a>
+                                <div class="post-meta-group">
+                                    <span class="post-tags">ChatGPT · Workflows · Automation</span>
+                                    <time datetime="2026-08-24">Aug 24, 2026</time>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                     <a class="section-link" href="/automations/">All automations →</a>
                 </div>
             </section>
@@ -121,7 +167,7 @@
         </main>
 
         <footer class="site-footer">
-            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+            <div class="wrap">© <span id="year">2026</span> Issack John</div>
         </footer>
 
         <script src="/assets/main.js" defer></script>

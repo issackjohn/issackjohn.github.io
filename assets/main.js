@@ -22,7 +22,22 @@
         if (!toggle) return;
         const isDark = theme === "dark";
         toggle.setAttribute("aria-pressed", String(isDark));
-        toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+        toggle.setAttribute("aria-label", "Dark mode");
+    }
+
+    function syncThemeColor(theme) {
+        let meta = document.querySelector('meta[name="theme-color"]');
+        if (!meta) {
+            meta = document.createElement("meta");
+            meta.setAttribute("name", "theme-color");
+            document.head.appendChild(meta);
+        }
+        meta.setAttribute("content", theme === "dark" ? "#0c0d10" : "#fbfaf8");
+    }
+
+    function syncThemeState(theme) {
+        syncToggleState(theme);
+        syncThemeColor(theme);
     }
 
     function setupTheme() {
@@ -36,10 +51,20 @@
                 } catch (e) {
                     // Private mode or blocked storage: the theme still applies for this page.
                 }
-                syncToggleState(target);
+                syncThemeState(target);
             });
         }
-        syncToggleState(getActiveTheme());
+        syncThemeState(getActiveTheme());
+
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        const handleSchemeChange = function () {
+            syncThemeState(getActiveTheme());
+        };
+        if (typeof media.addEventListener === "function") {
+            media.addEventListener("change", handleSchemeChange);
+        } else if (typeof media.addListener === "function") {
+            media.addListener(handleSchemeChange);
+        }
     }
 
     function setupNavigation() {
@@ -57,15 +82,27 @@
         ].forEach(function (entry) {
             const link = el("a", null, entry[0]);
             link.href = entry[1];
-
-            const path = window.location.pathname;
-            if ((entry[1] === "/blog/" && path.startsWith("/blog/")) || (entry[1] === "/automations/" && path.startsWith("/automations/"))) {
-                link.setAttribute("aria-current", "page");
-            }
-
             nav.appendChild(link);
         });
 
+        function syncCurrent() {
+            const path = window.location.pathname;
+            const hash = window.location.hash;
+            const projectsCurrent = path === "/" && (hash === "" || hash === "#work");
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.removeAttribute("aria-current");
+            });
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                if ((link.getAttribute("href") === "/blog/" && path.startsWith("/blog/")) || (link.getAttribute("href") === "/automations/" && path.startsWith("/automations/")) || (link.getAttribute("href") === "/#work" && projectsCurrent)) {
+                    link.setAttribute("aria-current", "page");
+                }
+            });
+        }
+
+        syncCurrent();
+        window.addEventListener("hashchange", syncCurrent);
         bar.insertBefore(nav, toggle);
     }
 
@@ -262,11 +299,11 @@
         const referencesCount = document.getElementById("referencesCount");
         if (referencesCount) referencesCount.textContent = String(content.references.length);
 
-        renderInto("blogPostsList", content.blogPosts.slice().sort(byNewest), renderPost);
+        renderInto("blogPostsList", content.blogPosts.slice().sort(byNewest), renderPost, "No writing published yet.");
         renderInto("automationsList", content.automations.slice().sort(byNewest), renderAutomation, "No automations published yet.");
-        renderInto("projectsList", content.projects, renderItem);
-        renderInto("referencesList", content.references, renderItem);
-        renderInto("videosList", content.videos, renderItem);
+        renderInto("projectsList", content.projects, renderItem, "No projects published yet.");
+        renderInto("referencesList", content.references, renderItem, "No open source references published yet.");
+        renderInto("videosList", content.videos, renderItem, "No videos added yet.");
     }
 
     // --- Email ---------------------------------------------------------------
@@ -281,9 +318,10 @@
         try {
             const addr = atob(encoded);
             node.href = "mailto:" + addr;
+            node.removeAttribute("aria-disabled");
             node.setAttribute("aria-label", "Email " + addr);
         } catch (e) {
-            // Malformed payload: leave the link inert rather than pointing at garbage.
+            // Malformed payload: keep the no-JavaScript fallback available.
         }
     }
 
@@ -467,5 +505,6 @@
         setupHighlighting();
         revealOnScroll(".reveal", 0.08);
         revealOnScroll(".chart", 0.25);
+        root.classList.add("reveal-ready");
     });
 })();
