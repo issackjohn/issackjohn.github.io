@@ -20,11 +20,28 @@
         </script>
     </head>
     <body>
-        <main class="wrap" style="min-height: 80vh; display: grid; place-content: center; text-align: center; gap: 1rem">
-            <div class="avatar" aria-hidden="true" style="margin-bottom: 0.5rem">404</div>
-            <h1 style="margin: 0; font-size: 2rem">Page not found</h1>
-            <p style="color: var(--text-muted); margin: 0">The page you're looking for doesn't exist or has moved.</p>
-            <p style="margin: 0.5rem 0 0"><a href="/">&larr; Back to home</a></p>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <header class="topbar">
+            <div class="wrap">
+                <a class="brand" href="/">Issack John</a>
+                <nav class="site-nav" aria-label="Page navigation">
+                    <a href="/">← Back to home</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main" class="wrap notfound" tabindex="-1">
+            <div class="notfound-code" aria-hidden="true">404</div>
+            <h1>Page not found</h1>
+            <p>The page you're looking for doesn't exist or has moved.</p>
+            <p><a href="/">← Back to home</a></p>
         </main>
+
+        <footer class="site-footer">
+            <div class="wrap">© <span id="year">2026</span> Issack John</div>
+        </footer>
+
+        <script src="/assets/main.js" defer></script>
     </body>
 </html>

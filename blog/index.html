@@ -34,10 +34,10 @@
     <body>
         <a class="skip-link" href="#main">Skip to content</a>
 
-        <div class="topbar">
+        <header class="topbar">
             <div class="wrap">
                 <a class="brand" href="/">Issack John</a>
-                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false">
                     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
@@ -47,9 +47,9 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </header>
 
-        <main id="main" class="wrap">
+        <main id="main" class="wrap" tabindex="-1">
             <header class="page-header reveal">
                 <p class="kicker">Issack John — Writing</p>
                 <h1 class="page-title">Writing</h1>
@@ -57,12 +57,45 @@
             </header>
 
             <div class="post-list reveal">
-                <div class="ledger" id="blogPostsList"></div>
+                <div class="ledger" id="blogPostsList">
+                    <article class="post">
+                        <h3>Who Actually Uses JS Call Stacks in Crash Reports?</h3>
+                        <p>A scan of the Tranco top 5,000 found which sites enabled Chrome’s JavaScript call stacks in crash reports.</p>
+                        <div class="post-foot">
+                            <a href="/blog/who-actually-uses-js-call-stacks-in-crash-reports.html" aria-label="Read more: Who Actually Uses JS Call Stacks in Crash Reports?">Read more →</a>
+                            <time datetime="2026-07-24">Jul 24, 2026</time>
+                        </div>
+                    </article>
+                    <article class="post">
+                        <h3>Fixing a Reporting API Race in Chromium</h3>
+                        <p>Chromium could expire a reporting source before its crash report reached the cache, causing the report to be dropped.</p>
+                        <div class="post-foot">
+                            <a href="/blog/fixing-a-reporting-api-race-in-chromium.html" aria-label="Read more: Fixing a Reporting API Race in Chromium">Read more →</a>
+                            <time datetime="2026-07-24">Jul 24, 2026</time>
+                        </div>
+                    </article>
+                    <article class="post">
+                        <h3>Fixing x86 String Corruption in V8</h3>
+                        <p>A C++ string move and copy chain corrupted Intl.DateTimeFormat output in official Windows x86 builds.</p>
+                        <div class="post-foot">
+                            <a href="/blog/fixing-intl-datetimeformat-corruption-in-v8.html" aria-label="Read more: Fixing x86 String Corruption in V8">Read more →</a>
+                            <time datetime="2026-02-12">Feb 12, 2026</time>
+                        </div>
+                    </article>
+                    <article class="post">
+                        <h3>When Two Profilers Share a Thread</h3>
+                        <p>Two profiling streams shared state on one thread and corrupted attribution in DevTools.</p>
+                        <div class="post-foot">
+                            <a href="/blog/when-two-profilers-share-a-thread.html" aria-label="Read more: When Two Profilers Share a Thread">Read more →</a>
+                            <time datetime="2025-11-12">Nov 12, 2025</time>
+                        </div>
+                    </article>
+                </div>
             </div>
         </main>
 
         <footer class="site-footer">
-            <div class="wrap">© <span id="year">2025</span> Issack John</div>
+            <div class="wrap">© <span id="year">2026</span> Issack John</div>
         </footer>
 
         <script src="/assets/main.js" defer></script>
